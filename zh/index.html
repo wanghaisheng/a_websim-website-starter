@@ -1,0 +1,1632 @@
+
+<html><head><base href="/zh" />
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互动情感图 - 理解和管理您的情感</title>
+    <meta name="description" content="探索我们的互动情感图，识别和理解您的情感。适合治疗、教育和个人成长。今天就定制您的情感体验！">
+    <meta name="keywords" content="互动情感图, 情感图, 情感轮, 情感意识, 心理健康工具, 自定义情感">
+    
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://feelingchart.heytcm.com/zh"> <!-- 替换为您的规范URL -->
+
+    <!-- Hreflang Tags -->
+    <link rel="alternate" href="https://feelingchart.heytcm.com" hreflang="en" />
+    <link rel="alternate" href="https://feelingchart.heytcm.com/es" hreflang="es" />
+    <link rel="alternate" href="https://feelingchart.heytcm.com/de" hreflang="de" />
+    <link rel="alternate" href="https://feelingchart.heytcm.com/fr" hreflang="fr" />
+    <link rel='alternate' href='https://feelingchart.heytcm.com/zh' hreflang='zh' />
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="互动情感图 - 理解和管理您的情感">
+    <meta property="og:description" content="通过我们创新的互动情感图，发现理解您情感的力量。前所未有地与您的情感互动！">
+    <meta property="og:image" content="URL_to_your_image.jpg"> <!-- 替换为实际图片URL -->
+    <meta property="og:url" content="https://feelingchart.heytcm.com"> <!-- 替换为您的网站URL -->
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="互动情感图 - 理解和管理您的情感">
+    <meta name="twitter:description" content="探索我们的互动情感图，识别和理解您的情感。适合治疗、教育和个人成长。">
+    <meta name="twitter:image" content="URL_to_your_image.jpg"> <!-- 替换为实际图片URL -->
+</head>
+<style>
+  :root {
+    --primary: #6366f1;
+    --secondary: #ec4899;
+    --accent: #8b5cf6;
+    --background: #f8fafc;
+    --text: #1e293b;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    color: var(--text);
+    background: var(--background);
+  }
+  
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-content {
+    max-width: 800px;
+    text-align: center;
+    z-index: 2;
+  }
+  
+  .hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+  
+  .cta-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    padding: 1rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .btn-primary {
+    background: white;
+    color: var(--primary);
+  }
+  
+  .btn-secondary {
+    background: white;
+    border: 2px solid white;
+    color: var(--primary);
+  }
+  
+  .demo-container .btn-secondary:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  
+  .feeling-chart {
+    width: 600px;
+    height: 600px;
+    margin: 2rem auto;
+    position: relative;
+  }
+  
+  .emotion {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .emotion.primary {
+    z-index: 2;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .emotion.secondary {
+    width: 80px;
+    height: 80px;
+    font-size: 0.9rem;
+    z-index: 1;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .emotion:hover {
+    transform: scale(1.1);
+    z-index: 10;
+  }
+  
+  .section {
+    padding: 5rem 2rem;
+  }
+  
+  .section-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--primary);
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .feature-card {
+    padding: 2rem;
+    border-radius: 1rem;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+  }
+  
+  .testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .testimonial-card {
+    padding: 2rem;
+    border-radius: 1rem;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .testimonial-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .pricing-card {
+    padding: 2rem;
+    border-radius: 1rem;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .price {
+    font-size: 3rem;
+    color: var(--primary);
+    margin: 1rem 0;
+  }
+  
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .blog-card {
+    border-radius: 1rem;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-content {
+    padding: 1.5rem;
+  }
+  
+  .comparison-table {
+    width: 100%;
+    max-width: 1000px;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .comparison-table th {
+    background: #f8fafc;
+    font-weight: 600;
+  }
+  
+  .feature-check {
+    color: #22c55e;
+    font-size: 1.25rem;
+  }
+  
+  .feature-x {
+    color: #ef4444;
+    font-size: 1.25rem;
+  }
+  
+  .section-intro {
+    margin-bottom: 3rem;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  
+  .section-intro strong {
+    color: var(--primary);
+  }
+  
+  .keyword-highlight {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .feeling-chart {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .emotion {
+      width: 60px;
+      height: 60px;
+      font-size: 0.8rem;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .comparison-table {
+      font-size: 0.9rem;
+    }
+    
+    .comparison-table td {
+      padding: 1rem 0.5rem;
+    }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+  }
+  
+  .video-preview {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 1rem;
+    background: rgba(0,0,0,0.05);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .video-preview:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+  
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease;
+  }
+  
+  .play-button svg {
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+  }
+  
+  .video-preview:hover .play-button {
+    background: white;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  
+  .video-preview::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(236,72,153,0.1) 100%);
+    z-index: 1;
+  }
+  
+  .preview-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  
+  .preview-animation {
+    width: 200px;
+    height: 200px;
+    position: relative;
+  }
+  
+  .preview-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    animation: previewFloat 3s ease-in-out infinite;
+  }
+  
+  @keyframes previewFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(5px, -5px) scale(1.1); }
+    100% { transform: translate(0, 0) scale(1); }
+  
+  .faq-item {
+    transition: transform 0.3s ease;
+  }
+  
+  .faq-item:hover {
+    transform: translateY(-2px);
+  }
+  
+  .comparison-table td {
+    padding: 1.25rem 1rem;
+  }
+  
+  .comparison-table tr:hover {
+    background: rgba(99,102,241,0.05);
+  }
+  
+  .feature-x {
+    color: #ef4444;
+    margin-right: 0.5rem;
+  }
+  
+  .feature-check {
+    color: #22c55e;
+    margin-right: 0.5rem;
+  }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  
+  <div class="language-picker" style="position: fixed; top: 1rem; right: 1rem; z-index: 1000; background: white; padding: 0.5rem; border-radius: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <select id="languagePicker" style="padding: 0.5rem; border: 1px solid var(--primary); border-radius: 0.25rem; cursor: pointer;">
+      <option value="zh">中文</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="ja">日本語</option>
+    </select>
+  </div>
+  
+  <section class="hero">
+    <div class="hero-content">
+      <h1>感受它，命名它，掌握它：你的完整情绪图表之旅</h1>
+      <p>通过我们全面的情绪图表和情感平台提升你的情绪意识。我们的互动式情绪追踪系统将前沿心理学与直观设计相结合，帮助你识别、理解并掌握情绪模式，实现持久的个人成长。</p>
+      <div class="cta-container">
+        <a href="https://feelingchart.heytcm.com/app" class="btn btn-primary">开始你的旅程</a>
+        <a href="https://feelingchart.heytcm.com/demo" class="btn btn-secondary">体验图表</a>
+      </div>
+    </div>
+    
+    <div class="feeling-chart">
+      <div id="emotions-container"></div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="section-content">
+      <h2 class="section-title">理解现代情绪健康工具</h2>
+      
+      <div class="section-intro" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+        <p>现代情绪健康需要现代解决方案。虽然传统的<span class="keyword-highlight">情绪图表</span>工具一直为我们服务，但数字时代需要更具互动性和个性化的情商提升方法。</p>
+      </div>
+  
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>以用户为中心的设计</h3>
+          <p>与静态PDF不同，我们的互动式<span class="keyword-highlight">情绪图表</span>能适应你独特的情绪词汇和体验。</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3>实时互动</h3>
+          <p>我们的动态<span class="keyword-highlight">情绪图表</span>响应你的输入，提供即时反馈和更深层次的情感洞察。</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>全面追踪</h3>
+          <p>通过高级模式分析和情感旅程映射，超越基本的情感识别。</p>
+        </div>
+      </div>
+  
+      <div style="margin-top: 4rem;">
+        <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+          <h3 style="color: var(--primary); margin-bottom: 1.5rem; text-align: center;">理解用户需求</h3>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div>
+              <h4 style="color: var(--primary); margin-bottom: 1rem;">用户想要什么</h4>
+              <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--primary); margin-right: 0.5rem;">✓</span>
+                  准确的情感识别
+                </li>
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--primary); margin-right: 0.5rem;">✓</span>
+                  实用的应用指南
+                </li>
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--primary); margin-right: 0.5rem;">✓</span>
+                  互动功能
+                </li>
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--primary); margin-right: 0.5rem;">✓</span>
+                  自定义选项
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 style="color: var(--secondary); margin-bottom: 1rem;">我们如何提供</h4>
+              <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--secondary); margin-right: 0.5rem;">→</span>
+                  高级互动<span class="keyword-highlight">情绪图表</span>
+                </li>
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--secondary); margin-right: 0.5rem;">→</span>
+                  全面的情感谱
+                </li>
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--secondary); margin-right: 0.5rem;">→</span>
+                  个性化的<span class="keyword-highlight">情绪图表</span>体验
+                </li>
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--secondary); margin-right: 0.5rem;">→</span>
+                  与健康工具的整合
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="https://feelingchart.heytcm.com/demo" class="btn btn-primary">体验不同</a>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" style="background: #f8fafc;">
+    <div class="section-content">
+      <h2 class="section-title">培养儿童的情商</h2>
+      <div class="section-intro" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+        <p>早期的情感意识和理解可以显著影响儿童的心理健康发展。我们的互动式<span class="keyword-highlight">情绪图表</span>帮助儿童有效识别、表达和管理他们的情绪，从而减少未来情感调节挑战的风险。</p>
+      </div>
+  
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌟</div>
+          <h3>早期识别</h3>
+          <p>帮助儿童及早识别和表达他们的情绪，使识别潜在的情绪调节挑战变得更加容易。</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <h3>互动学习</h3>
+          <p>通过与我们的<span class="keyword-highlight">情绪图表</span>的趣味互动，使儿童的情感学习变得有趣而自然。</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🧩</div>
+          <h3>基础建设</h3>
+          <p>通过结构化、适合年龄的活动建立强大的情感意识基础。</p>
+        </div>
+      </div>
+  
+      <div style="margin-top: 4rem;">
+        <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+          <h3 style="color: var(--primary); margin-bottom: 1.5rem; text-align: center;">儿童的关键好处</h3>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div>
+              <h4 style="color: var(--primary); margin-bottom: 1rem;">预防与早期干预</h4>
+              <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--primary); margin-right: 0.5rem;">✓</span>
+                  早期情感识别
+                </li>
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--primary); margin-right: 0.5rem;">✓</span>
+                  情绪模式意识
+                </li>
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--primary); margin-right: 0.5rem;">✓</span>
+                  情感词汇发展
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 style="color: var(--secondary); margin-bottom: 1rem;">技能发展</h4>
+              <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--secondary); margin-right: 0.5rem;">→</span>
+                  自我调节技巧
+                </li>
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--secondary); margin-right: 0.5rem;">→</span>
+                  健康的应对策略
+                </li>
+                <li style="margin-bottom: 0.5rem; display: flex; align-items: center;">
+                  <span style="color: var(--secondary); margin-right: 0.5rem;">→</span>
+                  沟通技能
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  
+        <div style="margin-top: 2rem; text-align: center;">
+          <p style="margin-bottom: 1rem;">今天就开始你孩子的情感意识之旅</p>
+          <div style="display: flex; gap: 1rem; justify-content: center;">
+            <a href="https://feelingchart.heytcm.com/children" class="btn btn-primary">儿童图表</a>
+            <a href="https://feelingchart.heytcm.com/parent-guide" class="btn btn-secondary">家长指南</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="section-content">
+      <h2 class="section-title">情感的重要性</h2>
+      <div class="section-intro" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+        <p>我们的先进情绪图表技术帮助你导航复杂的情感领域。使用我们的互动<span class="keyword-highlight">情绪图表</span>，你将发现不同情感之间的联系及其对你日常生活的影响。情绪图表工具实时提供对你情感状态的洞察，帮助你建立更好的自我意识和情商。</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>获得清晰感</h3>
+          <p>精准而深入地理解你的情感状态。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎭</div>
+          <h3>改善调节能力</h3>
+          <p>学习有效管理你的情感。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>识别模式</h3>
+          <p>追踪你的情感旅程。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" style="background: #f8fafc;">
+    <div class="section-content">
+      <h2 class="section-title">我们如何比较</h2>
+      <div class="section-intro" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+        <p>看看我们的<span class="keyword-highlight">情绪图表</span>和<span class="keyword-highlight">情感图表</span>解决方案与领先的情绪追踪应用程序的比较。我们的互动平台为全面的情感意识提供独特的优势。</p>
+      </div>
+  
+      <div class="comparison-container" style="overflow-x: auto;">
+        <table class="comparison-table">
+          <tr>
+            <th>特征</th>
+            <th>我们的互动<span class="keyword-highlight">情绪图表</span></th>
+            <th>Moodflow</th>
+            <th>Daylio</th>
+            <th>iMoodJournal</th>
+          </tr>
+          <tr>
+            <td>核心功能</td>
+            <td><span class="feature-check">✓</span> 互动视觉情感映射</td>
+            <td>基本情绪滑块</td>
+            <td>简单的情绪日志</td>
+            <td>文字日记</td>
+          </tr>
+          <tr>
+            <td>设计界面</td>
+            <td><span class="feature-check">✓</span> 动态悬停互动</td>
+            <td><span class="feature-x">✗</span> 静态界面</td>
+            <td><span class="feature-x">✗</span> 基本图标</td>
+            <td><span class="feature-x">✗</span> 基于文本</td>
+          </tr>
+          <tr>
+            <td>情感深度</td>
+            <td><span class="feature-check">✓</span> 多层情感</td>
+            <td><span class="feature-x">✗</span> 限制情感</td>
+            <td><span class="feature-x">✗</span> 基本情感</td>
+            <td><span class="feature-x">✗</span> 用户定义</td>
+          </tr>
+          <tr>
+            <td>视觉洞察</td>
+            <td><span class="feature-check">✓</span> 实时情感映射</td>
+            <td><span class="feature-x">✗</span> 基本图表</td>
+            <td><span class="feature-check">✓</span> 月度模式</td>
+            <td><span class="feature-check">✓</span> 趋势图</td>
+          </tr>
+          <tr>
+            <td>自定义</td>
+            <td><span class="feature-check">✓</span> 完全自定义</td>
+            <td><span class="feature-x">✗</span> 限制选项</td>
+            <td><span class="feature-x">✗</span> 预定义集</td>
+            <td><span class="feature-x">✗</span> 基本选项</td>
+          </tr>
+          <tr>
+            <td>隐私关注</td>
+            <td><span class="feature-check">✓</span> 不需要数据存储</td>
+            <td><span class="feature-x">✗</span> 需要账户</td>
+            <td><span class="feature-x">✗</span> 需要账户</td>
+            <td><span class="feature-x">✗</span> 需要账户</td>
+          </tr>
+        </table>
+      </div>
+  
+      <div class="feature-highlights" style="margin-top: 4rem;">
+        <h3 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">选择我们的互动<span class="keyword-highlight">情绪图表</span>的理由</h3>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h4>动态互动</h4>
+            <p>体验情感的生动表现，我们的互动悬停界面与静态应用大相径庭，提供了一种参与感。</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <h4>增强意识</h4>
+            <p>通过我们的多层<span class="keyword-highlight">情感图表</span>超越基本标签，理解情感之间的微妙联系。</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h4>隐私优先</h4>
+            <p>无需账户或数据存储。你的情感旅程完全保持私密并掌握在你手中。</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">💻</div>
+            <h4>多平台支持</h4>
+            <p>在任何设备上访问我们的<span class="keyword-highlight">情绪图表</span>，或将其整合到你自己的应用程序中。没有平台限制。</p>
+          </div>
+        </div>
+      </div>
+  
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="https://feelingchart.heytcm.com/app" class="btn btn-primary">体验不同</a>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="section-content">
+      <h2 class="section-title">人们的评价</h2>
+      <div class="section-intro" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+        <p>探索我们的情绪图表和情感图表工具如何改变生活。用户报告称，在使用我们的互动情绪追踪系统后，情感意识和调节能力有了显著改善。</p>
+      </div>
+      <div class="testimonials">
+        <div class="testimonial-card">
+          <img src="https://i.pravatar.cc/150?img=1" alt="Sarah" class="testimonial-avatar">
+          <h3>Sarah Thompson</h3>
+          <p>"这个工具帮助我识别我都不知道的情感！"</p>
+        </div>
+        <div class="testimonial-card">
+          <img src="https://i.pravatar.cc/150?img=2" alt="James" class="testimonial-avatar">
+          <h3>James Wilson</h3>
+          <p>"互动图表是情感意识的游戏规则改变者。"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" style="background: #f8fafc;">
+    <div class="section-content">
+      <h2 class="section-title">情感健康资源</h2>
+      <div class="section-intro" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+        <p>访问我们丰富的情绪图表资源和感受图表指南。学习如何有效使用情绪追踪工具来增强你的个人成长旅程。</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+          <div>
+            <div class="feature-icon">📚</div>
+            <h3>专家文章</h3>
+            <p>访问我们由专业人士撰写的心理健康文章库。</p>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <a href="https://feelingchart.heytcm.com/resources/articles" class="btn btn-primary">浏览文章</a>
+          </div>
+        </div>
+        
+        <div class="feature-card" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+          <div>
+            <div class="feature-icon">🎥</div>
+            <h3>视频指南</h3>
+            <p>观看关于情感管理和正念的实用教程。</p>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <a href="https://feelingchart.heytcm.com/resources/videos" class="btn btn-primary">立即观看</a>
+          </div>
+        </div>
+        
+        <div class="feature-card" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+          <div>
+            <div class="feature-icon">🧘</div>
+            <h3>引导练习</h3>
+            <p>跟随引导冥想和呼吸练习。</p>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <a href="https://feelingchart.heytcm.com/resources/exercises" class="btn btn-primary">开始练习</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="section-content">
+      <h2 class="section-title">互动情感层次</h2>
+      <div class="section-intro" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+        <p>我们的互动<span class="keyword-highlight">情绪图表</span>允许你探索情感的复杂层次。发现主要情感如何导致次要反应，帮助你更好地理解你的情感模式。</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>主要情感</h3>
+          <p>识别核心情感反应，如快乐、悲伤、愤怒和恐惧。</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3>次要反应</h3>
+          <p>探索主要情感如何演变为更复杂的情感。</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🧩</div>
+          <h3>情感模式</h3>
+          <p>识别重复出现的情感序列和触发因素。</p>
+        </div>
+      </div>
+  
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="https://feelingchart.heytcm.com/demo" class="btn btn-primary">探索情感层次</a>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="section-content">
+      <h2 class="section-title">亲自尝试</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <!-- Traditional Chart Demo -->
+        <div class="demo-container" style="text-align: center;">
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">传统互动图表</h3>
+          <p style="margin-bottom: 2rem;">在我们的经典布局中探索从核心到复杂的情感。</p>
+          
+          <div class="video-preview">
+            <div class="play-button">
+              <svg viewBox="0 0 24 24" fill="var(--primary)">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+            <div class="preview-content">
+              <div class="preview-animation" id="traditional-preview">
+                <!-- Animation dots will be added here via JS -->
+              </div>
+            </div>
+          </div>
+          
+          <p style="margin: 2rem 0;">在熟悉的领域中映射你的情感旅程</p>
+          <a href="https://feelingchart.heytcm.com/playground/traditional-interactive-feeling-charts" class="btn btn-primary">尝试传统图表</a>
+        </div>
+  
+        <!-- Reverse Chart Demo -->
+        <div class="demo-container" style="text-align: center;">
+          <h3 style="color: var(--secondary); margin-bottom: 1rem;">反向互动图表</h3>
+          <p style="margin-bottom: 2rem;">从细腻的情感开始，逐步深入核心情感。</p>
+          
+          <div class="video-preview">
+            <div class="play-button">
+              <svg viewBox="0 0 24 24" fill="var(--secondary)">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+            <div class="preview-content">
+              <div class="preview-animation" id="reverse-preview">
+                <!-- Animation dots will be added here via JS -->
+              </div>
+            </div>
+          </div>
+          
+          <p style="margin: 2rem 0;">从新的角度体验情感</p>
+          <a href="https://feelingchart.heytcm.com/playground/reverse-interactive-feeling-charts" class="btn btn-primary">尝试反向图表</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" style="background: #f8fafc;">
+    <div class="section-content">
+      <h2 class="section-title">加入我们的社区</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3>支持小组</h3>
+          <p>与其他人在相似的情绪健康旅程中建立联系。</p>
+          <a href="https://feelingchart.heytcm.com/community/groups" class="btn btn-primary">加入小组</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📝</div>
+          <h3>分享你的故事</h3>
+          <p>通过分享你的情感成长故事来激励他人。</p>
+          <a href="https://feelingchart.heytcm.com/community/stories" class="btn btn-primary">立即分享</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>每周挑战</h3>
+          <p>参与与社区的情感意识挑战。</p>
+          <a href="https://feelingchart.heytcm.com/community/challenges" class="btn btn-primary">查看挑战</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" style="background: #f8fafc;">
+    <div class="section-content">
+      <h2 class="section-title">传统与互动<span class="keyword-highlight">情绪图表</span></h2>
+      <div class="section-intro" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+        <p>发现为什么我们的互动<span class="keyword-highlight">情绪图表</span>平台与传统静态图表相比，能够革命性地提升情感意识。</p>
+      </div>
+  
+      <table class="comparison-table">
+        <tr>
+          <th>特征</th>
+          <th>传统PDF/图像图表</th>
+          <th>我们的互动<span class="keyword-highlight">情绪图表</span></th>
+        </tr>
+        <tr>
+          <td>个性化</td>
+          <td><span class="feature-x">✗</span> 固定的、一刀切的方式</td>
+          <td><span class="feature-check">✓</span> 可自定义以适应你的情绪词汇</td>
+        </tr>
+        <tr>
+          <td>参与感</td>
+          <td><span class="feature-x">✗</span> 仅静态查看</td>
+          <td><span class="feature-check">✓</span> 动态与情感互动</td>
+        </tr>
+        <tr>
+          <td>进度追踪</td>
+          <td><span class="feature-x">✗</span> 需要手动追踪</td>
+          <td><span class="feature-check">✓</span> 自动情感旅程追踪</td>
+        </tr>
+        <tr>
+          <td>理解深度</td>
+          <td><span class="feature-x">✗</span> 限于表面层识别</td>
+          <td><span class="feature-check">✓</span> 探索情感的联系和模式</td>
+        </tr>
+        <tr>
+          <td>可达性</td>
+          <td><span class="feature-x">✗</span> 需要打印或本地保存</td>
+          <td><span class="feature-check">✓</span> 随时随地可用</td>
+        </tr>
+        <tr>
+          <td>学习支持</td>
+          <td><span class="feature-x">✗</span> 仅自学</td>
+          <td><span class="feature-check">✓</span> 基于AI的情商提升建议</td>
+        </tr>
+        <tr>
+          <td>更新与改进</td>
+          <td><span class="feature-x">✗</span> 静态内容从未变化</td>
+          <td><span class="feature-check">✓</span> 根据研究定期更新</td>
+        </tr>
+        <tr>
+          <td>数据洞察</td>
+          <td><span class="feature-x">✗</span> 无数据收集或分析</td>
+          <td><span class="feature-check">✓</span> 个人情感模式洞察</td>
+        </tr>
+      </table>
+  
+      <div style="text-align: center; margin-top: 3rem;">
+        <p style="max-width: 600px; margin: 0 auto 2rem auto;">亲自体验我们的互动<span class="keyword-highlight">情绪图表</span>平台的不同。</p>
+        <a href="https://feelingchart.heytcm.com/demo" class="btn btn-primary">立即尝试互动图表</a>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="section-content">
+      <h2 class="section-title">开始你的旅程</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>免费计划</h3>
+          <div class="price">$0</div>
+          <ul>
+            <li>访问互动图表</li>
+            <li>基本情绪追踪</li>
+            <li>社区支持</li>
+          </ul>
+          <a href="https://feelingchart.heytcm.com/signup" class="btn btn-primary">开始</a>
+        </div>
+        <div class="pricing-card">
+          <h3>高级计划</h3>
+          <div class="price">$4.99</div>
+          <ul>
+            <li>高级功能</li>
+            <li>详细分析</li>
+            <li>优先支持</li>
+          </ul>
+          <a href="https://feelingchart.heytcm.com/premium" class="btn btn-primary">立即升级</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" style="background: #f8fafc;">
+    <div class="section-content">
+      <h2 class="section-title">即将推出：高级情绪追踪应用</h2>
+      <div class="section-intro" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+        <p>体验我们革命性的新情绪追踪应用，具备超过100种情绪和详细的情感日志能力。目前处于测试阶段，这一强大工具将我们的互动<span class="keyword-highlight">情绪图表</span>与高级追踪功能结合在一起。</p>
+      </div>
+  
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+        <div class="feature-card" style="background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white;">
+          <div class="feature-icon">📱</div>
+          <h3>100+ 情绪状态</h3>
+          <p>通过我们全面的情绪库，跟踪细腻的情绪状态，从基本情感到复杂情感组合。</p>
+          <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+            <li style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+              <span style="color: white; margin-right: 0.5rem;">✓</span>
+              细化的情绪追踪
+            </li>
+            <li style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+              <span style="color: white; margin-right: 0.5rem;">✓</span>
+              可自定义的情绪标签
+            </li>
+            <li style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+              <span style="color: white; margin-right: 0.5rem;">✓</span>
+              强度缩放
+            </li>
+          </ul>
+        </div>
+  
+        <div class="feature-card" style="background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%); color: white;">
+          <div class="feature-icon">📊</div>
+          <h3>高级分析</h3>
+          <p>通过我们复杂的分析工具深入了解你的情感模式。</p>
+          <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+            <li style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+              <span style="color: white; margin-right: 0.5rem;">✓</span>
+              情绪趋势可视化
+            </li>
+            <li style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+              <span style="color: white; margin-right: 0.5rem;">✓</span>
+              模式识别
+            </li>
+            <li style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+              <span style="color: white; margin-right: 0.5rem;">✓</span>
+              触发因素识别
+            </li>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="video-preview" style="width: 80%; max-width: 600px; height: 400px; margin: 0 auto;">
+        <div class="play-button">
+          <svg viewBox="0 0 24 24" fill="var(--primary)">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+        <div class="preview-content">
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">Beta 预览</h3>
+          <p style="margin-bottom: 2rem;">观看我们的新情绪追踪工具如何工作</p>
+          <div class="preview-animation" id="mood-tracker-preview">
+            <!-- Animation dots added via JS -->
+          </div>
+        </div>
+      </div>
+  
+      <div style="text-align: center; margin-top: 3rem;">
+        <p style="max-width: 600px; margin: 0 auto 2rem auto;">成为第一批尝试我们革命性情绪追踪应用的人。</p>
+        <div class="cta-container" style="justify-content: center; gap: 1rem;">
+          <a href="https://feelingchart.heytcm.com/beta-signup" class="btn btn-primary">加入测试计划</a>
+          <a href="https://feelingchart.heytcm.com/app" class="btn btn-secondary">尝试演示版本</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="section-content">
+      <h2 class="section-title">常见问题</h2>
+      <div class="section-intro" style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+        <p>找到关于我们的<span class="keyword-highlight">情绪图表</span>和<span class="keyword-highlight">情感图表</span>工具的常见问题的答案。学习如何有效使用这些资源来促进情感成长。</p>
+      </div>
+      
+      <div style="display: grid; gap: 1.5rem; max-width: 800px; margin: 0 auto;">
+        <!-- FAQ Items -->
+        <div class="faq-item" style="background: white; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem;">什么是情绪图表？</h3>
+          <p>情绪图表是一个视觉工具，旨在帮助个人识别和理解他们的感受，通过根据强度和愉悦感对情感进行分类。我们的互动<span class="keyword-highlight">情绪图表</span>提供了一个全面的情感意识框架。</p>
+        </div>
+        
+        <div class="faq-item" style="background: white; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem;">如何有效使用情绪图表？</h3>
+          <p>使用我们的<span class="keyword-highlight">情绪图表</span>时，首先要识别你当前的情感状态。参考互动<span class="keyword-highlight">情绪图表</span>来理解不同情感之间的强度和关系，从而促进更好的情感意识和沟通。</p>
+        </div>
+        
+        <div class="faq-item" style="background: white; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem;">为什么识别情感很重要？</h3>
+          <p>使用<span class="keyword-highlight">情绪图表</span>有助于发展情商，从而更好地管理情感、改善人际关系和提升心理健康。我们的<span class="keyword-highlight">情绪图表</span>工具使这一过程直观易懂。</p>
+        </div>
+        
+        <div class="faq-item" style="background: white; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem;">如何将情感图表介绍给儿童？</h3>
+          <p>我们的互动<span class="keyword-highlight">情绪图表</span>旨在适合儿童。通过将其逐步引入他们的环境，并鼓励使用<span class="keyword-highlight">情绪图表</span>进行开放式讨论。</p>
+        </div>
+        
+        <div class="faq-item" style="background: white; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem;">什么工具可以补充情绪图表？</h3>
+          <p>我们的综合<span class="keyword-highlight">情绪图表</span>平台包括情绪计和情感轮等附加资源。这些工具与我们的主要<span class="keyword-highlight">情绪图表</span>配合使用，提供完整的情感意识解决方案。</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="https://feelingchart.heytcm.com/faq" class="btn btn-primary">查看所有常见问题</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="section-content">
+      <h2 class="section-title">心理健康资源</h2>
+      <div class="features-grid">
+        <div class="feature-card" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+          <div>
+            <div class="feature-icon">📚</div>
+            <h3>专家文章</h3>
+            <p>访问我们由专业人士撰写的心理健康文章库。</p>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <a href="https://feelingchart.heytcm.com/resources/articles" class="btn btn-primary">浏览文章</a>
+          </div>
+        </div>
+        
+        <div class="feature-card" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+          <div>
+            <div class="feature-icon">🎥</div>
+            <h3>视频指南</h3>
+            <p>观看关于情感管理和正念的实用教程。</p>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <a href="https://feelingchart.heytcm.com/resources/videos" class="btn btn-primary">立即观看</a>
+          </div>
+        </div>
+        
+        <div class="feature-card" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;">
+          <div>
+            <div class="feature-icon">🧘</div>
+            <h3>引导练习</h3>
+            <p>跟随引导冥想和呼吸练习。</p>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <a href="https://feelingchart.heytcm.com/resources/exercises" class="btn btn-primary">开始练习</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" style="background: #f8fafc;">
+    <div class="section-content">
+      <h2 class="section-title">研究与发展</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔬</div>
+          <h3>最新研究</h3>
+          <p>随时了解情绪健康的最新研究和发现。</p>
+          <a href="https://feelingchart.heytcm.com/research" class="btn btn-primary">查看研究</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>数据洞察</h3>
+          <p>通过我们的匿名数据分析，了解情绪健康趋势。</p>
+          <a href="https://feelingchart.heytcm.com/insights" class="btn btn-primary">查看洞察</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <h3>合作伙伴网络</h3>
+          <p>与我们的心理健康专业人士和组织网络联系。</p>
+          <a href="https://feelingchart.heytcm.com/partners" class="btn btn-primary">认识合作伙伴</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" style="background: #f8fafc;">
+    <div class="section-content">
+      <h2 class="section-title">企业解决方案</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🏢</div>
+          <h3>团队健康</h3>
+          <p>为您的组织实施情绪健康计划。</p>
+          <a href="https://feelingchart.heytcm.com/corporate/teams" class="btn btn-primary">了解更多</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>分析仪表板</h3>
+          <p>通过详细分析跟踪和改善团队的情绪健康。</p>
+          <a href="https://feelingchart.heytcm.com/corporate/analytics" class="btn btn-primary">查看演示</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>培训项目</h3>
+          <p>访问企业培训模块以发展情商。</p>
+          <a href="https://feelingchart.heytcm.com/corporate/training" class="btn btn-primary">开始培训</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer style="background: var(--text); color: white; padding: 4rem 2rem;">
+    <div class="section-content">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+        <div>
+          <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.2rem;">About Us</h3>
+          <p style="opacity: 0.9; margin-bottom: 1rem;">We're dedicated to improving emotional wellness through innovative interactive feeling charts and emotion tracking tools.</p>
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <a href="https://twitter.com/feelingchart" style="color: white; opacity: 0.9;">Twitter</a>
+            <a href="https://facebook.com/feelingchart" style="color: white; opacity: 0.9;">Facebook</a>
+            <a href="https://linkedin.com/company/feelingchart" style="color: white; opacity: 0.9;">LinkedIn</a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.2rem;">Quick Links</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/about" style="color: white; opacity: 0.9; text-decoration: none;">About</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/features" style="color: white; opacity: 0.9; text-decoration: none;">Features</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/pricing" style="color: white; opacity: 0.9; text-decoration: none;">Pricing</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/blog" style="color: white; opacity: 0.9; text-decoration: none;">Blog</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.2rem;">Resources</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/help" style="color: white; opacity: 0.9; text-decoration: none;">Help Center</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/docs" style="color: white; opacity: 0.9; text-decoration: none;">Documentation</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/api" style="color: white; opacity: 0.9; text-decoration: none;">API</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/status" style="color: white; opacity: 0.9; text-decoration: none;">Status</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.2rem;">Contact</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.8rem;">Email: support@feelingchart.com</li>
+            <li style="margin-bottom: 0.8rem;">Phone: +1 (555) 123-4567</li>
+            <li style="margin-bottom: 0.8rem;">Address: 123 Emotion Street, Mindful City, MC 12345</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <div style="opacity: 0.9;">
+          © 2023 Feeling Chart. All rights reserved.
+        </div>
+        <div style="display: flex; gap: 2rem;">
+          <a href="https://feelingchart.heytcm.com/privacy" style="color: white; opacity: 0.9; text-decoration: none;">Privacy Policy</a>
+          <a href="https://feelingchart.heytcm.com/terms" style="color: white; opacity: 0.9; text-decoration: none;">Terms of Service</a>
+          <a href="https://feelingchart.heytcm.com/cookies" style="color: white; opacity: 0.9; text-decoration: none;">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "互动情绪图表与情感图表工具",
+    "description": "全面的情感追踪和情绪图表平台，用于情感意识和个人成长。",
+    "applicationCategory": "健康软件",
+    "operatingSystem": "基于网页",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  
+  <script>
+  const emotions = [
+    { name: '快乐', color: 'hsl(60, 85%, 75%)', x: 300, y: 100, children: [
+      { name: '活泼', secondary: true },
+      { name: '满足', secondary: true },
+      { name: '有趣', secondary: true },
+      { name: '自豪', secondary: true }
+    ]},
+    { name: '惊讶', color: 'hsl(30, 85%, 75%)', x: 500, y: 200, children: [
+      { name: '震惊', secondary: true },
+      { name: '困惑', secondary: true },
+      { name: '惊叹', secondary: true }
+    ]},
+    { name: '坏', color: 'hsl(120, 85%, 75%)', x: 500, y: 400, children: [
+      { name: '无聊', secondary: true },
+      { name: '忙碌', secondary: true },
+      { name: '压力', secondary: true }
+    ]},
+    { name: '恐惧', color: 'hsl(180, 85%, 75%)', x: 300, y: 500, children: [
+      { name: '害怕', secondary: true },
+      { name: '焦虑', secondary: true },
+      { name: '不安', secondary: true }
+    ]},
+    { name: '愤怒', color: 'hsl(0, 85%, 75%)', x: 100, y: 400, children: [
+      { name: '失望', secondary: true },
+      { name: '羞辱', secondary: true },
+      { name: '怨恨', secondary: true }
+    ]},
+    { name: '悲伤', color: 'hsl(210, 85%, 75%)', x: 100, y: 200, children: [
+      { name: '受伤', secondary: true },
+      { name: '沮丧', secondary: true },
+      { name: '内疚', secondary: true }
+    ]}
+  ];
+  
+  function createEmotionElements() {
+    const container = document.getElementById('emotions-container');
+    
+    emotions.forEach(emotion => {
+      const div = document.createElement('div');
+      div.className = 'emotion primary';
+      div.style.backgroundColor = emotion.color;
+      div.style.left = `${emotion.x - 50}px`;
+      div.style.top = `${emotion.y - 50}px`;
+      div.style.animation = `float ${3 + Math.random() * 2}s ease-in-out infinite`;
+      div.textContent = emotion.name;
+      
+      // Enhanced hover effect
+      div.addEventListener('mouseenter', () => {
+        div.style.transform = 'scale(1.1)';
+        createSecondaryEmotions(emotion, div);
+      });
+      
+      div.addEventListener('mouseleave', () => {
+        div.style.transform = 'scale(1)';
+        removeSecondaryEmotions();
+      });
+      
+      container.appendChild(div);
+    });
+  }
+  
+  function createSecondaryEmotions(primaryEmotion, element) {
+    removeSecondaryEmotions(); // Clear existing secondary emotions
+    
+    const radius = 120;
+    const numEmotions = primaryEmotion.children.length;
+    
+    primaryEmotion.children.forEach((emotion, index) => {
+      const angle = (2 * Math.PI * index) / numEmotions;
+      const x = parseInt(element.style.left) + radius * Math.cos(angle);
+      const y = parseInt(element.style.top) + radius * Math.sin(angle);
+      
+      const secondaryDiv = document.createElement('div');
+      secondaryDiv.className = 'emotion secondary';
+      secondaryDiv.style.backgroundColor = primaryEmotion.color + '99';
+      secondaryDiv.style.left = `${x}px`;
+      secondaryDiv.style.top = `${y}px`;
+      secondaryDiv.style.transform = 'scale(0)';
+      secondaryDiv.textContent = emotion.name;
+      
+      element.parentNode.appendChild(secondaryDiv);
+      
+      // Animate in
+      setTimeout(() => {
+        secondaryDiv.style.transform = 'scale(0.7)';
+      }, index * 50);
+    });
+  }
+  
+  function removeSecondaryEmotions() {
+    const secondaries = document.querySelectorAll('.emotion.secondary');
+    secondaries.forEach(secondary => {
+      secondary.remove();
+    });
+  }
+  
+  // Demo Chart Interactive Feature
+  function initializeDemo() {
+    const demoEmotions = [
+      { name: '快乐', color: '#22c55e', angle: 0 },
+      { name: '平静', color: '#3b82f6', angle: 60 },
+      { name: '兴奋', color: '#f59e0b', angle: 120 },
+      { name: '专注', color: '#8b5cf6', angle: 180 },
+      { name: '感恩', color: '#ec4899', angle: 240 },
+      { name: '受到启发', color: '#06b6d4', angle: 300 }
+    ];
+  
+    // Update the selector to match the correct element
+    const demoChart = document.querySelector('.demo-chart');
+    
+    // Add null check
+    if (!demoChart) {
+      console.warn('Demo chart container not found');
+      return;
+    }
+  
+    demoEmotions.forEach(emotion => {
+      const radius = 120;
+      const x = 150 + radius * Math.cos(emotion.angle * Math.PI / 180);
+      const y = 150 + radius * Math.sin(emotion.angle * Math.PI / 180);
+      
+      const div = document.createElement('div');
+      div.className = 'emotion';
+      div.style.backgroundColor = emotion.color;
+      div.style.left = `${x - 30}px`;
+      div.style.top = `${y - 30}px`;
+      div.style.width = '60px';
+      div.style.height = '60px';
+      div.style.fontSize = '0.8rem';
+      div.textContent = emotion.name;
+      
+      div.addEventListener('click', () => {
+        div.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+          div.style.transform = 'scale(1)';
+        }, 200);
+      });
+      
+      demoChart.appendChild(div);
+    });
+  }
+  
+  // Add error handling to the initialization code
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      createEmotionElements();
+      initializePreviewAnimations();
+      initializeMoodTrackerPreview();
+      
+      // Add language picker functionality
+      document.getElementById('languagePicker').addEventListener('change', function(e) {
+        // In a real implementation, this would change the page language
+        console.log('Language changed to:', e.target.value);
+      });
+    } catch (error) {
+      console.error('Error initializing charts:', error);
+    }
+  });
+  
+  function initializeReverseDemo() {
+    const reverseEmotions = [
+      { name: '沮丧', color: '#ef4444', angle: 0 },
+      { name: '焦虑', color: '#8b5cf6', angle: 60 },
+      { name: '平静', color: '#3b82f6', angle: 120 },
+      { name: '精力充沛', color: '#f59e0b', angle: 180 },
+      { name: '满足', color: '#22c55e', angle: 240 },
+      { name: '好奇', color: '#ec4899', angle: 300 }
+    ];
+  
+    const reverseChart = document.querySelector('.demo-chart-reverse');
+    
+    reverseEmotions.forEach(emotion => {
+      const radius = 120;
+      const x = 150 + radius * Math.cos(emotion.angle * Math.PI / 180);
+      const y = 150 + radius * Math.sin(emotion.angle * Math.PI / 180);
+      
+      const div = document.createElement('div');
+      div.className = 'emotion';
+      div.style.backgroundColor = emotion.color;
+      div.style.left = `${x - 30}px`;
+      div.style.top = `${y - 30}px`;
+      div.style.width = '60px';
+      div.style.height = '60px';
+      div.style.fontSize = '0.8rem';
+      div.textContent = emotion.name;
+      
+      div.addEventListener('click', () => {
+        div.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+          div.style.transform = 'scale(1)';
+        }, 200);
+      });
+      
+      reverseChart.appendChild(div);
+    });
+  }
+  
+  function initializePreviewAnimations() {
+    const colors = ['#6366f1', '#ec4899', '#8b5cf6', '#22c55e', '#f59e0b'];
+    
+    function createPreviewDots(containerId, count) {
+      const container = document.getElementById(containerId);
+      
+      for (let i = 0; i < count; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'preview-dot';
+        dot.style.backgroundColor = colors[i % colors.length];
+        
+        // Calculate position in a circle
+        const angle = (2 * Math.PI * i) / count;
+        const radius = 80;
+        const x = 100 + radius * Math.cos(angle);
+        const y = 100 + radius * Math.sin(angle);
+        
+        dot.style.left = `${x}px`;
+        dot.style.top = `${y}px`;
+        dot.style.animationDelay = `${i * 0.5}s`;
+        
+        container.appendChild(dot);
+      }
+    }
+    
+    createPreviewDots('traditional-preview', 6);
+    createPreviewDots('reverse-preview', 6);
+    
+    // Add click handlers for video previews
+    document.querySelectorAll('.video-preview').forEach(preview => {
+      preview.addEventListener('click', function() {
+        const link = this.closest('.demo-container').querySelector('.btn');
+        if (link) {
+          link.click();
+        }
+      });
+    });
+  }
+  
+  // Add this to your DOMContentLoaded event listener
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      createEmotionElements();
+      initializePreviewAnimations();
+    } catch (error) {
+      console.error('Error initializing charts:', error);
+    }
+  });
+  
+  // Add to your existing initializePreviewAnimations function
+  function initializeMoodTrackerPreview() {
+    const container = document.getElementById('mood-tracker-preview');
+    if (container) {
+      createPreviewDots('mood-tracker-preview', 8);
+    }
+  }
+  
+  <footer style="background: var(--text); color: white; padding: 4rem 2rem;">
+    <div class="section-content">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+        <div>
+          <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.2rem;">关于我们</h3>
+          <p style="opacity: 0.9; margin-bottom: 1rem;">我们致力于通过创新的互动情绪图表和情绪追踪工具改善情绪健康。</p>
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <a href="https://twitter.com/feelingchart" style="color: white; opacity: 0.9;">Twitter</a>
+            <a href="https://facebook.com/feelingchart" style="color: white; opacity: 0.9;">Facebook</a>
+            <a href="https://linkedin.com/company/feelingchart" style="color: white; opacity: 0.9;">LinkedIn</a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.2rem;">快捷链接</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/about" style="color: white; opacity: 0.9; text-decoration: none;">关于</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/features" style="color: white; opacity: 0.9; text-decoration: none;">功能</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/pricing" style="color: white; opacity: 0.9; text-decoration: none;">定价</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/blog" style="color: white; opacity: 0.9; text-decoration: none;">博客</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.2rem;">资源</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/help" style="color: white; opacity: 0.9; text-decoration: none;">帮助中心</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/docs" style="color: white; opacity: 0.9; text-decoration: none;">文档</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/api" style="color: white; opacity: 0.9; text-decoration: none;">API</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="https://feelingchart.heytcm.com/status" style="color: white; opacity: 0.9; text-decoration: none;">状态</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.2rem;">联系方式</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.8rem;">邮箱: support@feelingchart.com</li>
+            <li style="margin-bottom: 0.8rem;">电话: +1 (555) 123-4567</li>
+            <li style="margin-bottom: 0.8rem;">地址: 123 情感街, 心理城市, MC 12345</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <div style="opacity: 0.9;">
+          © 2023 感受图表. 版权所有.
+        </div>
+        <div style="display: flex; gap: 2rem;">
+          <a href="https://feelingchart.heytcm.com/privacy" style="color: white; opacity: 0.9; text-decoration: none;">隐私政策</a>
+          <a href="https://feelingchart.heytcm.com/terms" style="color: white; opacity: 0.9; text-decoration: none;">服务条款</a>
+          <a href="https://feelingchart.heytcm.com/cookies" style="color: white; opacity: 0.9; text-decoration: none;">Cookie政策</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  </body>
+  </html>

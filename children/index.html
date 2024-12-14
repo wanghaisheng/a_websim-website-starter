@@ -1,0 +1,2326 @@
+
+<html><head><base href="/app" /><style>
+    /* Keeping existing styles */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+    
+    :root {
+      --happy: #FFD93D;
+      --sad: #4F86F7; 
+      --angry: #FF6B6B;
+      --calm: #95E1D3;
+      --fear: #424242;
+      --love: #FF9ECD;
+      --nav-height: 60px;
+    }
+    
+    /* Update mobile container styling */
+    .mobile-container {
+      width: 100%;
+      max-width: 480px; /* Standard mobile width */
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Navigation Menu Styling */
+    .nav-menu {
+      height: var(--nav-height);
+      background: white;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 10px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #666;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      width: 25%;
+      font-size: 0.85rem;
+    }
+    
+    .nav-icon {
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+    
+    .nav-item.active {
+      color: var(--calm);
+      background: rgba(149, 225, 211, 0.1);
+    }
+    
+    .nav-item:hover {
+      color: var(--calm);
+      transform: translateY(-2px);
+    }
+    
+    /* Update container class for proper width alignment */
+    .container {
+      flex: 1;
+      width: 100%;
+      height: calc(100vh - var(--nav-height) - 44px);
+      overflow-y: auto;
+      background: #f5f5f5;
+    }
+    
+    /* Update page class for consistent width */
+    .page {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 15px;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    /* Update header spacing */
+    .header {
+      padding: 12px 5px;
+      margin-bottom: 10px;
+    }
+    
+    /* Update mood-slider for proper width alignment */
+    .mood-slider {
+      width: 100%;
+      padding: 15px;
+      margin: 15px 0;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    /* Update emotion wheel size and spacing */
+    .emotion-wheel {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      margin: 10px auto;
+    }
+    
+    /* Update tags layout */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 15px 0;
+    }
+    
+    .tag {
+      padding: 8px 16px;
+      font-size: 0.85rem;
+    }
+    
+    /* Update reflection textarea */
+    .reflection {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      margin: 12px 0 0 0;
+      min-height: 80px;
+      font-size: 0.9rem;
+    }
+    
+    /* Keep all previous styles */
+    body {
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    /* Status bar styling */
+    .status-bar {
+      height: 44px;
+      background: #333;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      color: white;
+      font-size: 14px;
+    }
+    
+    .status-bar .time {
+      font-weight: 500;
+    }
+    
+    .status-bar .icons {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .header {
+      padding: 12px 5px; /* Updated spacing */
+      margin-bottom: 10px; /* Updated margin */
+    }
+    
+    .header h1 {
+      color: #333;
+      font-size: 1.25rem; /* Updated font size */
+      margin-bottom: 0.25rem; /* Updated margin */
+    }
+    
+    .header p {
+      color: #666;
+      font-size: 0.85rem; /* Updated font size */
+    }
+    
+    .emotion-wheel {
+      width: 200px; /* Updated size */
+      height: 200px; /* Updated size */
+      position: relative;
+      margin: 10px auto; /* Updated margin */
+      transition: transform 0.3s ease;
+    }
+    
+    .emotion-sector {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: 100% 100%;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .emotion-sector:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .mood-slider h3 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    .slider {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      -webkit-appearance: none;
+      background: linear-gradient(to right, #FFD93D, #FF6B6B);
+    }
+    
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid #FF6B6B;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .slider::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+    }
+    
+    .mood-history {
+      width: 100%;
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      overflow-y: auto;
+      margin: 0 auto;
+    }
+    
+    /* Update mood-history for proper width alignment */
+    .mood-history {
+      width: 100%;
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      overflow-y: auto;
+      margin: 0 auto;
+    }
+    
+    .mood-history h3 {
+      margin-bottom: 1rem;
+      color: #333;
+      position: sticky;
+      top: 0;
+      background: white;
+      padding: 0.5rem 0;
+    }
+    
+    .history-filters {
+      display: none; /* Hide history filters section */
+    }
+    
+    .history-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .history-stat-card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .stat-label {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    
+    .stat-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--calm);
+    }
+    
+    .history-calendar {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .history-calendar h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      padding: 10px 0;
+    }
+    
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .calendar-day.selected {
+      border: 2px solid var(--calm);
+      transform: scale(1.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .calendar-day:hover {
+      transform: scale(1.1);
+    }
+    
+    .calendar-day.has-mood {
+      background: var(--calm);
+      color: white;
+    }
+    
+    .mood-timeline {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .mood-timeline h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .mood-entry {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-left-width: 4px;
+      border-left-style: solid;
+    }
+    
+    .mood-entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .mood-entry-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .emotion-icon {
+      font-size: 1.2rem;
+    }
+    
+    .mood-entry-time {
+      color: #666;
+      font-size: 0.85rem;
+    }
+    
+    .mood-entry-date {
+      color: #888;
+      font-size: 0.8rem;
+    }
+    
+    .mood-entry-intensity {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+      color: #666;
+    }
+    
+    .intensity-bar {
+      flex: 1;
+      height: 6px;
+      background: #eee;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .intensity-fill {
+      height: 100%;
+      background: var(--calm);
+      border-radius: 3px;
+    }
+    
+    .mood-entry-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0;
+    }
+    
+    .mood-entry-tags .tag {
+      font-size: 0.8rem;
+      padding: 4px 12px;
+      background: #f5f5f5;
+      border-radius: 15px;
+      color: #666;
+    }
+    
+    .mood-entry-reflection {
+      margin-top: 8px;
+      padding: 8px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      font-style: italic;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .mood-date-group {
+      margin-bottom: 25px;
+    }
+    
+    .mood-date-header {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 480px; /* Match mobile container max-width */
+      height: 100vh;
+      border-radius: 0;
+      padding: 0;
+      position: relative;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Update emotion select modal styling for better mobile layout */
+    .emotion-select-modal .modal-content {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .emotion-select-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 10px;
+      overflow-y: auto;
+      background: #f5f5f5;
+    }
+    
+    /* Update modal header layout */
+    .modal-header {
+      position: relative;
+      padding: 15px;
+      background: white;
+      border-bottom: 1px solid #eee;
+    }
+    
+    #emotionBackBtn {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 1rem;
+      color: var(--calm);
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    
+    #emotionBackBtn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    /* Update emotion path styling */
+    .emotion-path {
+      padding: 10px 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+    
+    .emotion-path span {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    
+    /* Responsive emotion wheel sizing */
+    .emotion-wheel {
+      width: min(280px, 90vw);
+      height: min(280px, 90vw);
+      margin: 10px auto;
+      position: relative;
+    }
+    
+    /* Adjust sizes for different steps */
+    .emotion-wheel.secondary-step {
+      width: min(260px, 85vw);
+      height: min(260px, 85vw);
+    }
+    
+    .emotion-wheel.tertiary-step {
+      width: min(240px, 80vw);
+      height: min(240px, 80vw);
+    }
+    
+    /* Update sunburst container */
+    .sunburst-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+    
+    /* Update center display */
+    .sunburst-center {
+      width: min(80px, 25vw);
+      height: min(80px, 25vw);
+      font-size: 0.9rem;
+      padding: 5px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      word-break: break-word;
+    }
+    
+    /* Update emotion sectors */
+    .emotion-sector {
+      font-size: 0.9rem;
+    }
+    
+    .emotion-sector span {
+      font-size: min(0.9rem, 3.5vw);
+    }
+    
+    /* Media queries for smaller screens */
+    @media (max-width: 360px) {
+      .emotion-wheel {
+        width: 85vw;
+        height: 85vw;
+      }
+      
+      .emotion-wheel.secondary-step {
+        width: 80vw;
+        height: 80vw;
+      }
+      
+      .emotion-wheel.tertiary-step {
+        width: 75vw;
+        height: 75vw;
+      }
+      
+      .emotion-sector span {
+        font-size: 0.8rem;
+      }
+      
+      .sunburst-center {
+        width: 22vw;
+        height: 22vw;
+        font-size: 0.8rem;
+      }
+      
+      .emotion-path span {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+      }
+    }
+    
+    /* Update save button styling */
+    #emotionSaveBtn {
+      margin: 15px auto;
+      padding: 10px 25px;
+      background: var(--calm);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    #emotionSaveBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* Update modal filters styling */
+    .modal-filters {
+      margin: 0;
+      padding: 15px;
+      background: white;
+      border-bottom: 1px solid #eee;
+    }
+    
+    /* Update modal content area */
+    #modalMoodLog {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background: #f5f5f5;
+    }
+    
+    /* Adjust filter row styling */
+    .filter-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .filter-row:last-child {
+      margin-bottom: 0;
+    }
+    
+    .filter-row select {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      background: white;
+    }
+    
+    .pattern-item {
+      background: #f8f8f8;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    
+    .pattern-item h4 {
+      color: #333;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+    
+    .pattern-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--calm);
+      margin-bottom: 5px;
+    }
+    
+    .pattern-detail {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    .stats-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .stats-card h3 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+    
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    
+    /* Add media query for better mobile responsiveness */
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      
+      .mobile-container {
+        width: 100%;
+      }
+      
+      .container {
+        width: 100%;
+      }
+      
+      .page {
+        padding: 12px;
+        width: 100%;
+      }
+      
+      .mood-slider,
+      .mood-history {
+        width: 100%;
+        margin: 12px 0;
+      }
+    
+      .history-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    
+      .history-stat-card {
+        padding: 12px;
+      }
+    
+      .calendar-grid {
+        gap: 3px;
+      }
+    
+      .calendar-day {
+        font-size: 0.7rem;
+      }
+    
+      .modal-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+      }
+      
+      .stats-container {
+        padding: 12px;
+      }
+      
+      .stats-card {
+        padding: 15px;
+        margin-bottom: 12px;
+      }
+      
+      .stat-grid {
+        gap: 10px;
+      }
+      
+      .pattern-item {
+        padding: 12px;
+      }
+    }
+    
+    /* Stats Page Styles */
+    .stats-container {
+      padding: 15px;
+    }
+    
+    .stats-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .stats-card h3 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+    
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .stat-item {
+      background: #f8f8f8;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .stat-item:hover {
+      transform: translateY(-2px);
+    }
+    
+    .stat-value {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--calm);
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    .distribution-bar {
+      height: 24px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      margin-bottom: 15px;
+    }
+    
+    .bar-segment {
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+    
+    .distribution-legend {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      color: #666;
+    }
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      margin-right: 6px;
+    }
+    
+    .tag-stat-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .tag-name {
+      width: 80px;
+      font-size: 0.9rem;
+      color: #333;
+    }
+    
+    .tag-bar-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .tag-bar {
+      height: 8px;
+      background: var(--calm);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    
+    .tag-count {
+      font-size: 0.85rem;
+      color: #666;
+      min-width: 70px;
+    }
+    
+    .streak-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    
+    .streak-item {
+      background: #f8f8f8;
+      padding: 15px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: transform 0.3s ease;
+    }
+    
+    .streak-item:hover {
+      transform: translateY(-2px);
+    }
+    
+    .streak-icon {
+      font-size: 1.5rem;
+    }
+    
+    .streak-details {
+      flex: 1;
+    }
+    
+    .streak-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--calm);
+      margin-bottom: 2px;
+    }
+    
+    .streak-label {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    /* Sunburst diagram styling */
+    .sunburst-container {
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      position: relative;
+    }
+    
+    .sunburst-level {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .sunburst-segment {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform-origin: 50% 50%;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .sunburst-segment span {
+      position: absolute;
+      left: 50%;
+      top: 25%;
+      transform-origin: 0 100%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      color: white;
+      font-size: 0.9rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    
+    .sunburst-segment:hover {
+      filter: brightness(1.1);
+    }
+    
+    .sunburst-segment.selected {
+      filter: brightness(1.2);
+    }
+    
+    .sunburst-center {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: white;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 10px;
+    }
+    
+    /* Add media query for better mobile responsiveness */
+    @media (max-width: 480px) {
+      .sunburst-container {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    
+    /* Emotion Selection Modal Styles */
+    .emotion-select-modal .modal-content {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    
+    .emotion-select-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .emotion-select-container .emotion-wheel {
+      width: 280px; /* Slightly smaller base size */
+      height: 280px;
+      position: relative;
+      margin: 20px auto;
+      transition: all 0.3s ease;
+    }
+    
+    /* Add responsive sizing for tertiary step */
+    .emotion-select-container .emotion-wheel.tertiary-step {
+      width: 240px; /* Even smaller for tertiary step */
+      height: 240px;
+      margin: 15px auto;
+    }
+    
+    /* Adjust sector sizes for tertiary step */
+    .emotion-select-container .emotion-wheel.tertiary-step .emotion-sector {
+      font-size: 0.9rem; /* Smaller font for tertiary items */
+    }
+    
+    /* Adjust center display size for tertiary step */
+    .emotion-select-container .emotion-wheel.tertiary-step .sunburst-center {
+      width: 80px;
+      height: 80px;
+      font-size: 0.9rem;
+    }
+    
+    /* Ensure labels are readable */
+    .emotion-sector span {
+      position: absolute;
+      transform-origin: center;
+      white-space: nowrap;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .emotion-sector:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    /* Add path styles */
+    .emotion-path {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .emotion-path span {
+      padding: 5px 15px;
+      border-radius: 15px;
+      font-size: 0.9rem;
+    }
+    </style></head><body>
+    
+    <div class="mobile-container">
+      <div class="status-bar">
+        <div class="time" id="currentTime">12:00</div>
+        <div class="icons">
+          <span>📶</span>
+          <span>🔋</span>
+        </div>
+      </div>
+    
+      <div class="container">
+        <!-- Home Page -->
+        <div class="page active" id="home">
+          <div class="header">
+            <h1>Today's Mood</h1>
+            <p>How are you feeling?</p>
+          </div>
+          <div class="emotion-path" id="emotionPath"></div>
+          <div class="emotion-wheel" id="emotionWheel"></div>
+          <div class="mood-slider">
+            <h3>Intensity</h3>
+            <input type="range" min="1" max="100" value="50" class="slider" id="intensitySlider">
+            <div class="tags">
+              <span class="tag">Work</span>
+              <span class="tag">Family</span>
+              <span class="tag">Health</span>
+              <span class="tag">Social</span>
+              <span class="tag">Sleep</span>
+              <span class="tag">+ Add Tag</span>
+            </div>
+            <textarea class="reflection" placeholder="How are you feeling today? What triggered this emotion? (Optional)"></textarea>
+          </div>
+          <button class="start-emotion-btn">Start Tracking Mood</button>
+        </div>
+    
+        <!-- History Page -->
+        <div class="page" id="history">
+          <div class="header">
+            <h1>Mood History</h1>
+            <p>Track your emotional journey</p>
+          </div>
+          <div class="mood-history">
+            <div class="history-stats">
+              <div class="history-stat-card">
+                <span class="stat-label">Total Entries</span>
+                <span class="stat-value">24</span>
+              </div>
+              <div class="history-stat-card">
+                <span class="stat-label">Most Common</span>
+                <span class="stat-value">😊 Happy</span>
+              </div>
+              <div class="history-stat-card">
+                <span class="stat-label">Average Mood</span>
+                <span class="stat-value">Positive</span>
+              </div>
+            </div>
+    
+            <div class="history-calendar">
+              <h3>Monthly Overview</h3>
+              <div class="calendar-grid" id="moodCalendar">
+                <!-- Calendar will be populated by JS -->
+              </div>
+            </div>
+    
+            <div class="mood-timeline">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3>Recent Entries</h3>
+                <button id="viewAllButton" class="view-all-btn">View All</button>
+              </div>
+              <div id="moodLog"></div>
+            </div>
+    
+            <!-- Add this after the mood-timeline div -->
+            <div class="modal" id="entriesModal">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3>All Entries</h3>
+                  <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-filters">
+                  <div class="filter-row">
+                    <select class="modal-filter" id="modalMoodFilter">
+                      <option value="all">All Moods</option>
+                      <option value="happy">Happy</option>
+                      <option value="sad">Sad</option>
+                      <option value="angry">Angry</option>
+                      <option value="calm">Calm</option>
+                      <option value="fear">Fear</option>
+                      <option value="love">Love</option>
+                    </select>
+                    <select class="modal-filter" id="modalTimeFilter">
+                      <option value="7">Last 7 Days</option>
+                      <option value="30">Last 30 Days</option>
+                      <option value="90">Last 3 Months</option>
+                      <option value="all">All Time</option>
+                    </select>
+                  </div>
+                  <div class="filter-row">
+                    <select class="modal-filter" id="modalSortFilter">
+                      <option value="newest">Newest First</option>
+                      <option value="oldest">Oldest First</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="modalMoodLog"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Stats Page -->
+        <div class="page" id="stats">
+          <div class="header">
+            <h1>Insights</h1>
+            <p>Understanding your patterns</p>
+          </div>
+          <div class="stats-container">
+            <!-- Overview Stats -->
+            <div class="stats-card">
+              <h3>Mood Overview</h3>
+              <div class="stat-grid">
+                <div class="stat-item">
+                  <div class="stat-value">😊 Happy</div>
+                  <div class="stat-label">Most Frequent Mood</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">65%</div>
+                  <div class="stat-label">Average Daily Mood</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">+12%</div>
+                  <div class="stat-label">Week over Week</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">+8%</div>
+                  <div class="stat-label">Month over Month</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Mood Distribution -->
+            <div class="stats-card">
+              <h3>Mood Distribution</h3>
+              <div class="distribution-bar">
+                <div class="bar-segment" style="width: 45%; background: var(--happy);" title="Happy: 45%"></div>
+                <div class="bar-segment" style="width: 20%; background: var(--calm);" title="Calm: 20%"></div>
+                <div class="bar-segment" style="width: 15%; background: var(--love);" title="Love: 15%"></div>
+                <div class="bar-segment" style="width: 10%; background: var(--sad);" title="Sad: 10%"></div>
+                <div class="bar-segment" style="width: 5%; background: var(--fear);" title="Fear: 5%"></div>
+                <div class="bar-segment" style="width: 5%; background: var(--angry);" title="Angry: 5%"></div>
+              </div>
+              <div class="distribution-legend">
+                <div class="legend-item"><span class="legend-color" style="background: var(--happy)"></span>Happy (45%)</div>
+                <div class="legend-item"><span class="legend-color" style="background: var(--calm)"></span>Calm (20%)</div>
+                <div class="legend-item"><span class="legend-color" style="background: var(--love)"></span>Love (15%)</div>
+                <div class="legend-item"><span class="legend-color" style="background: var(--sad)"></span>Sad (10%)</div>
+                <div class="legend-item"><span class="legend-color" style="background: var(--fear)"></span>Fear (5%)</div>
+                <div class="legend-item"><span class="legend-color" style="background: var(--angry)"></span>Angry (5%)</div>
+              </div>
+            </div>
+    
+            <!-- Time Patterns -->
+            <div class="stats-card">
+              <h3>Time Patterns</h3>
+              <div class="time-patterns">
+                <div class="pattern-item">
+                  <h4>Peak Mood Time</h4>
+                  <div class="pattern-value">🌅 Morning</div>
+                  <div class="pattern-detail">Most positive moods recorded between 6 AM - 10 AM</div>
+                  <div class="pattern-detail">Success rate: 75%</div>
+                </div>
+                <div class="pattern-item">
+                  <h4>Best Day of Week</h4>
+                  <div class="pattern-value">📅 Saturday</div>
+                  <div class="pattern-detail">Highest average mood rating of 8.5/10</div>
+                  <div class="pattern-detail">Success rate: 82%</div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Mood Triggers -->
+            <div class="stats-card">
+              <h3>Common Tags & Triggers</h3>
+              <div class="tag-stats">
+                <div class="tag-list">
+                  <div class="tag-stat-item">
+                    <span class="tag-name">Work</span>
+                    <div class="tag-bar-container">
+                      <div class="tag-bar" style="width: 80%"></div>
+                      <span class="tag-count">24 entries (80%)</span>
+                    </div>
+                  </div>
+                  <div class="tag-stat-item">
+                    <span class="tag-name">Family</span>
+                    <div class="tag-bar-container">
+                      <div class="tag-bar" style="width: 60%"></div>
+                      <span class="tag-count">18 entries (60%)</span>
+                    </div>
+                  </div>
+                  <div class="tag-stat-item">
+                    <span class="tag-name">Health</span>
+                    <div class="tag-bar-container">
+                      <div class="tag-bar" style="width: 50%"></div>
+                      <span class="tag-count">15 entries (50%)</span>
+                    </div>
+                  </div>
+                  <div class="tag-stat-item">
+                    <span class="tag-name">Social</span>
+                    <div class="tag-bar-container">
+                      <div class="tag-bar" style="width: 40%"></div>
+                      <span class="tag-count">12 entries (40%)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Streak Stats -->
+            <div class="stats-card">
+              <h3>Tracking Streak</h3>
+              <div class="streak-stats">
+                <div class="streak-item">
+                  <div class="streak-icon">🔥</div>
+                  <div class="streak-details">
+                    <div class="streak-value">7 Days</div>
+                    <div class="streak-label">Current Streak</div>
+                  </div>
+                </div>
+                <div class="streak-item">
+                  <div class="streak-icon">⭐</div>
+                  <div class="streak-details">
+                    <div class="streak-value">14 Days</div>
+                    <div class="streak-label">Personal Best</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Settings Page -->
+        <div class="page" id="settings">
+          <div class="header">
+            <h1>Settings</h1>
+            <p>Customize your experience</p>
+          </div>
+          <div class="settings-container">
+            <div class="settings-section">
+              <h3>Preferences</h3>
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>Daily Reminder</span>
+                  <p class="setting-description">Get notified to log your mood</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>Dark Mode</span>
+                  <p class="setting-description">Switch to dark theme</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>Weekly Summary</span>
+                  <p class="setting-description">Receive weekly mood insights</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="settings-section">
+              <h3>Data & Privacy</h3>
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>Export Data</span>
+                  <p class="setting-description">Download your mood history as CSV</p>
+                </div>
+                <button class="settings-button">Export</button>
+              </div>
+              
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>Backup Data</span>
+                  <p class="setting-description">Save your data to cloud</p>
+                </div>
+                <button class="settings-button">Backup</button>
+              </div>
+              
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>Clear History</span>
+                  <p class="setting-description">Delete all mood entries</p>
+                </div>
+                <button class="settings-button danger">Clear</button>
+              </div>
+            </div>
+            
+            <div class="settings-section">
+              <h3>About</h3>
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>Version</span>
+                  <p class="setting-description">Current app version</p>
+                </div>
+                <span style="color: #666; font-size: 0.9rem;">1.0.0</span>
+              </div>
+              
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>Help & Support</span>
+                  <p class="setting-description">Get assistance and FAQs</p>
+                </div>
+                <button class="settings-button">View</button>
+              </div>
+              
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>Send Feedback</span>
+                  <p class="setting-description">Help us improve the app</p>
+                </div>
+                <button class="settings-button">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Emotion Selection Modal -->
+      <div class="modal" id="emotionSelectModal">
+        <div class="modal-content emotion-select-modal">
+          <div class="modal-header">
+            <h3 id="emotionSelectTitle">Select Primary Emotion</h3>
+            <button class="close-modal" id="closeEmotionSelect">&times;</button>
+          </div>
+          <div class="emotion-select-container">
+            <div class="emotion-path" id="emotionPath"></div>
+            <div class="sunburst-container" id="sunburstContainer"></div>
+            <div class="emotion-select-nav">
+              <button id="emotionBackBtn" class="emotion-nav-btn" disabled>← Back</button>
+              <button id="emotionNextBtn" class="emotion-nav-btn" style="display: none;">Next →</button>
+              <button id="emotionSaveBtn" class="emotion-nav-btn" style="display: none;">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Navigation Menu -->
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active" data-page="home">
+          <span class="nav-icon">🏠</span>
+          <span>Home</span>
+        </a>
+        <a href="#" class="nav-item" data-page="history">
+          <span class="nav-icon">📅</span>
+          <span>History</span>
+        </a>
+        <a href="#" class="nav-item" data-page="stats">
+          <span class="nav-icon">📊</span>
+          <span>Stats</span>
+        </a>
+        <a href="#" class="nav-item" data-page="settings">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+    
+    <script>
+    const emotions = [
+      { 
+        name: 'Happy', 
+        color: 'var(--happy)', 
+        rotation: 0,
+        subEmotions: ['Joyful', 'Content', 'Excited', 'Grateful']
+      },
+      { 
+        name: 'Love', 
+        color: 'var(--love)', 
+        rotation: 60,
+        subEmotions: ['Affectionate', 'Caring', 'Passionate', 'Connected']
+      },
+      { 
+        name: 'Calm', 
+        color: 'var(--calm)', 
+        rotation: 120,
+        subEmotions: ['Peaceful', 'Relaxed', 'Serene', 'Mindful']
+      },
+      { 
+        name: 'Sad', 
+        color: 'var(--sad)', 
+        rotation: 180,
+        subEmotions: ['Down', 'Lonely', 'Disappointed', 'Hurt']
+      },
+      { 
+        name: 'Fear', 
+        color: 'var(--fear)', 
+        rotation: 240,
+        subEmotions: ['Anxious', 'Worried', 'Overwhelmed', 'Uncertain']
+      },
+      { 
+        name: 'Angry', 
+        color: 'var(--angry)', 
+        rotation: 300,
+        subEmotions: ['Frustrated', 'Irritated', 'Mad', 'Annoyed']
+      }
+    ];
+    
+    const emotionHierarchy = {
+      Happy: {
+        Joyful: ['Cheerful', 'Gleeful', 'Jubilant'],
+        Grateful: ['Appreciative', 'Thankful', 'Relieved'],
+        Proud: ['Confident', 'Accomplished', 'Empowered'],
+        Excited: ['Energized', 'Enthusiastic', 'Overjoyed'],
+        Content: ['Peaceful', 'Satisfied', 'Relaxed'],
+        Playful: ['Silly', 'Carefree', 'Fun']
+      },
+      Love: {
+        Affectionate: ['Tender', 'Caring', 'Fondness'],
+        Romantic: ['Passionate', 'Intimate', 'Amorous'],
+        Connected: ['Bonded', 'Close', 'United'],
+        Compassionate: ['Empathetic', 'Understanding', 'Kind'],
+        Admiring: ['Respectful', 'Inspired', 'Awed'],
+        Gentle: ['Soft', 'Delicate', 'Mild']
+      },
+      Calm: {
+        Peaceful: ['Tranquil', 'Serene', 'Still'],
+        Relaxed: ['At ease', 'Comfortable', 'Loose'],
+        Mindful: ['Present', 'Aware', 'Centered'],
+        Secure: ['Safe', 'Protected', 'Stable'],
+        Grounded: ['Balanced', 'Steady', 'Rooted'],
+        Content: ['Satisfied', 'Fulfilled', 'Complete']
+      },
+      Sad: {
+        Lonely: ['Isolated', 'Abandoned', 'Rejected'],
+        Down: ['Blue', 'Gloomy', 'Low'],
+        Disappointed: ['Let down', 'Discouraged', 'Disheartened'],
+        Hurt: ['Pained', 'Wounded', 'Injured'],
+        Grief: ['Loss', 'Sorrow', 'Mourning'],
+        Empty: ['Hollow', 'Void', 'Vacant']
+      },
+      Fear: {
+        Anxious: ['Worried', 'Nervous', 'Uneasy'],
+        Scared: ['Frightened', 'Afraid', 'Terrified'],
+        Overwhelmed: ['Stressed', 'Pressured', 'Swamped'],
+        Uncertain: ['Unsure', 'Doubtful', 'Hesitant'],
+        Vulnerable: ['Exposed', 'Helpless', 'Insecure'],
+        Worried: ['Concerned', 'Troubled', 'Distressed']
+      },
+      Angry: {
+        Frustrated: ['Annoyed', 'Agitated', 'Irritated'],
+        Mad: ['Furious', 'Enraged', 'Livid'],
+        Irritated: ['Bothered', 'Aggravated', 'Peeved'],
+        Annoyed: ['Disturbed', 'Displeased', 'Irked'],
+        Defensive: ['Guarded', 'Protected', 'Resistant'],
+        Bitter: ['Resentful', 'Hostile', 'Vengeful']
+      }
+    };
+    
+    function formatMoodEntry(emotion, intensity, reflection, tags, date) {
+      const timeStr = new Date(date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      const dateStr = new Date(date).toLocaleDateString();
+      
+      return `
+        <div class="mood-entry" style="border-left-color: ${emotion.color}">
+          <div class="mood-entry-header">
+            <div class="mood-entry-main">
+              <span class="emotion-icon">${getEmotionEmoji(emotion.name)}</span>
+              <strong>${emotion.name}</strong>
+            </div>
+            <span class="mood-entry-time">${timeStr}</span>
+          </div>
+          
+          <div class="mood-entry-intensity">
+            <span>Intensity</span>
+            <div class="intensity-bar">
+              <div class="intensity-fill" style="width: ${intensity}%; background: ${emotion.color}"></div>
+            </div>
+            <span>${intensity}%</span>
+          </div>
+          
+          ${tags.length ? `
+            <div class="mood-entry-tags">
+              ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+          ` : ''}
+          
+          ${reflection ? `          
+            <div class="mood-entry-reflection">
+              "${reflection}"
+            </div>
+          ` : ''}
+          
+        </div>
+      `;
+    }
+    
+    function createEmotionWheel() {
+      const wheel = document.getElementById('emotionWheel');
+      
+      emotions.forEach(emotion => {
+        const sector = document.createElement('div');
+        sector.className = 'emotion-sector';
+        sector.style.transform = `rotate(${emotion.rotation}deg) skewY(30deg)`;
+        sector.style.backgroundColor = emotion.color;
+        
+        const label = document.createElement('span');
+        label.textContent = emotion.name;
+        label.style.transform = `skewY(-30deg) rotate(${-emotion.rotation}deg)`;
+        sector.appendChild(label);
+        
+        sector.addEventListener('click', () => selectEmotion(emotion.name, 'primary'));
+        sector.title = `${emotion.name}: ${emotion.subEmotions.join(', ')}`;
+        
+        wheel.appendChild(sector);
+      });
+    }
+    
+    function updateTime() {
+      const timeElement = document.getElementById('currentTime');
+      const now = new Date();
+      timeElement.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    
+    function selectEmotion(emotion, step) {
+      // Clear previous selections
+      document.querySelectorAll('.emotion-sector').forEach(segment => {
+        segment.classList.remove('selected');
+      });
+      
+      // Find the clicked sector and add selected class
+      const sectors = document.querySelectorAll('.emotion-sector');
+      sectors.forEach(sector => {
+        if (sector.querySelector('span').textContent === emotion) {
+          sector.classList.add('selected');
+        }
+      });
+      
+      currentSelection[step] = emotion;
+      
+      // Auto advance to next step after short delay
+      setTimeout(() => {
+        if (step === 'primary') {
+          currentStep = 'secondary';
+          updateEmotionSelect();
+        } else if (step === 'secondary') {
+          currentStep = 'tertiary';
+          updateEmotionSelect();
+        }
+      }, 300);
+    }
+    
+    function updateEmotionSelect() {
+      const title = document.getElementById('emotionSelectTitle');
+      const backBtn = document.getElementById('emotionBackBtn');
+      const nextBtn = document.getElementById('emotionNextBtn');
+      const saveBtn = document.getElementById('emotionSaveBtn');
+      
+      title.textContent = `Select ${currentStep.charAt(0).toUpperCase() + currentStep.slice(1)} Emotion`;
+      backBtn.disabled = currentStep === 'primary';
+      
+      // Hide next button since we'll auto-advance
+      nextBtn.style.display = 'none';
+      
+      // Only show save button on tertiary step
+      saveBtn.style.display = currentStep === 'tertiary' ? 'block' : 'none';
+      
+      renderSunburst();
+    }
+    
+    // Update renderSunburst function to handle different steps
+    function renderSunburst() {
+      const container = document.getElementById('sunburstContainer');
+      container.innerHTML = '';
+      
+      const emotionWheel = document.createElement('div');
+      emotionWheel.className = 'emotion-wheel';
+      
+      // Add step-specific classes
+      if (currentStep === 'secondary') {
+        emotionWheel.classList.add('secondary-step');
+      } else if (currentStep === 'tertiary') {
+        emotionWheel.classList.add('tertiary-step');
+      }
+      
+      container.appendChild(emotionWheel);
+      
+      // Update center display text and size
+      const center = document.createElement('div');
+      center.className = 'sunburst-center';
+      
+      if (currentStep === 'secondary') {
+        center.textContent = currentSelection.primary;
+      } else if (currentStep === 'tertiary') {
+        center.textContent = currentSelection.secondary;
+      } else {
+        center.textContent = 'Select';
+      }
+      
+      emotionWheel.appendChild(center);
+    
+      let options = [];
+      if (currentStep === 'primary') {
+        options = Object.keys(emotionHierarchy);
+      } else if (currentStep === 'secondary' && currentSelection.primary) {
+        options = Object.keys(emotionHierarchy[currentSelection.primary] || {});
+      } else if (currentStep === 'tertiary' && currentSelection.primary && currentSelection.secondary) {
+        options = emotionHierarchy[currentSelection.primary]?.[currentSelection.secondary] || [];
+      }
+    
+      // Create sectors with adjusted sizing
+      options.forEach((emotion, index) => {
+        const sector = document.createElement('div');
+        sector.className = 'emotion-sector';
+        
+        const angle = 360 / options.length;
+        const rotation = index * angle;
+        
+        sector.style.transform = `rotate(${rotation}deg) skewY(${360/(2*options.length)}deg)`;
+        sector.style.backgroundColor = getEmotionColor(emotion);
+        
+        const label = document.createElement('span');
+        label.textContent = emotion;
+        label.style.transform = `skewY(-${360/(2*options.length)}deg) rotate(${-rotation}deg)`;
+        
+        sector.appendChild(label);
+        sector.onclick = () => selectEmotion(emotion, currentStep);
+        emotionWheel.appendChild(sector);
+      });
+      
+      updateEmotionPath();
+    }
+    
+    // Add helper function to get emotion color
+    function getEmotionColor(emotion) {
+      const baseColors = {
+        'Happy': 'var(--happy)',
+        'Love': 'var(--love)', 
+        'Calm': 'var(--calm)',
+        'Sad': 'var(--sad)',
+        'Fear': 'var(--fear)',
+        'Angry': 'var(--angry)'
+      };
+    
+      // Return base color if it exists, otherwise return parent emotion's color
+      if (baseColors[emotion]) {
+        return baseColors[emotion];
+      }
+      
+      // For secondary/tertiary emotions, use their primary emotion's color
+      for (const [primary, secondaries] of Object.entries(emotionHierarchy)) {
+        if (Object.keys(secondaries).includes(emotion)) {
+          return baseColors[primary];
+        }
+        for (const [secondary, tertiaries] of Object.entries(secondaries)) {
+          if (tertiaries.includes(emotion)) {
+            return baseColors[primary];
+          }
+        }
+      }
+      
+      return 'var(--calm)'; // Default color
+    }
+    
+    // Update the existing updateEmotionSelect function
+    function updateEmotionSelect() {
+      const title = document.getElementById('emotionSelectTitle');
+      const backBtn = document.getElementById('emotionBackBtn');
+      const nextBtn = document.getElementById('emotionNextBtn');
+      const saveBtn = document.getElementById('emotionSaveBtn');
+      
+      title.textContent = `Select ${currentStep.charAt(0).toUpperCase() + currentStep.slice(1)} Emotion`;
+      backBtn.disabled = currentStep === 'primary';
+      
+      // Hide next button since we'll auto-advance
+      nextBtn.style.display = 'none';
+      
+      // Only show save button on tertiary step
+      saveBtn.style.display = currentStep === 'tertiary' ? 'block' : 'none';
+      
+      renderSunburst();
+    }
+    
+    // Add this function to handle updating the emotion path display
+    function updateEmotionPath() {
+      const pathContainer = document.getElementById('emotionPath');
+      if (!pathContainer) return;
+      
+      pathContainer.innerHTML = '';
+      
+      // Add primary emotion if selected
+      if (currentSelection.primary) {
+        const primarySpan = document.createElement('span');
+        primarySpan.textContent = currentSelection.primary;
+        primarySpan.style.backgroundColor = getEmotionColor(currentSelection.primary);
+        primarySpan.style.color = 'white';
+        pathContainer.appendChild(primarySpan);
+      }
+    
+      // Add arrow and secondary emotion if selected
+      if (currentSelection.secondary) {
+        const arrow1 = document.createElement('span');
+        arrow1.textContent = '→';
+        arrow1.style.color = '#666';
+        pathContainer.appendChild(arrow1);
+    
+        const secondarySpan = document.createElement('span');
+        secondarySpan.textContent = currentSelection.secondary;
+        secondarySpan.style.backgroundColor = getEmotionColor(currentSelection.secondary);
+        secondarySpan.style.color = 'white';
+        pathContainer.appendChild(secondarySpan);
+      }
+    
+      // Add arrow and tertiary emotion if selected
+      if (currentSelection.tertiary) {
+        const arrow2 = document.createElement('span');
+        arrow2.textContent = '→';
+        arrow2.style.color = '#666';
+        pathContainer.appendChild(arrow2);
+    
+        const tertiarySpan = document.createElement('span');
+        tertiarySpan.textContent = currentSelection.tertiary;
+        tertiarySpan.style.backgroundColor = getEmotionColor(currentSelection.tertiary);
+        tertiarySpan.style.color = 'white';
+        pathContainer.appendChild(tertiarySpan);
+      }
+    }
+    
+    // Event listeners 
+    document.querySelector('.start-emotion-btn').onclick = () => {
+      document.getElementById('emotionSelectModal').classList.add('active');
+      currentStep = 'primary';
+      updateEmotionSelect();
+    };
+    
+    document.getElementById('closeEmotionSelect').onclick = () => {
+      document.getElementById('emotionSelectModal').classList.remove('active');
+      currentSelection = { primary: '', secondary: '', tertiary: '' };
+    };
+    
+    document.getElementById('emotionBackBtn').onclick = () => handleNavigation('back');
+    document.getElementById('emotionNextBtn').onclick = () => handleNavigation('next');
+    document.getElementById('emotionSaveBtn').onclick = () => {
+      const selectedEmotion = {
+        primary: currentSelection.primary,
+        secondary: currentSelection.secondary,
+        tertiary: currentSelection.tertiary
+      };
+      
+      console.log('Final emotion selection:', selectedEmotion);
+      // Here you would handle saving the emotion data
+      
+      document.getElementById('emotionSelectModal').classList.remove('active');
+      currentSelection = { primary: '', secondary: '', tertiary: '' };
+      currentStep = 'primary';
+    };
+    
+    // Initialize
+    createEmotionWheel();
+    updateTime();
+    setInterval(updateTime, 1000);
+    
+    // Initialize Calendar
+    function initializeCalendar() {
+      const calendar = document.getElementById('moodCalendar');
+      const daysInMonth = 31; // Simplified version
+      const today = new Date();
+      
+      for (let i = 1; i <= daysInMonth; i++) {
+        const day = document.createElement('div');
+        day.className = 'calendar-day';
+        day.textContent = i;
+        
+        // Randomly add mood indicators for demo
+        if (Math.random() > 0.5) {
+          day.classList.add('has-mood');
+          // Store random mood for demo
+          day.dataset.mood = emotions[Math.floor(Math.random() * emotions.length)].name.toLowerCase();
+        }
+        
+        day.addEventListener('click', () => {
+          handleDayClick(i, day.dataset.mood);
+        });
+        
+        calendar.appendChild(day);
+      }
+    }
+    
+    // Add new function to handle day clicks
+    function handleDayClick(day, mood) {
+      // Show all date groups first
+      document.querySelectorAll('.mood-date-group').forEach(group => {
+        group.style.display = 'block';
+      });
+        
+      // Highlight the selected day
+      document.querySelectorAll('.calendar-day').forEach(d => {
+        d.classList.remove('selected');
+      });
+      event.target.classList.add('selected');
+        
+      // Get the date for the clicked day
+      const selectedDate = new Date();
+      selectedDate.setDate(day);
+      const dateStr = selectedDate.toLocaleDateString();
+        
+      // Show only entries for selected day
+      document.querySelectorAll('.mood-date-group').forEach(group => {
+        if(group.dataset.date !== dateStr) {
+          group.style.display = 'none';
+        }
+      });
+        
+      // Scroll to the entries
+      const dateGroup = document.querySelector(`[data-date="${dateStr}"]`);
+      if (dateGroup) {
+        dateGroup.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    
+    // Update the generateMockHistory function to better handle dates and show today's entries by default
+    function generateMockHistory() {
+      const moodLog = document.getElementById('moodLog');
+      moodLog.innerHTML = ''; // Clear existing entries
+      
+      const today = new Date();
+      const past30Days = Array.from({length: 30}, (_, i) => {
+        const date = new Date(today);
+        date.setDate(date.getDate() - i);
+        return date;
+      });
+    
+      // Generate entries for each day
+      past30Days.forEach(date => {
+        const numEntries = Math.floor(Math.random() * 3) + 1;
+        
+        // Create date group for each day
+        const dateStr = date.toLocaleDateString();
+        let dateGroup = document.createElement('div');
+        dateGroup.className = 'mood-date-group';
+        dateGroup.dataset.date = dateStr;
+        dateGroup.innerHTML = `<h4 class="mood-date-header">${dateStr}</h4>`;
+        
+        // Generate entries for this day
+        for(let i = 0; i < numEntries; i++) {
+          const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];
+          const intensity = Math.floor(Math.random() * 100) + 1;
+          const mockTags = ['Work', 'Family', 'Health', 'Social', 'Sleep'];
+          const selectedTags = mockTags
+            .filter(() => Math.random() > 0.5)
+            .slice(0, Math.floor(Math.random() * 3) + 1);
+          
+          const reflections = [
+            "Feeling great after completing my project!",
+            "Had a challenging day at work",
+            "Spent quality time with family",
+            "Worried about upcoming deadlines",
+            "Really enjoyed my workout today"
+          ];
+          const reflection = Math.random() > 0.3 ? reflections[Math.floor(Math.random() * reflections.length)] : '';
+          
+          const entryHTML = formatMoodEntry(randomEmotion, intensity, reflection, selectedTags, date);
+          dateGroup.insertAdjacentHTML('beforeend', entryHTML);
+        }
+        
+        moodLog.appendChild(dateGroup);
+      });
+    
+      // Hide all date groups except today's
+      const todayStr = today.toLocaleDateString();
+      document.querySelectorAll('.mood-date-group').forEach(group => {
+        if(group.dataset.date !== todayStr) {
+          group.style.display = 'none';
+        }
+      });
+    }
+    
+    // Add event listener for "View All" button
+    document.getElementById('viewAllButton').addEventListener('click', () => {
+      const modal = document.getElementById('entriesModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      
+      // Copy all entries to modal
+      const modalLog = document.getElementById('modalMoodLog');
+      const originalLog = document.getElementById('moodLog');
+      modalLog.innerHTML = originalLog.innerHTML;
+      
+      // Show all entries in modal
+      modalLog.querySelectorAll('.mood-date-group').forEach(group => {
+        group.style.display = 'block';
+      });
+    });
+    
+    // Close modal when clicking close button
+    const closeModal = document.querySelector('.close-modal');
+    closeModal.addEventListener('click', () => {
+      const modal = document.getElementById('entriesModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    });
+    
+    // Close modal when clicking outside
+    const modal = document.getElementById('entriesModal');
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Handle modal filters
+    document.getElementById('modalMoodFilter').addEventListener('change', filterModalEntries);
+    document.getElementById('modalTimeFilter').addEventListener('change', filterModalEntries);
+    document.getElementById('modalSortFilter').addEventListener('change', filterModalEntries);
+    
+    function filterModalEntries() {
+      const moodFilter = document.getElementById('modalMoodFilter').value;
+      const timeFilter = document.getElementById('modalTimeFilter').value;
+      const sortFilter = document.getElementById('modalSortFilter').value;
+      
+      const modalLog = document.getElementById('modalMoodLog');
+      const entries = modalLog.querySelectorAll('.mood-entry');
+      
+      entries.forEach(entry => {
+        let show = true;
+        
+        // Filter by mood
+        if (moodFilter !== 'all') {
+          const entryMood = entry.querySelector('strong').textContent.toLowerCase();
+          show = show && entryMood === moodFilter;
+        }
+        
+        // Filter by time
+        const entryDate = new Date(entry.querySelector('.mood-entry-date').textContent);
+        const daysAgo = (new Date() - entryDate) / (1000 * 60 * 60 * 24);
+        
+        if (timeFilter !== 'all') {
+          show = show && daysAgo <= parseInt(timeFilter);
+        }
+        
+        entry.style.display = show ? 'block' : 'none';
+      });
+      
+      // Sort entries
+      const dateGroups = modalLog.querySelectorAll('.mood-date-group');
+      const groupsArray = Array.from(dateGroups);
+      
+      groupsArray.sort((a, b) => {
+        const dateA = new Date(a.querySelector('.mood-date-header').textContent);
+        const dateB = new Date(b.querySelector('.mood-date-header').textContent);
+        return sortFilter === 'newest' ? dateB - dateA : dateA - dateB;
+      });
+      
+      groupsArray.forEach(group => modalLog.appendChild(group));
+    }
+    
+    // Call this after page load
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('home').style.display = 'block';
+      document.getElementById('home').style.opacity = '1';
+      initializeCalendar();
+      generateMockHistory(); // Call to generate mock history on load
+    });
+    
+    // Update the switchPage function to handle transitions better
+    function switchPage(targetPage) {
+      // Hide all pages first
+      document.querySelectorAll('.page').forEach(page => {
+        page.style.opacity = '0';
+        setTimeout(() => {
+          page.style.display = 'none';
+        }, 300);
+      });
+      
+      // Update nav items
+      document.querySelectorAll('.nav-item').forEach(navItem => {
+        navItem.classList.remove('active');
+      });
+      document.querySelector(`[data-page="${targetPage}"]`).classList.add('active');
+      
+      // Show target page
+      const targetElement = document.getElementById(targetPage);
+      setTimeout(() => {
+        targetElement.style.display = 'block';
+        setTimeout(() => {
+          targetElement.style.opacity = '1';
+        }, 50);
+      }, 300);
+    }
+    
+    // Event listeners for navigation
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetPage = item.dataset.page;
+        switchPage(targetPage);
+      });
+    });
+    
+    // Event listeners for intensity slider
+    document.getElementById('intensitySlider').addEventListener('input', function() {
+      const value = this.value;
+      const gradient = `linear-gradient(to right, var(--happy) ${value}%, #eee ${value}%)`;
+      this.style.background = gradient;
+    });
+    
+    // Event listeners for tags
+    document.querySelectorAll('.tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        if (tag.textContent !== '+ Add Tag') {
+          tag.classList.toggle('active');
+        } else {
+          const newTag = prompt('Enter new tag:');
+          if (newTag && newTag.trim()) {
+            const tagElement = document.createElement('span');
+            tagElement.className = 'tag';
+            tagElement.textContent = newTag.trim();
+            tag.parentNode.insertBefore(tagElement, tag);
+            
+            tagElement.addEventListener('click', () => {
+              tagElement.classList.toggle('active');
+            });
+          }
+        }
+      });
+    });
+    
+    // Function to get emotion emoji
+    function getEmotionEmoji(emotion) {
+      const emojis = {
+        'Happy': '😊',
+        'Love': '❤️',
+        'Calm': '😌',
+        'Sad': '😢',
+        'Fear': '😰',
+        'Angry': '😠'
+      };
+      return emojis[emotion] || '😐';
+    }
+    
+    // New Stats Functions
+    function generateMockStatsData() {
+      return {
+        totalEntries: 24,
+        mostCommonMood: 'Happy',
+        averageIntensity: 65,
+        dailyAverage: 4.2,
+        moodDistribution: {
+          Happy: 45,
+          Calm: 20,
+          Love: 15,
+          Sad: 10,
+          Fear: 5,
+          Angry: 5
+        },
+        bestTimeOfDay: {
+          time: 'Morning',
+          detail: 'Most positive moods recorded between 6 AM - 10 AM',
+          percentage: '75%'
+        },
+        bestDayOfWeek: {
+          day: 'Saturday',
+          detail: 'Highest average mood rating of 8.5/10',
+          percentage: '82%'
+        },
+        tags: [
+          { name: 'Work', count: 24, percentage: 80 },
+          { name: 'Family', count: 18, percentage: 60 },
+          { name: 'Health', count: 15, percentage: 50 },
+          { name: 'Social', count: 12, percentage: 40 }
+        ],
+        currentStreak: 7,
+        longestStreak: 14,
+        improvements: {
+          weekOverWeek: '+12%',
+          monthOverMonth: '+8%'
+        }
+      };
+    }
+    
+    function updateStatsPage() {
+      const stats = generateMockStatsData();
+      
+      // Update overview stats with more descriptive stats
+      document.querySelector('#stats .stat-grid').innerHTML = `
+        <div class="stat-item">
+          <div class="stat-value">😊 ${stats.mostCommonMood}</div>
+          <div class="stat-label">Most Frequent Mood</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">${stats.averageIntensity}%</div>
+          <div class="stat-label">Average Daily Mood</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">${stats.improvements.weekOverWeek}</div>
+          <div class="stat-label">Week over Week</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">${stats.improvements.monthOverMonth}</div>
+          <div class="stat-label">Month over Month</div>
+        </div>
+      `;
+    
+      // Update time patterns with more detailed information
+      document.querySelector('.time-patterns').innerHTML = `
+        <div class="pattern-item">
+          <h4>Peak Mood Time</h4>
+          <div class="pattern-value">🌅 ${stats.bestTimeOfDay.time}</div>
+          <div class="pattern-detail">${stats.bestTimeOfDay.detail}</div>
+          <div class="pattern-detail">Success rate: ${stats.bestTimeOfDay.percentage}</div>
+        </div>
+        <div class="pattern-item">
+          <h4>Best Day of Week</h4>
+          <div class="pattern-value">📅 ${stats.bestDayOfWeek.day}</div>
+          <div class="pattern-detail">${stats.bestDayOfWeek.detail}</div>
+          <div class="pattern-detail">Success rate: ${stats.bestDayOfWeek.percentage}</div>
+        </div>
+      `;
+    
+      // Update tag stats with better visualization
+      document.querySelector('.tag-list').innerHTML = stats.tags
+        .map(tag => `
+          <div class="tag-stat-item">
+            <span class="tag-name">${tag.name}</span>
+            <div class="tag-bar-container">
+              <div class="tag-bar" style="width: ${tag.percentage}%"></div>
+              <span class="tag-count">${tag.count} entries (${tag.percentage}%)</span>
+            </div>
+          </div>
+        `).join('');
+    
+      // Update streak stats with more context
+      document.querySelector('.streak-stats').innerHTML = `
+        <div class="streak-item">
+          <div class="streak-icon">🔥</div>
+          <div class="streak-details">
+            <div class="streak-value">${stats.currentStreak} Days</div>
+            <div class="streak-label">Current Streak</div>
+          </div>
+        </div>
+        <div class="streak-item">
+          <div class="streak-icon">⭐</div>
+          <div class="streak-details">
+            <div class="streak-value">${stats.longestStreak} Days</div>
+            <div class="streak-label">Personal Best</div>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Call updateStatsPage when switching to stats page
+    document.querySelector('[data-page="stats"]').addEventListener('click', updateStatsPage);
+    
+    // Also call it on initial load if stats page is active
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.querySelector('#stats').classList.contains('active')) {
+        updateStatsPage();
+      }
+    });
+    
+    // State management for emotion selection
+    let currentSelection = {
+      primary: '',
+      secondary: '',
+      tertiary: ''
+    };
+    
+    let currentStep = 'primary';
+    
+    // Function to handle navigation
+    function handleNavigation(direction) {
+      const steps = ['primary', 'secondary', 'tertiary'];
+      const currentIndex = steps.indexOf(currentStep);
+      
+      if (direction === 'next' && currentIndex < 2) {
+        currentStep = steps[currentIndex + 1];
+        updateEmotionSelect();
+      } else if (direction === 'back' && currentIndex > 0) {
+        currentStep = steps[currentIndex - 1];
+        updateEmotionSelect();
+      }
+    }
+    
+    // Update the emotion save button handler
+    document.getElementById('emotionSaveBtn').onclick = () => {
+      const selectedEmotion = {
+        primary: currentSelection.primary,
+        secondary: currentSelection.secondary,
+        tertiary: currentSelection.tertiary
+      };
+      
+      console.log('Final emotion selection:', selectedEmotion);
+    // Here you would handle saving the emotion data
+      
+      document.getElementById('emotionSelectModal').classList.remove('active');
+      currentSelection = { primary: '', secondary: '', tertiary: '' };
+      currentStep = 'primary';
+    };
+    </script>
+    
+    </body></html>
