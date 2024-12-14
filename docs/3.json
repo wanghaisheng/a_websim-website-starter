@@ -1,0 +1,157 @@
+{
+  "facts": [
+    {
+      "id": 1,
+      "title": "Payment Systems",
+      "description": "China uses advanced mobile payment systems like WeChat Pay and Alipay. QR codes are widely used for transactions, making payments fast and convenient. The U.S. primarily relies on credit cards and cash, although digital payments are increasing in popularity.",
+      "likes": 120,
+      "dislikes": 15,
+      "comments": [
+        {
+          "user": "JohnDoe",
+          "comment": "I think mobile payments in China are way ahead of the U.S.!"
+        },
+        {
+          "user": "JaneSmith",
+          "comment": "It's true! I was amazed by how easy it is to pay with just a phone."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Transportation",
+      "description": "In China, cities are more walkable, and public transportation is cheap, reliable, and well-connected. Biking and ride-hailing options are also widely available. In contrast, many areas in the U.S. rely heavily on cars, and public transport can be limited.",
+      "likes": 98,
+      "dislikes": 22,
+      "comments": [
+        {
+          "user": "AlexB",
+          "comment": "I love how efficient China's public transport system is. The subway in Beijing is top-notch!"
+        },
+        {
+          "user": "SarahLee",
+          "comment": "Public transport is so inconvenient in my U.S. city. A car is almost essential."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "App Usage",
+      "description": "In China, WeChat serves multiple purposes: messaging, payments, shopping, and more. The U.S. typically uses different apps for each task, leading to a more cluttered phone interface.",
+      "likes": 110,
+      "dislikes": 8,
+      "comments": [
+        {
+          "user": "MikeM",
+          "comment": "WeChat is a game changer! It's crazy how one app can do so much."
+        },
+        {
+          "user": "EmilyW",
+          "comment": "I prefer having separate apps for different tasks. It feels more organized to me."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Internet Access",
+      "description": "In China, access to certain international websites is restricted due to the Great Firewall. People often use VPNs to bypass these restrictions. In the U.S., internet access is largely unrestricted with a vast variety of content available.",
+      "likes": 75,
+      "dislikes": 30,
+      "comments": [
+        {
+          "user": "ChrisG",
+          "comment": "VPNs are a must when you're in China if you want access to global content."
+        },
+        {
+          "user": "AnnaR",
+          "comment": "I can't imagine having to deal with internet censorship on a daily basis."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Culinary Experience",
+      "description": "In China, there are abundant dining options with diverse cuisines available nearby. Eating out is very common, and the food tends to be healthy and varied. In the U.S., home cooking is more frequent, and dining out may be limited depending on the area.",
+      "likes": 150,
+      "dislikes": 10,
+      "comments": [
+        {
+          "user": "OliviaS",
+          "comment": "Chinese food is just incredible! There's such a variety of flavors and dishes."
+        },
+        {
+          "user": "BrianD",
+          "comment": "I miss the wide variety of restaurants available in China. It's hard to find authentic options here."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Social Interactions",
+      "description": "In China, friends often connect spontaneously, and social life is vibrant and active. In the U.S., social plans are typically made in advance, and it may take longer to form deeper connections.",
+      "likes": 85,
+      "dislikes": 20,
+      "comments": [
+        {
+          "user": "KateM",
+          "comment": "It's so true! In China, it feels like people are always together, making spontaneous plans."
+        },
+        {
+          "user": "TomJ",
+          "comment": "I prefer the American way of scheduling social events. It feels more organized."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Safety",
+      "description": "China is generally considered very safe, with low crime rates contributing to a sense of security. In the U.S., safety can vary greatly by region, with certain areas facing higher crime rates.",
+      "likes": 130,
+      "dislikes": 5,
+      "comments": [
+        {
+          "user": "MarkW",
+          "comment": "China is so safe. I felt comfortable walking around any time of the day."
+        },
+        {
+          "user": "SophieL",
+          "comment": "Safety is such a mixed experience in the U.S. – some cities are much safer than others."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Public Spaces and Community Life",
+      "description": "In China, public spaces are lively, with many people contributing to a bustling atmosphere. In the U.S., public spaces can feel empty, and community interactions may be less frequent.",
+      "likes": 95,
+      "dislikes": 12,
+      "comments": [
+        {
+          "user": "NinaK",
+          "comment": "I miss the energy of public spaces in China. It feels so alive!"
+        },
+        {
+          "user": "LukeF",
+          "comment": "It's true. In the U.S., most public spaces are empty unless there's an event going on."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Cultural Differences",
+      "description": "In China, there's a stronger emphasis on group activities and collective experiences, whereas in the U.S., individualism plays a larger role, and social interactions can be more surface-level.",
+      "likes": 100,
+      "dislikes": 18,
+      "comments": [
+        {
+          "user": "RachelB",
+          "comment": "I love how China values community. It feels like you're always part of something bigger."
+        },
+        {
+          "user": "EvanP",
+          "comment": "American individualism is nice, but I sometimes miss the sense of belonging in group settings."
+        }
+      ]
+    }
+  ]
+}
