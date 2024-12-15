@@ -1,9 +1,9 @@
 name: SEO Checker
 
 on:
-  push:
-    branches:
-      - main   # Trigger action on push to the main branch (you can adjust as needed)
+  # push:
+    # branches:
+      # - main   # Trigger action on push to the main branch (you can adjust as needed)
   workflow_dispatch:  # Allows manual trigger
 jobs:
   seo-check:
