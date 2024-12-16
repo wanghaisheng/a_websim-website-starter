@@ -1,3 +1,4 @@
 {
-    "baseUrl": "https://feelingchart.heytcm.com"
+  "baseurl": "https://mood-island.heytcm.com",
+  "defaultLang": "en"
 }
