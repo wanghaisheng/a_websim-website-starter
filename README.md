@@ -15,3 +15,6 @@ this may not perfect but is a start
 5. seo metadata
 6. google analytic and microsoft clarity
 7. pwa support
+8. keyword research
+   umbrella  trend  kgr spyfu
+10. 
