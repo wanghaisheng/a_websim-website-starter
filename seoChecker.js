@@ -1,19 +1,18 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { JSDOM } = require('jsdom');
 const url = require('url');
 const fs = require('fs');
 
-// List of pages to check (can be extended)
-const pages = [
-  'https://mood-island.heytcm.com',
-  'https://mood-island.heytcm.com/en',
-  'https://mood-island.heytcm.com/fr',
-  'https://mood-island.heytcm.com/zh',
-];
+const urlsFile = './urls.txt'; // File containing the list of URLs
+const resultsFile = './seo-check-results.txt'; // File to save SEO check results
 
-const defaultLang = 'en';  // The default language
-const resultsFile = './seo-check-results.txt';  // File to save SEO check results
+const defaultLang = 'en'; // Default language for checks
+
+// Load URLs from the file
+const pages = fs.readFileSync(urlsFile, 'utf-8')
+  .split('\n')
+  .map(line => line.trim())
+  .filter(line => line.length > 0); // Remove empty lines
 
 // Create or overwrite the results file
 fs.writeFileSync(resultsFile, 'SEO Check Results:\n\n', 'utf-8');
@@ -60,7 +59,7 @@ async function checkPageSEO(pageUrl) {
     if (!canonical) {
       results.push('[Warning] Missing <link rel="canonical"> tag');
     } else if (canonical !== pageUrl) {
-      results.push('[Suggestion] The <link rel="canonical"> tag should point to the correct page URL: ', pageUrl);
+      results.push(`[Suggestion] The <link rel="canonical"> tag should point to the correct page URL: ${pageUrl}`);
     }
 
     // 5. Base Tag Issues
@@ -95,7 +94,7 @@ async function checkPageSEO(pageUrl) {
     images.each(function () {
       const altText = $(this).attr('alt');
       if (!altText) {
-        results.push('[Warning] Image missing <alt> attribute:', $(this).attr('src'));
+        results.push(`[Warning] Image missing <alt> attribute: ${$(this).attr('src')}`);
       }
     });
 
@@ -104,7 +103,7 @@ async function checkPageSEO(pageUrl) {
     await axios.get(pageUrl); // Measure the time for a full page load
     const loadTime = (Date.now() - start) / 1000;
     if (loadTime > 3) {
-      results.push('[Suggestion] Page load time is too slow, consider optimizing resources. Time:', loadTime, 's');
+      results.push(`[Suggestion] Page load time is too slow, consider optimizing resources. Time: ${loadTime}s`);
     }
 
     results.push('\n--- End of SEO Check ---\n');
@@ -113,6 +112,7 @@ async function checkPageSEO(pageUrl) {
     fs.appendFileSync(resultsFile, results.join('\n'), 'utf-8');
   } catch (error) {
     console.error(`[Error] Unable to fetch or check page: ${pageUrl}`);
+    fs.appendFileSync(resultsFile, `[Error] Unable to fetch or check page: ${pageUrl}\n`, 'utf-8');
   }
 }
 
