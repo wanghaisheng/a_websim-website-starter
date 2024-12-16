@@ -29,3 +29,9 @@ https://huggingface.co/spaces/multimodalart/logo-in-context
 给人穿芒果衣
 
 https://huggingface.co/spaces/HumanAIGC/OutfitAnyone
+
+
+fangda 
+
+https://huggingface.co/spaces/bookbot/Image-Upscaling-Playground
+
