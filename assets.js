@@ -2,6 +2,8 @@ logo
 
 https://huggingface.co/spaces/multimodalart/logo-in-context
 
+https://sticker-gen-b4ba.onrender.com/
+
 
 ico
 
