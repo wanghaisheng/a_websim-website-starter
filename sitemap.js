@@ -15,7 +15,7 @@ try {
 const locales = ['', 'fr', 'zh', 'es', 'de'];
 const baseDir = path.join(__dirname, '/');
 const baseUrl = config.baseUrl || 'https://default-url.com';
-const ignoreFolders = ['node_modules', 'assets', 'temp'];
+const ignoreFolders = ['node_modules','template', 'assets', 'temp'];
 
 function listHtmlFiles(dir) {
     return fs.readdirSync(dir).reduce((files, file) => {
