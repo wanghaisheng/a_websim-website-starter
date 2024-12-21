@@ -29,12 +29,27 @@ jobs:
         python generateKey.py  # Assuming the script is named generate_key.py
 
     - name: Read the generated key from file
+      id: read-key
       run: |
-        cat indexnow_key.txt  # Display the content of the key file for confirmation
-        
-    - 
-       name: Push
-       run: |
-          git add .
-          git commit -m "${{ env.FAKE_HASH }}" 
-          git push -f
+        KEY=$(cat indexnow_key.txt)  # Read the content of the key file
+        echo "::set-output name=indexnow_key::$KEY"
+
+    - name: Save key to GitHub secrets
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const key = process.env.INDEXNOW_KEY;
+          github.actions.createOrUpdateRepoSecret({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            secret_name: 'INDEXNOW_KEY',
+            encrypted_value: key
+          });
+      env:
+        INDEXNOW_KEY: ${{ steps.read-key.outputs.indexnow_key }}
+
+    - name: Push changes
+      run: |
+        git add .
+        git commit -m "${{ env.FAKE_HASH }}" 
+        git push -f
