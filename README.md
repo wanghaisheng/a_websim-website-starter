@@ -22,4 +22,11 @@ this may not perfect but is a start
 11.  dev
     
 https://idx.google.com/applimode-7011803
-13.  
+
+12. image generation
+
+logo, cover,
+
+14.  blog  text generation  g4f
+
+https://github.com/wanghaisheng/auto-blog-g4f-action
