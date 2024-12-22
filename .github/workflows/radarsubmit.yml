@@ -1,0 +1,32 @@
+name: Parse Sitemap and Submit URLs to Radar
+
+on:
+  push:
+    branches:
+      - main  # Trigger the action on pushes to the main branch
+  workflow_dispatch:  # Manual trigger option for the workflow
+
+jobs:
+  parse-sitemap:
+    runs-on: ubuntu-latest  # Run on an Ubuntu runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # Use your preferred version of Python
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Download sitemap file
+        run: |
+          curl -O https://example.com/sitemap.xml  # Modify this URL to the location of your sitemap
+
+      - name: Parse sitemap and submit URLs to Radar
+        run: |
+          python radar_submit.py sitemap.xml
