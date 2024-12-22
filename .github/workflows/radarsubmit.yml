@@ -21,7 +21,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install DrissionPage
+          pip install python-dotenv
 
       - name: Download sitemap file
         run: |
