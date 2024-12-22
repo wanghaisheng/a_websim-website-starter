@@ -5,7 +5,6 @@ import json
 import platform
 import subprocess
 from pathlib import Path
-from ahref import *
 
 def find_chrome_path():
     """Find Chrome browser path based on operating system"""
