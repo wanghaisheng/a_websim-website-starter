@@ -5,8 +5,8 @@ from loguru import logger
 
 # Assuming the 'submit_radar_with_retry' and 'Recorder' are defined elsewhere in your code.
 # Replace this with your actual method for submitting URLs to Radar.
-# from your_module import submit_radar_with_retry  
-# from Recorder import Recorder  
+from radar import process_domains_screensht  
+from DataRecorder import Recorder  
 
 # This function will parse the sitemap and return the URLs
 def parse_sitemap(sitemap_file):
@@ -41,7 +41,7 @@ def main():
     outfile = Recorder()  # Replace with your actual Recorder or similar object
 
     # Submit URLs to Radar
-    asyncio.run(submit_urls_to_radar(urls, outfile))
+    process_domains_screensht(urls, outfile)
 
 if __name__ == '__main__':
     main()
