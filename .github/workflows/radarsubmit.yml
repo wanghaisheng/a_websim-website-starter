@@ -21,8 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install DrissionPage
-          pip install python-dotenv
+          pip install DrissionPage  python-dotenv DataRecorder aiohttp loguru pandas
 
       - name: Download sitemap file
         run: |
