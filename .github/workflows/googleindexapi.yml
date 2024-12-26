@@ -24,4 +24,6 @@ jobs:
       - name: Run indexing script
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          SITEMAP_URL: ${{ secrets.SITEMAP_URL }}
+          LOCAL_SITEMAP_PATH: ${{ secrets.LOCAL_SITEMAP_PATH }}
         run: python index_sitemap.py
