@@ -20,3 +20,13 @@ base64 service_account.json > service_account.json.base64
 
 
 save repo secret as SERVICE_ACCOUNT_JSON
+
+add service account email to gsc
+
+
+
+![image](https://github.com/user-attachments/assets/f8d6f173-93d8-4cd6-8451-300a9a8e3e66)
+
+
+
+
