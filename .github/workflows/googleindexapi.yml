@@ -1,29 +1,44 @@
-name: Index Sitemap
+name: Google Indexing Script
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight UTC
   workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Domain or URL to index'
+        required: true
+        type: string
+
+  # Cron schedule to run every day at midnight (UTC)
+  # schedule:
+    # - cron: '0 0 * * *'  # Adjust this cron schedule as needed
+
+  # Trigger when the sitemap.xml file is modified
+  push:
+    paths:
+      - 'sitemap.xml'
 
 jobs:
-  index:
+  indexing:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          python-version: '3.x'
+          node-version: '20'
 
       - name: Install dependencies
-        run: pip install requests xmltodict google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+        run: |
+          npm i -g google-indexing-script
+      - name: Set up service account JSON
+        run: |
+          mkdir -p ~/.gis
+          echo "${{ secrets.SERVICE_ACCOUNT_JSON }}" > ~/.gis/service_account.json
 
-      - name: Run indexing script
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-          SITEMAP_URL: ${{ secrets.SITEMAP_URL }}
-          LOCAL_SITEMAP_PATH: ${{ secrets.LOCAL_SITEMAP_PATH }}
-        run: python index_sitemap.py
+      - name: Run Google Indexing Script
+        run: |
+          # If no domain input was provided, fallback to a default domain or from an environment variable
+          DOMAIN=${{ github.event.inputs.domain || 'default-domain.com' }}
+          gis $DOMAIN
