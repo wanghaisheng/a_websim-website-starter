@@ -30,5 +30,8 @@ add service account email to gsc
 ![image](https://github.com/user-attachments/assets/f8d6f173-93d8-4cd6-8451-300a9a8e3e66)
 
 
+![image](https://github.com/user-attachments/assets/7419a12e-bb5d-47dc-b40a-ff1190f496b6)
+
+
 
 
