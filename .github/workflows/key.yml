@@ -1,9 +1,9 @@
 name: Generate and Use IndexNow Key
 
 on:
-  schedule:
+  # schedule:
     # Runs at 00:00 and 12:00 UTC every day
-    - cron: '0 0,12 * * *'
+    # - cron: '0 0,12 * * *'
   workflow_dispatch:  # Allows you to run this workflow manually from the Actions tab
 
 jobs:
