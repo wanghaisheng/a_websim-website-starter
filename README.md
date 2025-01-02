@@ -30,3 +30,8 @@ logo, cover,
 14.  blog  text generation  g4f
 
 https://github.com/wanghaisheng/auto-blog-g4f-action
+
+
+15  静态框架自动部署
+
+https://github.com/marketplace/actions/github-pages-action
