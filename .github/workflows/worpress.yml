@@ -1,6 +1,11 @@
 # https://github.com/marketplace/actions/deploy-wordpress
-on: push
+on: 
+  # push
+  workflow_dispatch:  # Allows manual trigger
+  
 name: Deploying WordPress Site
+
+
 jobs:
   deploy:
     name: Deploy
