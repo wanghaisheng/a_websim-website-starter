@@ -1,10 +1,11 @@
 name: swift to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+  # push:
+    # branches:
+      # - main
+  # pull_request:
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
   deploy:
