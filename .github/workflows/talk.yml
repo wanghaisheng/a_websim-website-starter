@@ -37,7 +37,7 @@ jobs:
           python-version: '3.9'
 
       - name: Install all necessary packages
-          pip install httpx google-play-scraper aiohttp aiohttp_socks bs4 DataRecorder pandas DrissionPage python-dotenv app_store_scraper requests tqdm waybackpy cdx_toolkit lxml
+        run:  pip install httpx google-play-scraper aiohttp aiohttp_socks bs4 DataRecorder pandas DrissionPage python-dotenv app_store_scraper requests tqdm waybackpy cdx_toolkit lxml
 
         
       - name: Run the scraping script
