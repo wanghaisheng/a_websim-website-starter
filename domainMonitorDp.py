@@ -108,8 +108,7 @@ class DomainMonitor:
             
         elif  time_range=='all':
             print("default is all results")
-            pass
-
+            tbs=None
         params = {
             'q': query,
             'tbs': tbs,
