@@ -37,13 +37,16 @@ jobs:
           python-version: '3.9'
 
       - name: Install all necessary packages
-        run:  pip install httpx google-play-scraper aiohttp aiohttp_socks bs4 DataRecorder pandas DrissionPage python-dotenv app_store_scraper requests tqdm waybackpy cdx_toolkit lxml
+        run:  |
+          sudo apt-get install ffmpeg
+
+          pip install pydub SpeechRecognition  httpx google-play-scraper aiohttp aiohttp_socks bs4 DataRecorder pandas DrissionPage python-dotenv app_store_scraper requests tqdm waybackpy cdx_toolkit lxml
 
         
       - name: Run the scraping script
         run: python saaskit.py
         env:
-          domain: ${{ github.event.inputs.keywords }}          
+          domain: ${{ github.event.inputs.domain }}          
           count: ${{ github.event.inputs.count }}          
           keywords: ${{ github.event.inputs.keywords }}          
 
