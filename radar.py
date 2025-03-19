@@ -381,7 +381,8 @@ async def fetch_cloudflare_radar_data(domain):
                 return False
 
 def process_domains_screensht(domains, outfile,counts):
-        from setup_chrome import getbrowser
+        from getbrowser  import  setup_chrome
+    
         browser = setup_chrome()
 
         concurrency=5
