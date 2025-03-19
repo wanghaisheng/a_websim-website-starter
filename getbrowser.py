@@ -53,7 +53,8 @@ def find_chrome_path():
             r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
             r"%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe",
             r"%PROGRAMFILES%\Google\Chrome\Application\chrome.exe",
-            r"%PROGRAMFILES(X86)%\Google\Chrome\Application\chrome.exe"
+            r"%PROGRAMFILES(X86)%\Google\Chrome\Application\chrome.exe",
+            r"C:\Users\Administrator\AppData\Local\Google\Chrome\Bin/chrome.exe"
         ]
         for path in chrome_paths:
             path = os.path.expandvars(path)
