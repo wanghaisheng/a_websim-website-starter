@@ -13,7 +13,10 @@ try {
 }
 
 const locales = ['', 'fr', 'zh', 'es', 'de'];
-const baseDir = path.join(__dirname, '/');
+// const baseDir = path.join(__dirname, '/');
+const baseDir = path.dirname(__dirname);
+
+
 const baseUrl = config.baseUrl || 'https://default-url.com';
 const ignoreFolders = ['node_modules','template', 'assets', 'temp'];
 
@@ -107,11 +110,13 @@ ${sitemap.map(item => `    <url>
     </url>`).join('\n')}
 </urlset>`;
 
-fs.writeFileSync('sitemap.xml', sitemapXml);
+fs.writeFileSync('../sitemap.xml', sitemapXml);
 console.log('Sitemap has been generated and saved to sitemap.xml');
+const robotsbasePath = path.dirname(__dirname);
+
 
 // Generate robots.txt if it doesn't exist
-const robotsPath = path.join(__dirname, 'robots.txt');
+const robotsPath = path.join(robotsbasePath, 'robots.txt');
 if (!fs.existsSync(robotsPath)) {
     const robotsContent = `User-agent: *
 Allow: /
