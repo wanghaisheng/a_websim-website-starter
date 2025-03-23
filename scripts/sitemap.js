@@ -110,26 +110,28 @@ ${sitemap.map(item => `    <url>
     </url>`).join('\n')}
 </urlset>`;
 
-fs.writeFileSync('../sitemap.xml', sitemapXml);
-console.log('Sitemap has been generated and saved to sitemap.xml');
+// Always overwrite sitemap.xml
+const sitemapPath = path.join(path.dirname(__dirname), 'sitemap.xml');
+fs.writeFileSync(sitemapPath, sitemapXml);
+console.log(`Sitemap has been generated and saved to ${sitemapPath}`);
+
 const robotsbasePath = path.dirname(__dirname);
 
-
-// Generate robots.txt if it doesn't exist
+// Always generate robots.txt (overwrite if exists)
 const robotsPath = path.join(robotsbasePath, 'robots.txt');
-if (!fs.existsSync(robotsPath)) {
-    const robotsContent = `User-agent: *
+const robotsContent = `User-agent: *
 Allow: /
 
 Sitemap: ${baseUrl}/sitemap.xml`;
-    fs.writeFileSync(robotsPath, robotsContent);
-    console.log('robots.txt has been generated');
-}
+fs.writeFileSync(robotsPath, robotsContent);
+console.log(`robots.txt has been ${fs.existsSync(robotsPath) ? 'overwritten' : 'generated'} at ${robotsPath}`);
 
 // Generate CSV with lastmod dates
 const csvContent = ['URL,Lastmod,Changefreq,Priority']
     .concat(sitemap.map(item => `${baseUrl}${item.loc},${item.lastmod},${item.changefreq},${item.priority}`))
     .join('\n');
 
-fs.writeFileSync('urls.csv', csvContent);
-console.log('Found URLs have been saved to urls.csv');
+// Always overwrite urls.csv
+const csvPath = path.join(__dirname, 'urls.csv');
+fs.writeFileSync(csvPath, csvContent);
+console.log(`Found URLs have been saved to ${csvPath}`);
