@@ -102,12 +102,19 @@ const sitemap = Array.from(urlMap.values());
 // Generate XML with proper formatting and lastmod dates
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemap.map(item => `    <url>
-        <loc>${baseUrl}${item.loc}</loc>
+${sitemap.map(item => {
+    // Remove trailing slash from baseUrl if it exists
+    const cleanBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+    // Remove trailing slash from loc if it exists (except for root path which should be just '/')
+    const cleanLoc = item.loc === '/' ? '' : (item.loc.endsWith('/') ? item.loc.slice(0, -1) : item.loc);
+    
+    return `    <url>
+        <loc>${cleanBaseUrl}${cleanLoc}</loc>
         <lastmod>${item.lastmod}</lastmod>
         <changefreq>${item.changefreq}</changefreq>
         <priority>${item.priority}</priority>
-    </url>`).join('\n')}
+    </url>`;
+}).join('\n')}
 </urlset>`;
 
 // Always overwrite sitemap.xml
