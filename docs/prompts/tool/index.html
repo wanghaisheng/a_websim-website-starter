@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperBlackScreen - 专业专注屏幕工具 | 提升工作效率50%</title>
+    <meta name="description" content="SuperBlackScreen是一款多功能专注工具，提供多样化屏幕模式、透明度调节、定时器和社交分享功能，帮助您消除干扰，高效完成任务。">
+    <meta name="keywords" content="专注工具, 黑屏, 白屏, 番茄工作法, 专注力, 工作效率, 视力保护">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/icons/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/additional-styles.css">
+    <link rel="stylesheet" href="css/enhanced-responsive.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">SuperBlackScreen</div>
+            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="#" class="nav-link">首页</a></li>
+                    <li class="nav-item"><a href="#features" class="nav-link">功能</a></li>
+                    <li class="nav-item"><a href="#pricing" class="nav-link">价格</a></li>
+                    <li class="nav-item"><a href="#testimonials" class="nav-link">用户评价</a></li>
+                    <li class="nav-item"><a href="#faq" class="nav-link">常见问题</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section - First Screen -->
+    <section class="hero section" id="hero">
+        <div class="container hero-container">
+            <h1 class="hero-title">SuperBlackScreen：专业专注屏幕工具</h1>
+            <h2 class="hero-subtitle">创建完美专注环境，消除干扰，高效完成任务</h2>
+            <p class="hero-stats">已有50,000+专业人士使用 · 平均工作效率提升50% · 4.8/5用户评分</p>
+            
+            <!-- Focus Tool -->
+            <div class="focus-tool">
+                <h3>立即体验SuperBlackScreen</h3>
+                <div class="tool-controls">
+                    <div class="control-group">
+                        <label class="control-label">选择屏幕模式:</label>
+                        <div class="mode-buttons">
+                            <button class="mode-button" data-mode="black">黑屏</button>
+                            <button class="mode-button" data-mode="white">白屏</button>
+                            <button class="mode-button" data-mode="color">彩色</button>
+                            <button class="mode-button" data-mode="gradient">渐变</button>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">透明度调节: <span id="opacity-value">50</span>%</label>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" value="50" class="slider" id="opacity-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">定时器设置:</label>
+                        <div class="timer-buttons">
+                            <button class="mode-button" data-time="25">25分钟</button>
+                            <button class="mode-button" data-time="5">休息5分钟</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="start-button" id="start-focus">开始专注</button>
+                
+                <p class="mt-2"><strong>使用指南：</strong> 选择屏幕模式 → 调整透明度 → 设置定时器 → 点击开始专注</p>
+                
+                <div class="mt-2">
+                    <p><strong>为什么选择SuperBlackScreen：</strong></p>
+                    <ul>
+                        <li>多样化屏幕模式，适应不同工作环境</li>
+                        <li>精确透明度控制，平衡专注与参考需求</li>
+                        <li>内置番茄工作法定时器，科学管理时间</li>
+                        <li>社交分享功能，与朋友共同进步</li>
+                        <li>专注数据统计，持续优化工作习惯</li>
+                    </ul>
+                </div>
+                
+                <div class="mt-2 text-center">
+                    <a href="#" class="btn btn-primary">创建免费账户</a>
+                    <a href="#features" class="btn btn-secondary">了解高级功能</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section - Second Screen -->
+    <section class="results section" id="results">
+        <div class="container results-container">
+            <h2 class="section-title text-center">您的专注成果</h2>
+            
+            <div class="results-box">
+                <div class="results-data">
+                    <div class="data-item">今日专注时间: <strong>2小时35分钟</strong></div>
+                    <div class="data-item">本周专注时间: <strong>12小时45分钟</strong></div>
+                    <div class="data-item">专注效率评分: <strong>8.5/10</strong></div>
+                </div>
+                
+                <div class="results-actions">
+                    <a href="#" class="btn btn-primary">查看详细报告</a>
+                    <a href="#" class="btn btn-secondary">分享到社交媒体</a>
+                </div>
+            </div>
+            
+            <div class="user-cases">
+                <h3 class="cases-title">社区精选案例</h3>
+                
+                <div class="cases-grid">
+                    <div class="case-card">
+                        <img src="https://via.placeholder.com/400x200?text=创意写作案例" alt="创意写作案例" class="case-image">
+                        <div class="case-content">
+                            <div class="case-user">用户: 张女士，自由撰稿人</div>
+                            <div class="case-mode">使用模式: 白屏模式，透明度30%，25/5分钟番茄周期</div>
+                            <div class="case-result">"使用SuperBlackScreen的白屏模式一个月后，我的日均写作量从2000字提升到3500字，眼睛疲劳感也大大减轻。"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-card">
+                        <img src="https://via.placeholder.com/400x200?text=编程开发案例" alt="编程开发案例" class="case-image">
+                        <div class="case-content">
+                            <div class="case-user">用户: 王先生，软件工程师</div>
+                            <div class="case-mode">使用模式: 黑屏模式，透明度40%，50/10分钟番茄周期</div>
+                            <div class="case-result">"SuperBlackScreen帮助我在开放办公环境中保持专注，Bug率降低了30%，代码质量显著提升。"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-card">
+                        <img src="https://via.placeholder.com/400x200?text=数据分析案例" alt="数据分析案例" class="case-image">
+                        <div class="case-content">
+                            <div class="case-user">用户: 刘女士，数据分析师</div>
+                            <div class="case-mode">使用模式: 渐变模式，透明度50%，45/15分钟番茄周期</div>
+                            <div class="case-result">"渐变模式减轻了长时间盯着数据表格的视觉疲劳，提高了我的分析准确性和效率。"</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="community-stats">
+                    <div class="stat-item">今日活跃用户: 12,458人</div>
+                    <div class="stat-item">本周新增用户: 3,245人</div>
+                    <div class="stat-item">总专注时间: 2,356,789小时</div>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <a href="#" class="btn btn-primary">查看更多用户案例</a>
+                    <a href="#" class="btn btn-secondary">分享您的专注故事</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section - Third Screen -->
+    <section class="content section" id="content">
+        <div class="container content-container">
+            <h2 class="content-title">专注力科学：为什么我们需要专注工具？</h2>
+            
+            <div class="content-section">
+                <p>在当今信息爆炸的时代，我们的注意力正面临前所未有的挑战。研究表明，普通办公室工作者每11分钟就会被打断一次，而被打断后平均需要23分钟才能重新进入专注状态。这种持续的注意力分散不仅降低了工作效率，还增加了压力和疲劳感。</p>
+                
+                <h3>数字环境中的注意力挑战</h3>
+                <p>现代工作环境充满了各种干扰源：电子邮件通知、即时消息、社交媒体更新、新闻提醒等。我们的大脑并非设计用来应对如此多的信息输入，这导致了所谓的"注意力碎片化"现象。</p>
+                <p>研究表明，频繁的任务切换可能导致工作效率降低高达40%，并增加错误率。更令人担忧的是，长期的注意力分散可能改变我们的认知模式，降低深度思考和创造性问题解决的能力。</p>
+                
+                <h3>专注工具的工作原理</h3>
+                <p>专注工具如SuperBlackScreen通过创建一个视觉上简洁的环境，帮助用户减少外部干扰，更容易进入"心流"状态——一种完全沉浸在当前任务中的高效工作状态。</p>
+                <p>通过调整屏幕显示、管理工作时间和提供即时反馈，SuperBlackScreen解决了三个关键问题：</p>
+                <ol>
+                    <li><strong>视觉干扰最小化</strong>：屏幕模式和透明度调节减少了视觉刺激</li>
+                    <li><strong>时间结构化</strong>：番茄工作法定时器提供了清晰的工作-休息结构</li>
+                    <li><strong>进度可视化</strong>：数据统计和社交分享功能提供了成就感和动力</li>
+                </ol>
+                
+                <h3>如何使用SuperBlackScreen最大化您的专注力</h3>
+                
+                <h4>为不同任务选择最佳屏幕模式</h4>
+                <ul>
+                    <li><strong>黑屏模式</strong>：适合需要高度专注的编程、写作等任务</li>
+                    <li><strong>白屏模式</strong>：适合阅读和内容创作，减轻眼睛疲劳</li>
+                    <li><strong>彩色模式</strong>：适合创意工作，可以根据任务调整颜色</li>
+                    <li><strong>渐变模式</strong>：适合长时间工作，渐变色彩减轻视觉疲劳</li>
+                </ul>
+                
+                <h4>透明度调节技巧</h4>
+                <p>根据任务需求调整透明度：</p>
+                <ul>
+                    <li><strong>0-30%</strong>：需要完全专注的深度工作</li>
+                    <li><strong>30-60%</strong>：需要参考其他资料的工作</li>
+                    <li><strong>60-90%</strong>：需要频繁切换窗口的协作工作</li>
+                </ul>
+                
+                <h4>时间管理最佳实践</h4>
+                <ul>
+                    <li>尝试不同的番茄周期找到最适合您的节奏</li>
+                    <li>短休息时间确实休息，远离屏幕</li>
+                    <li>使用SuperBlackScreen的数据统计分析您的最佳工作时段</li>
+                </ul>
+                
+                <div class="text-center mt-3">
+                    <a href="#" class="btn btn-primary">立即尝试这些技巧</a>
+                    <a href="#" class="btn btn-secondary">查看详细使用指南</a>
+                </div>
+            </div>
+            
+            <div class="faq" id="faq">
+                <h3>常见问题解答</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Q: SuperBlackScreen与其他黑屏工具有什么不同？</div>
+                    <div class="faq-answer">A: 与其他单一功能的黑屏工具不同，SuperBlackScreen提供多样化的屏幕模式、精确的透明度控制、内置番茄工作法定时器、社交分享功能和详细的数据统计分析，是一个全面的专注解决方案。</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Q: SuperBlackScreen是否会影响我的其他应用程序？</div>
+                    <div class="faq-answer">A: 不会。SuperBlackScreen在浏览器中运行，不会干扰您的其他应用程序。您可以随时调整透明度或暂停SuperBlackScreen来访问其他应用。</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Q: 我可以在多台设备上使用SuperBlackScreen吗？</div>
+                    <div class="faq-answer">A: 是的。免费版支持在单一设备上使用，而专业版和团队版支持在多台设备上同步您的设置和数据。</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Q: SuperBlackScreen如何帮助保护视力？</div>
+                    <div class="faq-answer">A: SuperBlackScreen的多样化屏幕模式和透明度调节功能可以减少屏幕对眼睛的刺激，而内置的定时器提醒您定期休息，这些都有助于减轻视觉疲劳，保护眼睛健康。</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Q: 社交分享功能是如何工作的？</div>
+                    <div class="faq-answer">A: 您可以选择分享您的专注成果到社交媒体平台，包括专注时间、达成的目标和个性化的专注卡片。这不仅可以记录您的进步，还能激励您的朋友一起建立健康的工作习惯。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section - Fourth Screen -->
+    <section class="features section" id="features">
+        <div class="container">
+            <h2 class="features-title">解锁SuperBlackScreen的全部潜力</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title">自定义渐变模式</h3>
+                    <img src="https://via.placeholder.com/400x200?text=渐变模式演示" alt="渐变模式演示" class="feature-image">
+                    <p>创建符合您个人风格和工作环境的独特渐变背景，提升专注体验的同时保护视力。</p>
+                    <div class="feature-quote">"自定义渐变功能让我能够根据不同时间和任务调整屏幕，大大减轻了长时间工作的视觉疲劳。" —— 陈先生，UI设计师</div>
+                </div>
+                
+                <div class="feature-card">
+                    <h3 class="feature-title">智能番茄工作法</h3>
+                    <img src="https://via.placeholder.com/400x200?text=智能番茄工作法演示" alt="智能番茄工作法演示" class="feature-image">
+                    <p>基于您的工作习惯和效率数据，自动调整最佳的工作和休息时间，科学提升专注效率。</p>
+                    <div class="feature-quote">智能番茄功能帮助用户平均提升工作效率23%</div>
+                </div>
+                
+                <div class="feature-card">
+                    <h3 class="feature-title">专注数据分析</h3>
+                    <img src="https://via.placeholder.com/400x200?text=数据分析演示" alt="数据分析演示" class="feature-image">
+                    <p>详细的专注数据统计和可视化图表，帮助您了解自己的工作模式，识别高效时段和改进空间。</p>
+                    <div class="feature-quote">"数据分析功能让我发现自己在上午10-12点效率最高，我现在会安排最重要的工作在这个时段完成。" —— 李女士，项目经理</div>
+                </div>
+                
+                <div class="feature-card">
+                    <h3 class="feature-title">社交专注圈</h3>
+                    <img src="https://via.placeholder.com/400x200?text=社交专注圈演示" alt="社交专注圈演示" class="feature-image">
+                    <p>与朋友或同事创建专注圈，共同设定目标，相互监督，分享成果，提高专注动力。</p>
+                    <div class="feature-quote">加入专注圈的用户持续使用率提高了42%</div>
+                </div>
+                
+                <div class="feature-card">
+                    <h3 class="feature-title">跨设备同步</h3>
+                    <img src="https://via.placeholder.com/400x200?text=跨设备同步演示" alt="跨设备同步演示" class="feature-image">
+                    <p>在任何设备上无缝使用SuperBlackScreen，您的设置、数据和专注记录将自动同步。</p>
+                    <div class="feature-quote">"无论是在办公室的电脑还是出差时的笔记本，我都能保持一致的专注体验，这太方便了。" —— 张先生，销售总监</div>
+                </div>
+            </div>
+            
+            <div class="user-stories">
+                <h3 class="text-center mb-3">真实用户案例</h3>
+                
+                <div class="story-card">
+                    <div class="story-header">
+                        <h4>案例1：提升写作效率</h4>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">用户:</div>
+                        <div>王小明，自由作家</div>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">挑战:</div>
+                        <div>写作时容易分心，难以达到日均写作目标</div>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">解决方案:</div>
+                        <div>使用SuperBlackScreen的白屏模式，透明度20%，配合25/5分钟番茄周期</div>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">结果:</div>
+                        <div>日均写作量从2,000字提升到3,500字，完成首部长篇小说</div>
+                    </div>
+                    <img src="https://via.placeholder.com/800x400?text=写作案例前后对比" alt="写作案例前后对比" class="story-image">
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-header">
+                        <h4>案例2：改善远程团队协作</h4>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">用户:</div>
+                        <div>科技创新有限公司，15人产品团队</div>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">挑战:</div>
+                        <div>远程工作环境下团队成员专注度不足，协作效率低</div>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">解决方案:</div>
+                        <div>使用SuperBlackScreen团队版，创建团队专注圈，设定共同目标</div>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">结果:</div>
+                        <div>团队会议效率提升40%，项目交付时间缩短25%</div>
+                    </div>
+                    <img src="https://via.placeholder.com/800x400?text=团队协作案例前后对比" alt="团队协作案例前后对比" class="story-image">
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-header">
+                        <h4>案例3：缓解程序员视觉疲劳</h4>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">用户:</div>
+                        <div>李工，资深后端开发工程师</div>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">挑战:</div>
+                        <div>长时间编程导致严重视觉疲劳和头痛</div>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">解决方案:</div>
+                        <div>使用SuperBlackScreen的自定义渐变模式，配合智能番茄工作法</div>
+                    </div>
+                    <div class="story-detail">
+                        <div class="story-label">结果:</div>
+                        <div>视觉疲劳感减轻65%，工作满意度提升，代码质量改善</div>
+                    </div>
+                    <img src="https://via.placeholder.com/800x400?text=程序员案例前后对比" alt="程序员案例前后对比" class="story-image">
+                </div>
+            </div>
+            
+            <div class="text-center mt-3">
+                <a href="#" class="btn btn-primary btn-large">立即尝试高级功能</a>
+                <a href="#" class="btn btn-secondary">查看更多用户案例</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section - Fifth Screen -->
+    <section class="testimonials section" id="testimonials">
+        <div class="container">
+            <h2 class="testimonials-title">用户如何评价SuperBlackScreen</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://via.placeholder.com/60x60?text=用户1" alt="王先生，产品经理" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">王先生</div>
+                            <div class="testimonial-role">产品经理</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"SuperBlackScreen彻底改变了我的工作方式。多样化的屏幕模式和透明度调节让我能够在不同工作场景下保持最佳专注状态。番茄定时器功能更是帮助我建立了健康的工作节奏。强烈推荐给所有需要长时间电脑工作的专业人士！"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://via.placeholder.com/60x60?text=用户2" alt="张女士，自由撰稿人" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">张女士</div>
+                            <div class="testimonial-role">自由撰稿人</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"作为一名作家，我经常需要长时间盯着屏幕写作。SuperBlackScreen的白屏模式和透明度调节功能大大减轻了我的眼睛疲劳，而社交分享功能让我能与其他作家分享我的写作进度，获得更多动力。"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://via.placeholder.com/60x60?text=用户3" alt="刘先生，软件开发者" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">刘先生</div>
+                            <div class="testimonial-role">软件开发者</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"我尝试过市面上几乎所有的专注工具，SuperBlackScreen无疑是最全面的一个。特别喜欢它的数据统计功能，让我能清楚地看到自己的专注时间和效率变化。定制化选项也非常丰富，完全满足了我的需求。"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://via.placeholder.com/60x60?text=用户4" alt="陈女士，学生" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">陈女士</div>
+                            <div class="testimonial-role">学生</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★☆</div>
+                    <p class="testimonial-text">"SuperBlackScreen帮助我在图书馆和咖啡馆等嘈杂环境中保持专注。特别喜欢社交专注圈功能，我和同学们一起设定学习目标，互相监督，学习效率提高了很多。"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://via.placeholder.com/60x60?text=用户5" alt="李先生，设计师" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">李先生</div>
+                            <div class="testimonial-role">设计师</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"作为设计师，我需要在创意和专注之间找到平衡。SuperBlackScreen的彩色模式和渐变模式完美满足了我的需求，既能保持专注，又不会扼杀创造力。数据统计功能也让我更好地了解自己的工作模式。"</p>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">活跃用户</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">4.8/5</div>
+                    <div class="stat-label">平均用户评分</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">50%</div>
+                    <div class="stat-label">平均工作效率提升</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">35%</div>
+                    <div class="stat-label">用户持续使用率提升</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">200万+</div>
+                    <div class="stat-label">专注小时数已记录</div>
+                </div>
+            </div>
+            
+            <h3 class="text-center mb-2">知名企业的选择</h3>
+            <div class="clients">
+                <img src="https://via.placeholder.com/150x50?text=企业1" alt="企业标志1" class="client-logo">
+                <img src="https://via.placeholder.com/150x50?text=企业2" alt="企业标志2" class="client-logo">
+                <img src="https://via.placeholder.com/150x50?text=企业3" alt="企业标志3" class="client-logo">
+                <img src="https://via.placeholder.com/150x50?text=企业4" alt="企业标志4" class="client-logo">
+                <img src="https://via.placeholder.com/150x50?text=企业5" alt="企业标志5" class="client-logo">
+            </div>
+            
+            <!-- Pricing Section -->
+            <div class="pricing" id="pricing">
+                <h2 class="pricing-title mt-5">选择适合您的方案</h2>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3 class="pricing-name">免费版</h3>
+                        <div class="pricing-price">¥0<span class="pricing-period">/永久</span></div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">基础屏幕模式（黑屏、白屏）</li>
+                            <li class="pricing-feature">基础透明度调节</li>
+                            <li class="pricing-feature">简单定时器</li>
+                            <li class="pricing-feature">有限的使用统计</li>
+                            <li class="pricing-feature">单设备使用</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-secondary">立即开始</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">最受欢迎</div>
+                        <h3 class="pricing-name">专业版</h3>
+                        <div class="pricing-price">¥99<span class="pricing-period">/年</span></div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">所有屏幕模式（包括彩色和渐变）</li>
+                            <li class="pricing-feature">高级透明度和自定义设置</li>
+                            <li class="pricing-feature">番茄工作法定时器</li>
+                            <li class="pricing-feature">完整数据统计和分析</li>
+                            <li class="pricing-feature">社交分享功能</li>
+                            <li class="pricing-feature">多设备同步</li>
+                            <li class="pricing-feature">优先客户支持</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-primary">14天免费试用</a>
+                            <div class="pricing-note">无需信用卡</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3 class="pricing-name">团队版</h3>
+                        <div class="pricing-price">¥299<span class="pricing-period">/年</span></div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">专业版所有功能</li>
+                            <li class="pricing-feature">团队管理控制台</li>
+                            <li class="pricing-feature">团队数据统计和报告</li>
+                            <li class="pricing-feature">团队协作功能</li>
+                            <li class="pricing-feature">自定义品牌选项</li>
+                            <li class="pricing-feature">专属客户经理</li>
+                            <li class="pricing-feature">API访问</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-secondary">联系销售</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-section">
+                    <h3 class="faq-title">常见问题</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">Q: SuperBlackScreen是否需要安装？</div>
+                        <div class="faq-answer">A: 不需要。SuperBlackScreen是一个基于网页的应用，您可以直接在浏览器中使用，无需安装任何软件。</div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">Q: 免费版有使用时间限制吗？</div>
+                        <div class="faq-answer">A: 没有。免费版可以永久使用，但功能会有一定限制。</div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">Q: 如何取消订阅？</div>
+                        <div class="faq-answer">A: 您可以随时在账户设置中取消订阅，取消后您仍可以使用服务到当前订阅期结束。</div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">Q: SuperBlackScreen支持哪些设备？</div>
+                        <div class="faq-answer">A: 我们支持所有主流浏览器和设备，包括Windows、Mac、iOS和Android。</div>
+                    </div>
+                </div>
+                
+                <div class="final-cta">
+                    <h3 class="final-cta-title">立即开始提升您的专注力</h3>
+                    <p>加入50,000+专业人士的行列，体验SuperBlackScreen带来的专注力革命。</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary btn-large">立即免费试用</a>
+                        <a href="#" class="btn btn-secondary btn-large">查看演示视频</a>
+                    </div>
+                    
+                    <div class="cta-note">无需信用卡 · 基础功能永久免费 · 14天专业版试用</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Section - Sixth Screen -->
+    <section class="technical section">
+        <div class="container technical-container">
+            <h2 class="technical-title">SuperBlackScreen技术规格</h2>
+            
+            <div class="specs-list">
+                <div class="spec-item">
+                    <div class="spec-name">浏览器兼容性</div>
+                    <div class="spec-value">Chrome 70+, Firefox 65+, Safari 12+, Edge 80+</div>
+                </div>
+                
+                <div class="spec-item">
+                    <div class="spec-name">响应式设计</div>
+                    <div class="spec-value">完全适配从手机到大屏显示器的所有设备</div>
+                </div>
+                
+                <div class="spec-item">
+                    <div class="spec-name">数据安全</div>
+                    <div class="spec-value">所有用户数据使用AES-256加密</div>
+                </div>
+                
+                <div class="spec-item">
+                    <div class="spec-name">性能优化</div>
+                    <div class="spec-value">平均页面加载时间<2秒</div>
+                </div>
+                
+                <div class="spec-item">
+                    <div class="spec-name">可访问性</div>
+                    <div class="spec-value">符合WCAG 2.1 AA标准</div>
+                </div>
+                
+                <div class="spec-item">
+                    <div class="spec-name">API集成</div>
+                    <div class="spec-value">提供REST API用于团队版集成</div>
+                </div>
+            </div>
+            
+            <h3 class="text-center">开发者资源</h3>
+            <div class="dev-resources">
+                <a href="#" class="dev-link">API文档</a>
+                <a href="#" class="dev-link">集成指南</a>
+                <a href="#" class="dev-link">性能最佳实践</a>
+                <a href="#" class="dev-link">常见问题解答</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">SuperBlackScreen</div>
+                <p>创建完美专注环境，消除干扰，高效完成任务。</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-qq"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>产品</h4>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">功能</a></li>
+                    <li class="footer-link"><a href="#">价格</a></li>
+                    <li class="footer-link"><a href="#">用户案例</a></li>
+                    <li class="footer-link"><a href="#">下载</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>资源</h4>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">博客</a></li>
+                    <li class="footer-link"><a href="#">使用指南</a></li>
+                    <li class="footer-link"><a href="#">API文档</a></li>
+                    <li class="footer-link"><a href="#">常见问题</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>公司</h4>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">关于我们</a></li>
+                    <li class="footer-link"><a href="#">联系我们</a></li>
+                    <li class="footer-link"><a href="#">加入我们</a></li>
+                    <li class="footer-link"><a href="#">媒体报道</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>法律</h4>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">隐私政策</a></li>
+                    <li class="footer-link"><a href="#">使用条款</a></li>
+                    <li class="footer-link"><a href="#">Cookie政策</a></li>
+                    <li class="footer-link"><a href="#">GDPR合规</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <div class="container">
+                <p>SuperBlackScreen © 2025 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fullscreen Mode (Hidden by default) -->
+    <div id="fullscreen-mode" class="fullscreen-mode" style="display: none;">
+        <div id="fullscreen-timer" class="fullscreen-timer">25:00</div>
+        <div class="fullscreen-controls">
+            <button id="pause-button" class="exit-button">暂停</button>
+            <button id="exit-button" class="exit-button">退出</button>
+        </div>
+    </div>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Cookie consent -->
+    <div class="cookie-consent" id="cookie-consent">
+        <div class="cookie-text">
+            我们使用Cookie来提升您的浏览体验，详情请查看我们的<a href="#">Cookie政策</a>。
+        </div>
+        <div class="cookie-buttons">
+            <button class="btn btn-secondary" id="cookie-accept">接受</button>
+            <button class="btn btn-primary" id="cookie-settings">设置</button>
+        </div>
+    </div>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- JavaScript -->
+    <script src="js/focus-tool.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/ui-effects.js"></script>
+    <script src="js/main.js"></script>
+    
+    <!-- Mobile menu script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            if (mobileMenuToggle && navMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenuToggle.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const navLinks = navMenu.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+            
+            // Show cookie consent after a delay
+            setTimeout(function() {
+                const cookieConsent = document.getElementById('cookie-consent');
+                if (cookieConsent) {
+                    cookieConsent.classList.add('show');
+                }
+            }, 2000);
+            
+            // Cookie consent buttons
+            const cookieAccept = document.getElementById('cookie-accept');
+            const cookieSettings = document.getElementById('cookie-settings');
+            const cookieConsent = document.getElementById('cookie-consent');
+            
+            if (cookieAccept && cookieConsent) {
+                cookieAccept.addEventListener('click', function() {
+                    cookieConsent.classList.remove('show');
+                });
+            }
+            
+            if (cookieSettings && cookieConsent) {
+                cookieSettings.addEventListener('click', function() {
+                    // Show cookie settings modal (would be implemented in a real site)
+                    alert('Cookie设置功能将在正式版本中实现');
+                });
+            }
+            
+            // Back to top button
+            const backToTop = document.getElementById('back-to-top');
+            
+            if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        backToTop.classList.add('show');
+                    } else {
+                        backToTop.classList.remove('show');
+                    }
+                });
+                
+                backToTop.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // Hide preloader after page load
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                window.addEventListener('load', function() {
+                    preloader.classList.add('fade-out');
+                    setTimeout(function() {
+                        preloader.style.display = 'none';
+                    }, 500);
+                });
+                
+                // Fallback if load event already fired
+                setTimeout(function() {
+                    preloader.classList.add('fade-out');
+                    setTimeout(function() {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

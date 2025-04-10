@@ -72,8 +72,11 @@ def setup_chrome():
     
     co = ChromiumOptions()
     co.set_browser_path(chrome_path)
-    co.set_argument('--no-sandbox')  # 无沙盒模式
-    co.headless()  # 无头模式
+    co.set_argument('--no-sandbox')
+    co.set_argument('--disable-gpu')
+    co.set_argument('--lang=en-US')
+    co.set_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
+    co.headless()
     return Chromium(co)
 
 

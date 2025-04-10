@@ -18,7 +18,7 @@ const baseDir = path.dirname(__dirname);
 
 
 const baseUrl = config.baseUrl || 'https://default-url.com';
-const ignoreFolders = ['node_modules','template', 'assets', 'temp'];
+const ignoreFolders = ['node_modules','template', 'assets', 'temp','docs'];
 
 function listHtmlFiles(dir) {
     return fs.readdirSync(dir).reduce((files, file) => {
@@ -76,13 +76,12 @@ allHtmlFiles.forEach(file => {
     let loc;
     
     if (fileWithoutExtension.endsWith('index')) {
-        loc = `/${fileWithoutExtension.split('/').slice(0, -1).join('/')}`;
-        // Skip if it's the root path (already added)
-        if (loc === '/') {
-            return;
-        }
+        // For index pages, remove 'index' and ensure no trailing slash (except root)
+        const pathParts = fileWithoutExtension.split('/').slice(0, -1);
+        loc = pathParts.length === 0 ? '/' : `/${pathParts.join('/')}`;
     } else {
-        loc = `/${fileWithoutExtension}`;
+        // For non-index pages, ensure no trailing slash
+        loc = `/${fileWithoutExtension}`.replace(/\/+$/, '');
     }
     
     // Only add if URL doesn't exist or has a newer modification date
@@ -103,10 +102,8 @@ const sitemap = Array.from(urlMap.values());
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemap.map(item => {
-    // Remove trailing slash from baseUrl if it exists
-    const cleanBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
-    // Remove trailing slash from loc if it exists (except for root path which should be just '/')
-    const cleanLoc = item.loc === '/' ? '' : (item.loc.endsWith('/') ? item.loc.slice(0, -1) : item.loc);
+    const cleanBaseUrl = baseUrl.replace(/\/+$/, '');
+    const cleanLoc = item.loc === '/' ? '' : item.loc;
     
     return `    <url>
         <loc>${cleanBaseUrl}${cleanLoc}</loc>
@@ -125,12 +122,39 @@ console.log(`Sitemap has been generated and saved to ${sitemapPath}`);
 const robotsbasePath = path.dirname(__dirname);
 
 // Always generate robots.txt (overwrite if exists)
-const robotsPath = path.join(robotsbasePath, 'robots.txt');
-const robotsContent = `User-agent: *
-Allow: /
+// Modify the robots.txt generation part
+const robotsContent = [];
 
-Sitemap: ${baseUrl}/sitemap.xml`;
-fs.writeFileSync(robotsPath, robotsContent);
+// Add allowed bots
+if (config.robots?.allowedBots) {
+    config.robots.allowedBots.forEach(bot => {
+        robotsContent.push(`User-agent: ${bot}`);
+    });
+    robotsContent.push('Allow: /\n');
+}
+
+// Add blocked bots
+if (config.robots?.blockedBots) {
+    config.robots.blockedBots.forEach(bot => {
+        robotsContent.push(`User-agent: ${bot}`);
+    });
+    robotsContent.push('Disallow: /\n');
+}
+
+// Add general rules
+robotsContent.push('User-agent: *');
+if (config.robots?.allowedPaths) {
+    config.robots.allowedPaths.forEach(path => {
+        robotsContent.push(`Allow: ${path}`);
+    });
+}
+
+// Add sitemap
+robotsContent.push(`Sitemap: ${baseUrl}/sitemap.xml`);
+
+// Write robots.txt
+const robotsPath = path.join(robotsbasePath, 'robots.txt');
+fs.writeFileSync(robotsPath, robotsContent.join('\n'));
 console.log(`robots.txt has been ${fs.existsSync(robotsPath) ? 'overwritten' : 'generated'} at ${robotsPath}`);
 
 // Generate CSV with lastmod dates

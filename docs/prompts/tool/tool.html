@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperBlackScreen - 专业专注屏幕工具</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6c63ff;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 20px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            color: #6c63ff;
+        }
+        
+        /* 工具区域样式 */
+        .tool-section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .tool-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .tool-description {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tool-controls {
+            margin-bottom: 30px;
+        }
+        
+        .control-group {
+            margin-bottom: 20px;
+        }
+        
+        .control-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .mode-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .mode-button {
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .mode-button:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .mode-button.active {
+            background-color: #6c63ff;
+            color: white;
+        }
+        
+        .slider-container {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 5px;
+            background: #d3d3d3;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #6c63ff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #6c63ff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .start-button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 15px;
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .start-button:hover {
+            background-color: #5a52d5;
+        }
+        
+        /* 信息区域样式 */
+        .info-section {
+            margin: 40px 0;
+        }
+        
+        .info-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .info-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 20px;
+        }
+        
+        .info-card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+        
+        .info-card-content {
+            color: #666;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .footer-col {
+            flex: 1;
+            padding: 0 15px;
+        }
+        
+        .footer-col h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        
+        .footer-col a:hover {
+            color: #fff;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+        }
+        
+        /* 全屏模式 */
+        .fullscreen-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .fullscreen-timer {
+            font-size: 48px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .exit-button {
+            padding: 10px 20px;
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .exit-button:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav li {
+                margin-left: 0;
+                margin-right: 15px;
+            }
+            
+            .tool-title {
+                font-size: 24px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+            }
+            
+            .footer-col {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">SuperBlackScreen</a>
+            <nav>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="../blog/blog.html">博客</a></li>
+                    <li><a href="#">关于我们</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="tool-section">
+            <div class="tool-header">
+                <h1 class="tool-title">SuperBlackScreen专注工具</h1>
+                <p class="tool-description">创建完美专注环境，消除干扰，高效完成任务</p>
+            </div>
+            
+            <div class="tool-controls">
+                <div class="control-group">
+                    <label class="control-label">选择屏幕模式:</label>
+                    <div class="mode-buttons">
+                        <button class="mode-button active" data-mode="black">黑屏</button>
+                        <button class="mode-button" data-mode="white">白屏</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">透明度调节: <span id="opacity-value">50</span>%</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="100" value="50" class="slider" id="opacity-slider">
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">定时器设置:</label>
+                    <div class="mode-buttons">
+                        <button class="mode-button active" data-time="25">25分钟</button>
+                        <button class="mode-button" data-time="5">5分钟</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="start-button" id="start-focus">开始专注</button>
+        </section>
+        
+        <section class="info-section">
+            <h2 class="info-title">使用指南</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3 class="info-card-title">黑屏模式</h3>
+                    <p class="info-card-content">黑屏模式通过提供纯黑色背景，最大限度减少视觉干扰，适合需要高度专注的编程、写作等任务。</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3 class="info-card-title">白屏模式</h3>
+                    <p class="info-card-content">白屏模式提供明亮的背景，适合阅读和内容创作，有助于减轻长时间工作的眼睛疲劳。</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3 class="info-card-title">透明度调节</h3>
+                    <p class="info-card-content">根据任务需求调整透明度：0-30%适合完全专注的深度工作，30-60%适合需要参考其他资料的工作。</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3 class="info-card-title">定时器功能</h3>
+                    <p class="info-card-content">基于番茄工作法的定时器，帮助您科学管理工作和休息时间，提高工作效率和持续性。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <div id="fullscreen-mode" class="fullscreen-mode">
+        <div id="fullscreen-timer" class="fullscreen-timer">25:00</div>
+        <button id="exit-button" class="exit-button">退出</button>
+    </div>
+    
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3>SuperBlackScreen</h3>
+                <p>创建完美专注环境，消除干扰，高效完成任务。</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>链接</h3>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="../blog/blog.html">博客</a></li>
+                    <li><a href="#">关于我们</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>资源</h3>
+                <ul>
+                    <li><a href="#">使用指南</a></li>
+                    <li><a href="#">常见问题</a></li>
+                    <li><a href="#">用户案例</a></li>
+                    <li><a href="#">API文档</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>联系我们</h3>
+                <ul>
+                    <li>邮箱：info@superblackscreen.com</li>
+                    <li>电话：400-123-4567</li>
+                    <li>地址：北京市海淀区科技园</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright container">
+            <p>© 2025 SuperBlackScreen. 保留所有权利。</p>
+        </div>
+    </footer>
+    
+    <script>
+        // 获取DOM元素
+        const opacitySlider = document.getElementById('opacity-slider');
+        const opacityValue = document.getElementById('opacity-value');
+        const modeButtons = document.querySelectorAll('.mode-button[data-mode]');
+        const timeButtons = document.querySelectorAll('.mode-button[data-time]');
+        const startButton = document.getElementById('start-focus');
+        const fullscreenMode = document.getElementById('fullscreen-mode');
+        const fullscreenTimer = document.getElementById('fullscreen-timer');
+        const exitButton = document.getElementById('exit-button');
+        
+        // 当前设置
+        let currentMode = 'black';
+        let currentOpacity = 50;
+        let currentTime = 25;
+        let timerInterval;
+        
+        // 更新透明度显示
+        opacitySlider.addEventListener('input', function() {
+            currentOpacity = this.value;
+            opacityValue.textContent = currentOpacity;
+        });
+        
+        // 屏幕模式选择
+        modeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                modeButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentMode = this.getAttribute('data-mode');
+            });
+        });
+        
+        // 时间选择
+        timeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                timeButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentTime = parseInt(this.getAttribute('data-time'));
+                fullscreenTimer.textContent = currentTime + ':00';
+            });
+        });
+        
+        // 开始专注
+        startButton.addEventListener('click', function() {
+            fullscreenMode.style.display = 'flex';
+            
+            // 设置背景颜色
+            if (currentMode === 'black') {
+                fullscreenMode.style.backgroundColor = `rgba(0, 0, 0, ${(100 - currentOpacity) / 100})`;
+            } else if (currentMode === 'white') {
+                fullscreenMode.style.backgroundColor = `rgba(255, 255, 255, ${(100 - currentOpacity) / 100})`;
+            }
+            
+            // 设置定时器
+            let minutes = currentTime;
+            let seconds = 0;
+            updateTimerDisplay(minutes, seconds);
+            
+            timerInterval = setInterval(function() {
+                if (seconds === 0) {
+                    if (minutes === 0) {
+                        clearInterval(timerInterval);
+                        alert('专注时间结束！');
+                        fullscreenMode.style.display = 'none';
+                        return;
+                    }
+                    minutes--;
+                    seconds = 59;
+                } else {
+                    seconds--;
+                }
+                updateTimerDisplay(minutes, seconds);
+            }, 1000);
+        });
+        
+        // 更新定时器显示
+        function updateTimerDisplay(minutes, seconds) {
+            fullscreenTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // 退出全屏模式
+        exitButton.addEventListener('click', function() {
+            clearInterval(timerInterval);
+            fullscreenMode.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

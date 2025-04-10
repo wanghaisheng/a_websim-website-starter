@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperBlackScreen - 专业专注屏幕工具 | 提升工作效率50%</title>
+    <meta name="description" content="SuperBlackScreen是一款多功能专注工具，提供多样化屏幕模式、透明度调节、定时器和数据统计功能，帮助您消除干扰，高效完成任务。">
+    <meta name="keywords" content="专注工具, 黑屏, 白屏, 番茄工作法, 专注力, 工作效率, 视力保护">
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6c63ff;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 20px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            color: #6c63ff;
+        }
+        
+        /* 英雄区域样式 - 第一屏 */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            margin: 0 20px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #6c63ff;
+        }
+        
+        .stat-label {
+            color: #666;
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cta-buttons {
+            margin-top: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 10px 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #6c63ff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #5a52d5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: #6c63ff;
+            border: 2px solid #6c63ff;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #f0f0ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.1);
+        }
+        
+        /* 内容区域样式 - 第二屏 */
+        .content-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .feature-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #f0f0ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 24px;
+            color: #6c63ff;
+        }
+        
+        .feature-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-description {
+            color: #666;
+        }
+        
+        /* 用例部分 */
+        .use-cases {
+            margin-top: 80px;
+        }
+        
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .case-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .case-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .case-content {
+            padding: 20px;
+        }
+        
+        .case-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .case-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .case-result {
+            font-weight: bold;
+            color: #6c63ff;
+        }
+        
+        /* 科学部分 */
+        .science-section {
+            background-color: #f0f0ff;
+            padding: 80px 0;
+            margin-top: 80px;
+        }
+        
+        .science-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .science-content h3 {
+            font-size: 24px;
+            margin: 30px 0 15px;
+            color: #333;
+        }
+        
+        .science-content p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .science-content ul, .science-content ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        .science-content li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        /* FAQ部分 */
+        .faq-section {
+            padding: 80px 0;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .faq-question {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .faq-answer {
+            color: #666;
+        }
+        
+        /* 最终CTA */
+        .final-cta {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f0f0ff 0%, #e0e0ff 100%);
+            margin-top: 80px;
+        }
+        
+        .final-cta-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .final-cta-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-col h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col a:hover {
+            color: #fff;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+            }
+            
+            nav li {
+                margin-left: 0;
+                margin-right: 15px;
+                margin-bottom: 5px;
+            }
+            
+            .hero {
+                padding: 120px 0 60px;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .stat-item {
+                margin: 0 10px 20px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .feature-card, .case-card {
+                padding: 20px;
+            }
+            
+            .final-cta-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">SuperBlackScreen</a>
+            <nav>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#features">功能</a></li>
+                    <li><a href="#science">专注力科学</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- 英雄区域 - 第一屏 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">SuperBlackScreen：专业专注屏幕工具</h1>
+                <h2 class="hero-subtitle">创建完美专注环境，消除干扰，高效完成任务</h2>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50,000+</div>
+                        <div class="stat-label">专业人士使用</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50%</div>
+                        <div class="stat-label">工作效率提升</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.8/5</div>
+                        <div class="stat-label">用户评分</div>
+                    </div>
+                </div>
+                
+                <img src="https://via.placeholder.com/800x450?text=SuperBlackScreen+产品截图" alt="SuperBlackScreen产品截图" class="hero-image">
+                
+                <div class="cta-buttons">
+                    <a href="tool.html" class="btn btn-primary">立即免费体验</a>
+                    <a href="#features" class="btn btn-secondary">了解更多功能</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 内容区域 - 第二屏 -->
+    <section id="features" class="content-section">
+        <div class="container">
+            <h2 class="section-title">为什么选择SuperBlackScreen？</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i>🖥️</i>
+                    </div>
+                    <h3 class="feature-title">多样化屏幕模式</h3>
+                    <p class="feature-description">提供黑屏、白屏、彩色和渐变模式，适应不同工作环境和个人偏好，满足各种专注场景需求。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i>🔍</i>
+                    </div>
+                    <h3 class="feature-title">精确透明度控制</h3>
+                    <p class="feature-description">通过精确的透明度调节，平衡专注与参考需求，让您在保持专注的同时不错过重要信息。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i>⏱️</i>
+                    </div>
+                    <h3 class="feature-title">番茄工作法定时器</h3>
+                    <p class="feature-description">内置科学的番茄工作法定时器，帮助您合理安排工作和休息时间，提高工作效率和持续性。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i>📊</i>
+                    </div>
+                    <h3 class="feature-title">专注数据统计</h3>
+                    <p class="feature-description">记录和分析您的专注时间和效率，帮助您了解自己的工作模式，持续优化工作习惯。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i>👁️</i>
+                    </div>
+                    <h3 class="feature-title">视力保护功能</h3>
+                    <p class="feature-description">通过优化屏幕显示和定时休息提醒，减轻长时间盯着屏幕的视觉疲劳，保护眼睛健康。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i>🔄</i>
+                    </div>
+                    <h3 class="feature-title">跨设备同步</h3>
+                    <p class="feature-description">在不同设备上同步您的设置和专注数据，无论在办公室还是出差，都能保持一致的专注体验。</p>
+                </div>
+            </div>
+            
+            <div class="cta-buttons" style="text-align: center;">
+                <a href="tool.html" class="btn btn-primary">立即体验这些功能</a>
+            </div>
+            
+            <div class="use-cases">
+                <h2 class="section-title">用户如何使用SuperBlackScreen</h2>
+                
+                <div class="case-grid">
+                    <div class="case-card">
+                        <img src="https://via.placeholder.com/400x200?text=写作案例" alt="写作案例" class="case-image">
+                        <div class="case-content">
+                            <h3 class="case-title">提升写作效率</h3>
+                            <p class="case-description">自由作家王小明使用白屏模式，透明度20%，配合25/5分钟番茄周期，专注创作内容。</p>
+                            <p class="case-result">结果：日均写作量提升75%，完成首部长篇小说</p>
+                        </div>
+                    </div>
+                    
+                    <div class="case-card">
+                        <img src="https://via.placeholder.com/400x200?text=编程案例" alt="编程案例" class="case-image">
+                        <div class="case-content">
+                            <h3 class="case-title">提高代码质量</h3>
+                            <p class="case-description">软件工程师李工使用黑屏模式，透明度40%，配合50/10分钟番茄周期，专注编写代码。</p>
+                            <p class="case-result">结果：Bug率降低30%，代码质量显著提升</p>
+                        </div>
+                    </div>
+                    
+                    <div class="case-card">
+                        <img src="https://via.placeholder.com/400x200?text=数据分析案例" alt="数据分析案例" class="case-image">
+                        <div class="case-content">
+                            <h3 class="case-title">提升分析准确性</h3>
+                            <p class="case-description">数据分析师刘女士使用渐变模式，透明度50%，配合45/15分钟番茄周期，专注分析数据。</p>
+                            <p class="case-result">结果：分析准确性提高，视觉疲劳减轻</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 科学部分 -->
+    <section id="science" class="science-section">
+        <div class="container">
+            <h2 class="section-title">专注力科学：为什么我们需要专注工具？</h2>
+            
+            <div class="science-content">
+                <p>在当今信息爆炸的时代，我们的注意力正面临前所未有的挑战。研究表明，普通办公室工作者每11分钟就会被打断一次，而被打断后平均需要23分钟才能重新进入专注状态。这种持续的注意力分散不仅降低了工作效率，还增加了压力和疲劳感。</p>
+                
+                <h3>数字环境中的注意力挑战</h3>
+                <p>现代工作环境充满了各种干扰源：电子邮件通知、即时消息、社交媒体更新、新闻提醒等。我们的大脑并非设计用来应对如此多的信息输入，这导致了所谓的"注意力碎片化"现象。</p>
+                <p>研究表明，频繁的任务切换可能导致工作效率降低高达40%，并增加错误率。更令人担忧的是，长期的注意力分散可能改变我们的认知模式，降低深度思考和创造性问题解决的能力。</p>
+                
+                <h3>专注工具的工作原理</h3>
+                <p>专注工具如SuperBlackScreen通过创建一个视觉上简洁的环境，帮助用户减少外部干扰，更容易进入"心流"状态——一种完全沉浸在当前任务中的高效工作状态。</p>
+                <p>通过调整屏幕显示、管理工作时间和提供即时反馈，SuperBlackScreen解决了三个关键问题：</p>
+                <ol>
+                    <li><strong>视觉干扰最小化</strong>：屏幕模式和透明度调节减少了视觉刺激</li>
+                    <li><strong>时间结构化</strong>：番茄工作法定时器提供了清晰的工作-休息结构</li>
+                    <li><strong>进度可视化</strong>：数据统计和社交分享功能提供了成就感和动力</li>
+                </ol>
+                
+                <h3>如何使用SuperBlackScreen最大化您的专注力</h3>
+                
+                <p>为不同任务选择最佳屏幕模式：</p>
+                <ul>
+                    <li><strong>黑屏模式</strong>：适合需要高度专注的编程、写作等任务</li>
+                    <li><strong>白屏模式</strong>：适合阅读和内容创作，减轻眼睛疲劳</li>
+                    <li><strong>彩色模式</strong>：适合创意工作，可以根据任务调整颜色</li>
+                    <li><strong>渐变模式</strong>：适合长时间工作，渐变色彩减轻视觉疲劳</li>
+                </ul>
+                
+                <p>根据任务需求调整透明度：</p>
+                <ul>
+                    <li><strong>0-30%</strong>：需要完全专注的深度工作</li>
+                    <li><strong>30-60%</strong>：需要参考其他资料的工作</li>
+                    <li><strong>60-90%</strong>：需要频繁切换窗口的协作工作</li>
+                </ul>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="tool.html" class="btn btn-primary">立即尝试这些技巧</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ部分 -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">常见问题解答</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">SuperBlackScreen与其他黑屏工具有什么不同？</div>
+                    <div class="faq-answer">与其他单一功能的黑屏工具不同，SuperBlackScreen提供多样化的屏幕模式、精确的透明度控制、内置番茄工作法定时器、社交分享功能和详细的数据统计分析，是一个全面的专注解决方案。</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">SuperBlackScreen是否会影响我的其他应用程序？</div>
+                    <div class="faq-answer">不会。SuperBlackScreen在浏览器中运行，不会干扰您的其他应用程序。您可以随时调整透明度或暂停SuperBlackScreen来访问其他应用。</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">我可以在多台设备上使用SuperBlackScreen吗？</div>
+                    <div class="faq-answer">是的。免费版支持在单一设备上使用，而专业版和团队版支持在多台设备上同步您的设置和数据。</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">SuperBlackScreen如何帮助保护视力？</div>
+                    <div class="faq-answer">SuperBlackScreen的多样化屏幕模式和透明度调节功能可以减少屏幕对眼睛的刺激，而内置的定时器提醒您定期休息，这些都有助于减轻视觉疲劳，保护眼睛健康。</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">SuperBlackScreen是否提供企业解决方案？</div>
+                    <div class="faq-answer">是的，我们提供团队版和企业版，包括团队管理控制台、团队数据统计和报告、自定义品牌选项等功能。请联系我们的销售团队了解更多信息。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 最终CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2 class="final-cta-title">准备好提升您的专注力了吗？</h2>
+            <p class="final-cta-subtitle">加入50,000+专业人士的行列，体验SuperBlackScreen带来的专注力革命</p>
+            
+            <div class="cta-buttons">
+                <a href="tool.html" class="btn btn-primary">立即免费体验</a>
+                <a href="#contact" class="btn btn-secondary">联系我们</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3>SuperBlackScreen</h3>
+                <p>创建完美专注环境，消除干扰，高效完成任务。</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">微博</a>
+                    <a href="#" class="social-link">微信</a>
+                    <a href="#" class="social-link">知乎</a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>产品</h3>
+                <ul>
+                    <li><a href="#">功能</a></li>
+                    <li><a href="#">价格</a></li>
+                    <li><a href="#">用户案例</a></li>
+                    <li><a href="#">下载</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>资源</h3>
+                <ul>
+                    <li><a href="#">博客</a></li>
+                    <li><a href="#">使用指南</a></li>
+                    <li><a href="#">API文档</a></li>
+                    <li><a href="#">常见问题</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>公司</h3>
+                <ul>
+                    <li><a href="#">关于我们</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">加入我们</a></li>
+                    <li><a href="#">媒体报道</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>联系我们</h3>
+                <ul>
+                    <li>邮箱：info@superblackscreen.com</li>
+                    <li>电话：400-123-4567</li>
+                    <li>地址：北京市海淀区科技园</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 SuperBlackScreen. 保留所有权利。</p>
+        </div>
+    </footer>
+</body>
+</html>

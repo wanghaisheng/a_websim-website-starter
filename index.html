@@ -5,54 +5,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <script>
+    // Load config
+    fetch('/scripts/config.json')
+      .then(response => response.json())
+      .then(config => {
+        // Update meta tags with config values
+        document.querySelector('link[rel="canonical"]').href = `https://${config.domain}/`;
+        document.querySelector('meta[property="og:url"]').content = `https://${config.domain}`;
+        document.querySelector('meta[property="og:image"]').content = `https://${config.domain}/images/simulator-preview.jpg`;
+        document.querySelector('link[rel="icon"]').href = `https://${config.domain}/favicon.ico`;
+        document.querySelector('meta[name="twitter:creator"]').content = config.social.twitter;
+        
+        // Update analytics
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', config.analytics.ga);
+        
+        // Update Clarity
+        window.clarity=window.clarity||function(){(clarity.q=clarity.q||[]).push(arguments)};
+        clarity('set', 'anonymizeIP', true);
+      });
+  </script>
+
   <!-- SEO Meta Tags -->
   <meta name="description" content="A mobile simulator designed to demonstrate mobile interface design.">
   <meta name="keywords" content="mobile, simulator, mobile design, mobile app">
-  <meta name="author" content="Your Name or Company">
+  <meta name="author" content="Mood Island Team">
   <meta http-equiv="Content-Language" content="en">
 
   <!-- Canonical Link -->
-  <link rel="canonical" href="https://www.yourwebsite.com/pc-simulator" />
+  <link rel="canonical" href="" />
 
   <!-- Open Graph for Social Media -->
-  <meta property="og:title" content="PC Simulator">
+  <meta property="og:title" content="Mobile Simulator">
   <meta property="og:description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta property="og:image" content="https://www.yourwebsite.com/pc-simulator-image.jpg">
-  <meta property="og:url" content="https://www.yourwebsite.com/pc-simulator">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
   <meta property="og:type" content="website">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PC Simulator">
+  <meta name="twitter:title" content="Mobile Simulator">
   <meta name="twitter:description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta name="twitter:image" content="https://www.yourwebsite.com/pc-simulator-image.jpg">
-  <meta name="twitter:creator" content="@yourtwitterhandle">
+  <meta name="twitter:image" content="">
+  <meta name="twitter:creator" content="">
 
   <!-- Favicon -->
-  <link rel="icon" href="https://www.yourwebsite.com/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="" type="image/x-icon">
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-XXXXX-Y');
-  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js"></script>
 
   <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y) {
-      window.clarity=window.clarity||function(){(clarity.q=clarity.q||[]).push(arguments)};
-      clarity('set', 'anonymizeIP', true);
-      i=l.createElement('script');i.async=1;i.src=r;i.type='text/javascript';
-      t=l.getElementsByTagName('script')[0];t.parentNode.insertBefore(i,t);
-    })(document,window,'script','https://www.clarity.ms/tag/XXXXXX');
-  </script>
+  <script async src="https://www.clarity.ms/tag/"></script>
 
-  <title>PC Simulator</title>
+  <title>Mobile Simulator</title>
 
   <style>
     /* Global Styles */

@@ -1,4 +1,30 @@
 {
   "baseUrl": "https://mood-island.heytcm.com",
-  "defaultLang": "en"
+  "defaultLang": "en",
+  "email":"support@mood-island.heytcm.comsupport@mood-island.heytcm.com",
+  "robots": {
+    "allowedBots": [
+      "Googlebot",
+      "Applebot",
+      "Bingbot",
+      "DuckDuckBot",
+      "Yeti",
+      "Twitterbot",
+      "Yandex"
+    ],
+    "blockedBots": [
+      "Baiduspider",
+      "360Spider",
+      "Yisouspider",
+      "Sogouspider"
+    ],
+    "allowedPaths": [
+      "/",
+      "/en",
+      "/zh",
+      "/fr",
+      "/es",
+      "/de"
+    ]
+  }
 }
