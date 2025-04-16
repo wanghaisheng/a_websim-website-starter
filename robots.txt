@@ -1,0 +1,23 @@
+User-agent: Googlebot
+User-agent: Applebot
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: Yeti
+User-agent: Twitterbot
+User-agent: Yandex
+Allow: /
+
+User-agent: Baiduspider
+User-agent: 360Spider
+User-agent: Yisouspider
+User-agent: Sogouspider
+Disallow: /
+
+User-agent: *
+Allow: /
+Allow: /en
+Allow: /zh
+Allow: /fr
+Allow: /es
+Allow: /de
+Sitemap: https://websimstarter.borninsea.com/sitemap.xml

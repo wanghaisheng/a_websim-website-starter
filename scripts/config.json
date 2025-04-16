@@ -1,7 +1,7 @@
 {
-  "baseUrl": "https://mood-island.heytcm.com",
+  "baseUrl": "https://websimstarter.borninsea.com",
   "defaultLang": "en",
-  "email":"support@mood-island.heytcm.comsupport@mood-island.heytcm.com",
+  "email":"support@websimstarter.borninsea.com",
   "robots": {
     "allowedBots": [
       "Googlebot",
