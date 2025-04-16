@@ -58,10 +58,9 @@ jobs:
       env:
         INDEXNOW_KEY: ${{ steps.read-secret.outputs.result }}
 
-    - name: IndexNow action
-      uses: bojieyang/indexnow-action@v2
-      with:
-        sitemap-location: "https://feelingchart.heytcm.com/sitemap.xml"
-        since: 1
-        since-unit: "day"
-        key: ${{ env.INDEXNOW_KEY }}
+    - name: Submit URLs from sitemap.xml to IndexNow
+      run: |
+        pip install requests
+        python scripts/submit_indexnow.py sitemap.xml
+      env:
+        INDEXNOW_KEY: ${{ env.INDEXNOW_KEY }}

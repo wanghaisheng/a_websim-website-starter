@@ -1,141 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WebSim Vibe Coding Starter: Build a modern, SEO-optimized website in 5 minutes. AI赋能、极致自动化、响应式、SEO最佳实践、极具创意与未来感的SaaS工具。">
+  <meta name="keywords" content="WebSim, SaaS, Coding Starter, SEO, AI, Playground, 多语言, 创意, 极致体验">
+  <meta name="robots" content="index, follow">
+  <title data-i18n="title">WebSim Vibe Coding Starter</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="js/lang.js" defer></script>
+  <script src="js/playground.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <nav class="navbar">
+      <div class="logo">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="WebSim Logo">
+          <circle cx="20" cy="20" r="20" fill="url(#paint0_radial)"/>
+          <text x="50%" y="55%" text-anchor="middle" fill="#fff" font-size="18" font-family="monospace" dy=".3em">WS</text>
+          <defs>
+            <radialGradient id="paint0_radial" cx="0.5" cy="0.5" r="0.5" fx="0.2" fy="0.2">
+              <stop offset="0%" stop-color="#6f00ff"/>
+              <stop offset="100%" stop-color="#00eaff"/>
+            </radialGradient>
+          </defs>
+        </svg>
+        <span class="brand" data-i18n="brand">WebSim Vibe Coding Starter</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#features" data-i18n="nav_features">Features</a></li>
+        <li><a href="#playground" data-i18n="nav_playground">Playground</a></li>
+        <li><a href="#showcase" data-i18n="nav_showcase">Showcase</a></li>
+        <li><a href="#future" data-i18n="nav_future">Vision</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="career.html" data-i18n="nav_career">Career</a></li>
+      </ul>
+      <div class="lang-switcher" id="lang-switcher"></div>
+    </nav>
+    <div class="hero-content">
+      <h1 data-i18n="hero_title">Build the Future of Coding. Instantly.</h1>
+      <p data-i18n="hero_subtitle">AI-powered, SEO-first, multi-language SaaS starter. Experience the boldest, most creative web playground.</p>
+      <a href="#playground" class="cta" data-i18n="cta_try">Try Playground</a>
+    </div>
+    <div class="hero-bg-anim" id="hero-bg-anim"></div>
+  </header>
+
+  <main>
+    <section id="features" class="features-section">
+      <h2 data-i18n="features_title">Features</h2>
+      <ul class="features-list">
+        <li data-i18n="feature_rapid">⚡ Rapid static site setup & deployment</li>
+        <li data-i18n="feature_multilang">🌍 Multi-language support & auto-generated sitemaps</li>
+        <li data-i18n="feature_seo">🔍 Automated SEO: IndexNow, Bing, Google, metadata, validation</li>
+        <li data-i18n="feature_ai">🤖 AI-powered blog & image generation</li>
+        <li data-i18n="feature_pwa">📱 PWA & mobile-first, blazing fast</li>
+        <li data-i18n="feature_research">🔑 Keyword research, analytics, clarity</li>
+        <li data-i18n="feature_user">👤 Real user management (Cloudflare Workers)</li>
+        <li data-i18n="feature_deploy">🚀 One-click static deployment</li>
+      </ul>
+    </section>
+
+    <section id="playground" class="playground-section">
+      <h2 data-i18n="playground_title">Try the Interactive Playground</h2>
+      <div class="playground-tabs">
+        <ul class="tab-list">
+          <li class="tab active" data-tab="step1" data-i18n="tab_grok" tabindex="0">1. Research on Grok</li>
+          <li class="tab" data-tab="step2" data-i18n="tab_google" tabindex="0">2. Generate PRD.md</li>
+          <li class="tab" data-tab="step3" data-i18n="tab_websim" tabindex="0">3. Generate Site with WebSim</li>
+          <li class="tab" data-tab="step4" data-i18n="tab_deploy" tabindex="0">4. Deploy & Go Live</li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="step1">
+            <div class="tab-desc">
+              <div class="desc-main">
+                <h3 data-i18n="grok_title">Research User Complaints on Grok</h3>
+                <ul class="desc-features">
+                  <li data-i18n="grok_feat1">AI-powered search for user pain points</li>
+                  <li data-i18n="grok_feat2">Real-time trending topics</li>
+                  <li data-i18n="grok_feat3">Export insights for product ideation</li>
+                </ul>
+                <div class="desc-resources">
+                  <a href="https://grok.x.com/" target="_blank" class="desc-cta" data-i18n="grok_cta">Go to Grok.com &rarr;</a>
+                </div>
+              </div>
+              <div class="desc-media">
+                <img src="https://assets.codeium.com/websim/grok-sample.png" alt="Grok.com Screenshot" loading="lazy" style="max-width:260px;border-radius:12px;box-shadow:0 2px 12px #00eaff44;">
+              </div>
+            </div>
+            <iframe src="https://grok.x.com/" title="Grok.com Research" style="width:100%;height:400px;border-radius:16px;border:none;box-shadow:0 2px 12px #00eaff44;"></iframe>
+            <p data-i18n="grok_hint">Use Grok to research user pain points and complaints for your SaaS idea. Copy the insights for the next step.</p>
+          </div>
+          <div class="tab-pane" id="step2">
+            <div class="tab-desc">
+              <div class="desc-main">
+                <h3 data-i18n="google_title">Generate PRD.md with Google AI Studio</h3>
+                <ul class="desc-features">
+                  <li data-i18n="google_feat1">AI generates detailed PRD.md from research</li>
+                  <li data-i18n="google_feat2">Starter templates for SaaS, tools, apps</li>
+                  <li data-i18n="google_feat3">Easy editing and export</li>
+                </ul>
+                <div class="desc-resources">
+                  <a href="https://aistudio.google.com/starter-apps" target="_blank" class="desc-cta" data-i18n="google_cta">Go to Google AI Studio &rarr;</a>
+                </div>
+              </div>
+              <div class="desc-media">
+                <img src="https://assets.codeium.com/websim/google-ai-studio-sample.png" alt="Google AI Studio Screenshot" loading="lazy" style="max-width:260px;border-radius:12px;box-shadow:0 2px 12px #00eaff44;">
+              </div>
+            </div>
+            <iframe src="https://aistudio.google.com/starter-apps" title="Google AI Studio" style="width:100%;height:400px;border-radius:16px;border:none;box-shadow:0 2px 12px #00eaff44;"></iframe>
+            <p data-i18n="google_hint">Paste Grok output here and use Google AI Studio to generate a detailed PRD.md for your project.</p>
+            <textarea id="prd-input" placeholder="Paste Grok output here..." style="width:100%;margin:1em 0 0.5em;height:80px;"></textarea>
+            <button class="playground-btn" id="to-step3" data-i18n="to_websim_btn">Next: Generate Site with WebSim</button>
+          </div>
+          <div class="tab-pane" id="step3">
+            <div class="tab-desc">
+              <div class="desc-main">
+                <h3 data-i18n="websim_title">Generate HTML Site with WebSim</h3>
+                <ul class="desc-features">
+                  <li data-i18n="websim_feat1">AI-powered code & content generation</li>
+                  <li data-i18n="websim_feat2">SEO, multi-language, SaaS best practices</li>
+                  <li data-i18n="websim_feat3">Prompt templates for rapid prototyping</li>
+                </ul>
+                <div class="desc-resources">
+                  <a href="https://websim.com/" target="_blank" class="desc-cta" data-i18n="websim_cta">Go to WebSim.com &rarr;</a>
+                  <a href="docs/prompts" target="_blank" class="desc-cta" data-i18n="websim_prompt">Prompt Templates</a>
+                </div>
+              </div>
+              <div class="desc-media">
+                <img src="https://assets.codeium.com/websim/websim-sample.png" alt="WebSim.com Screenshot" loading="lazy" style="max-width:260px;border-radius:12px;box-shadow:0 2px 12px #6f00ff44;">
+              </div>
+            </div>
+            <iframe src="https://websim.com/" title="WebSim.com" style="width:100%;height:400px;border-radius:16px;border:none;box-shadow:0 2px 12px #6f00ff44;"></iframe>
+            <p data-i18n="websim_hint">Use your PRD.md and a prompt template from <code>docs/prompts</code> as input. WebSim will generate the HTML site files for you.</p>
+            <textarea id="websim-input" placeholder="Paste PRD.md and prompt template here..." style="width:100%;margin:1em 0 0.5em;height:80px;"></textarea>
+            <button class="playground-btn" id="to-step4" data-i18n="to_deploy_btn">Next: Deploy & Go Live</button>
+          </div>
+          <div class="tab-pane" id="step4">
+            <div class="tab-desc">
+              <div class="desc-main">
+                <h3 data-i18n="deploy_title">Deploy & Go Live</h3>
+                <ul class="desc-features">
+                  <li data-i18n="deploy_feat1">One-click deployment to Cloudflare or static host</li>
+                  <li data-i18n="deploy_feat2">SEO, config, and CI/CD best practices</li>
+                  <li data-i18n="deploy_feat3">Git push to go live instantly</li>
+                </ul>
+                <div class="desc-resources">
+                  <a href="https://pages.cloudflare.com/" target="_blank" class="desc-cta" data-i18n="deploy_cta">Go to Cloudflare Pages &rarr;</a>
+                </div>
+              </div>
+              <div class="desc-media">
+                <img src="https://assets.codeium.com/websim/cloudflare-sample.png" alt="Cloudflare Pages Screenshot" loading="lazy" style="max-width:260px;border-radius:12px;box-shadow:0 2px 12px #00eaff44;">
+              </div>
+            </div>
+            <ol>
+              <li data-i18n="deploy_step1">Place generated HTML files in this root folder.</li>
+              <li data-i18n="deploy_step2">Edit or create your <code>config.json</code>.</li>
+              <li data-i18n="deploy_step3">Connect your repo to Cloudflare Pages or another static host.</li>
+              <li data-i18n="deploy_step4">Git push and watch your SEO-friendly site go live!</li>
+            </ol>
+            <p data-i18n="deploy_success">🎉 Bingo! Your SaaS site is now live and SEO-optimized.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="showcase" class="showcase-section">
+      <h2 data-i18n="showcase_title">Featured Results Showcase</h2>
+      <div class="showcase-list">
+        <div class="showcase-item">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User project screenshot" loading="lazy">
+          <div class="showcase-desc">
+            <h3 data-i18n="showcase_project1">AI SaaS Landing Page</h3>
+            <p data-i18n="showcase_project1_desc">Generated in seconds with WebSim Vibe. Fully responsive, SEO-optimized, and production-ready.</p>
+          </div>
+        </div>
+        <div class="showcase-item">
+          <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="User project screenshot" loading="lazy">
+          <div class="showcase-desc">
+            <h3 data-i18n="showcase_project2">Multi-language Blog</h3>
+            <p data-i18n="showcase_project2_desc">Supports English, Chinese, and more. SEO best practices built-in.</p>
+          </div>
+        </div>
+        <div class="showcase-item">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="SVG Example">
+            <rect x="5" y="5" width="50" height="50" rx="12" fill="#00eaff"/>
+            <text x="50%" y="55%" text-anchor="middle" fill="#6f00ff" font-size="20" font-family="monospace" dy=".3em">SVG</text>
+          </svg>
+          <div class="showcase-desc">
+            <h3 data-i18n="showcase_project3">SVG UI Kit</h3>
+            <p data-i18n="showcase_project3_desc">All illustrations are SVG for best performance and scalability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="future" class="future-section">
+      <h2 data-i18n="future_title">Future Advantages & Vision</h2>
+      <ul>
+        <li data-i18n="future_ai">Continuous AI integration: smarter, more creative site generation</li>
+        <li data-i18n="future_seo">SEO automation: always up-to-date with the latest algorithms</li>
+        <li data-i18n="future_ux">Bold, creative UI/UX: GSAP-powered micro-interactions & animations</li>
+        <li data-i18n="future_scale">Scale from MVP to enterprise with one codebase</li>
+      </ul>
+    </section>
+
+    <section id="painpoints" class="painpoints-section">
+      <h2 data-i18n="painpoints_title">Deep User Pain Points & Visionary Solutions</h2>
+      <ul>
+        <li data-i18n="painpoint1">No more boring templates: instantly generate unique, high-converting pages</li>
+        <li data-i18n="painpoint2">SEO & multi-language are built-in, not afterthoughts</li>
+        <li data-i18n="painpoint3">No coding? No problem. Playground lets you prototype visually</li>
+        <li data-i18n="painpoint4">Performance, accessibility, and mobile-responsiveness by default</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="WebSim Logo">
+          <circle cx="20" cy="20" r="20" fill="url(#paint0_radial_footer)"/>
+          <defs>
+            <radialGradient id="paint0_radial_footer" cx="0.5" cy="0.5" r="0.5" fx="0.2" fy="0.2">
+              <stop offset="0%" stop-color="#6f00ff"/>
+              <stop offset="100%" stop-color="#00eaff"/>
+            </radialGradient>
+          </defs>
+        </svg>
+        <span class="brand" data-i18n="brand">WebSim Vibe Coding Starter</span>
+      </div>
+      <div class="footer-links">
+        <a href="about.html" data-i18n="footer_about">About</a>
+        <a href="career.html" data-i18n="footer_career">Career</a>
+        <a href="#features" data-i18n="footer_features">Features</a>
+      </div>
+      <div class="footer-lang-switcher" id="footer-lang-switcher"></div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2025 WebSim. <span data-i18n="footer_rights">All rights reserved.</span></span>
+    </div>
+  </footer>
 
   <script>
-    // Load config
-    fetch('/scripts/config.json')
-      .then(response => response.json())
-      .then(config => {
-        // Update meta tags with config values
-        document.querySelector('link[rel="canonical"]').href = `https://${config.domain}/`;
-        document.querySelector('meta[property="og:url"]').content = `https://${config.domain}`;
-        document.querySelector('meta[property="og:image"]').content = `https://${config.domain}/images/simulator-preview.jpg`;
-        document.querySelector('link[rel="icon"]').href = `https://${config.domain}/favicon.ico`;
-        document.querySelector('meta[name="twitter:creator"]').content = config.social.twitter;
-        
-        // Update analytics
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', config.analytics.ga);
-        
-        // Update Clarity
-        window.clarity=window.clarity||function(){(clarity.q=clarity.q||[]).push(arguments)};
-        clarity('set', 'anonymizeIP', true);
+    // GSAP Hero background animation
+    document.addEventListener('DOMContentLoaded', function() {
+      gsap.to('#hero-bg-anim', {
+        background: 'radial-gradient(circle at 60% 40%, #00eaff 0%, #6f00ff 100%)',
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power1.inOut',
+        onUpdate: function() {
+          // Custom creative micro-interaction
+        }
       });
+    });
   </script>
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta name="keywords" content="mobile, simulator, mobile design, mobile app">
-  <meta name="author" content="Mood Island Team">
-  <meta http-equiv="Content-Language" content="en">
-
-  <!-- Canonical Link -->
-  <link rel="canonical" href="" />
-
-  <!-- Open Graph for Social Media -->
-  <meta property="og:title" content="Mobile Simulator">
-  <meta property="og:description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta property="og:image" content="">
-  <meta property="og:url" content="">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mobile Simulator">
-  <meta name="twitter:description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta name="twitter:image" content="">
-  <meta name="twitter:creator" content="">
-
-  <!-- Favicon -->
-  <link rel="icon" href="" type="image/x-icon">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js"></script>
-
-  <!-- Microsoft Clarity -->
-  <script async src="https://www.clarity.ms/tag/"></script>
-
-  <title>Mobile Simulator</title>
-
-  <style>
-    /* Global Styles */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    .mobile-container {
-      width: 360px;
-      height: 640px;
-      border: 16px solid black;
-      border-radius: 16px;
-      background-color: #fff;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .content {
-      font-size: 1.2rem;
-      color: #333;
-    }
-
-    /* Adjustments for PC */
-    @media (min-width: 768px) {
-      .mobile-container {
-        width: 600px;
-        height: 1000px;
-      }
-
-      .content {
-        font-size: 1.5rem;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .mobile-container {
-        width: 800px;
-        height: 1400px;
-      }
-
-      .content {
-        font-size: 1.8rem;
-      }
-    }
-
-    /* Additional responsiveness for larger screens */
-    @media (min-width: 1200px) {
-      body {
-        justify-content: flex-start;
-      }
-
-      .mobile-container {
-        margin-top: 50px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="mobile-container">
-    <div class="content">
-      <p>Mobile Simulator Screen</p>
-      <p>PC Version: Adjusted for larger screens.</p>
-    </div>
-  </div>
 </body>
-
 </html>

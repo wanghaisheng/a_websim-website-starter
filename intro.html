@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>WebSim Vibe Coding Starter - PRD演示</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f6f7fb; margin: 0; }
+    main { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 32px #6f00ff22; overflow: hidden; }
+    section { display: none; padding: 3em 2em 2em; min-height: 400px; }
+    section.active { display: block; }
+    .ppt-nav { display: flex; justify-content: space-between; align-items: center; padding: 1em 2em; }
+    .ppt-btn { background: #6f00ff; color: #fff; border: none; border-radius: 8px; padding: 0.6em 1.6em; font-size: 1em; cursor: pointer; }
+    .ppt-btn:disabled { background: #eee; color: #aaa; cursor: not-allowed; }
+    h1, h2 { color: #6f00ff; }
+    ul { margin: 1em 0 1.5em 1.2em; }
+    img.ppt-img { max-width: 340px; border-radius: 10px; box-shadow: 0 2px 12px #00eaff44; margin: 1.2em 0; }
+  </style>
+</head>
+<body>
+<main>
+  <section class="active">
+    <h1>WebSim Vibe Coding Starter</h1>
+    <h3>极致自动化、SEO友好、多语言SaaS网站生成器</h3>
+    <!-- Logo/品牌色 -->
+  </section>
+  <section>
+    <h2>项目背景与目标</h2>
+    <ul>
+      <li>市场痛点：传统建站繁琐、SEO难自动化、多语言复杂、缺乏一站式部署</li>
+      <li>用户画像：开发者、创业团队、内容创作者</li>
+      <li>项目目标：一键生成高质量、自动SEO、多语言、可部署的现代SaaS站点</li>
+    </ul>
+  </section>
+  <section>
+    <h2>核心功能概览</h2>
+    <ul>
+      <li>AI 需求分析（Grok.com集成）</li>
+      <li>PRD自动生成（Google AI Studio）</li>
+      <li>代码与内容生成（WebSim.com）</li>
+      <li>SEO自动化（IndexNow、Bing、Google Search Console）</li>
+      <li>多语言支持（locale自动生成）</li>
+      <li>Playground多步骤标签页</li>
+      <li>一键部署（Cloudflare Pages等）</li>
+    </ul>
+  </section>
+  <section>
+    <h2>用户流程</h2>
+    <ol>
+      <li>Grok.com 研究用户痛点<br>
+        <img class="ppt-img" src="prototype-image-placeholder-grok-1.png" alt="Grok用户调研界面">
+      </li>
+      <li>Google AI Studio 生成PRD.md<br>
+        <img class="ppt-img" src="prototype-image-placeholder-ai-2.png" alt="AI Studio生成PRD">
+      </li>
+      <li>WebSim.com 生成站点<br>
+        <img class="ppt-img" src="prototype-image-placeholder-websim-3.png" alt="WebSim生成站点">
+      </li>
+      <li>本地配置与部署<br>
+        <img class="ppt-img" src="prototype-image-placeholder-deploy-4.png" alt="一键部署上线">
+      </li>
+    </ol>
+  </section>
+  <section>
+    <h2>关键页面与模块</h2>
+    <ul>
+      <li>首页（index.html）：产品介绍、功能亮点、Playground、案例展示</li>
+      <li>about.html、career.html</li>
+      <li>Playground多步骤标签页</li>
+      <li>locale/多语言资源</li>
+      <li>docs/prompts/模板</li>
+    </ul>
+  </section>
+  <section>
+    <h2>技术与集成</h2>
+    <ul>
+      <li>前端：HTML5、CSS3、GSAP动画、响应式、SVG</li>
+      <li>后端/自动化：Python、GitHub Actions</li>
+      <li>第三方API：Grok.com、Google AI Studio、WebSim.com、Cloudflare Pages等</li>
+    </ul>
+  </section>
+  <section>
+    <h2>SEO与最佳实践</h2>
+    <ul>
+      <li>语义化HTML、meta、alt、自动sitemap/robots.txt</li>
+      <li>自动提交索引，规避GSC常见错误</li>
+    </ul>
+  </section>
+  <section>
+    <h2>未来展望</h2>
+    <ul>
+      <li>支持更多API（Notion、Figma等）</li>
+      <li>自定义主题与UI市场</li>
+      <li>智能内容更新与A/B测试</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Q&A</h2>
+    <p>欢迎提问，或联系我们团队！</p>
+  </section>
+  <div class="ppt-nav">
+    <button class="ppt-btn" id="prevBtn">上一页</button>
+    <span id="ppt-indicator">1 / 9</span>
+    <button class="ppt-btn" id="nextBtn">下一页</button>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+const slides = document.querySelectorAll('main section');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const indicator = document.getElementById('ppt-indicator');
+let idx = 0;
+
+function animateIn(slide) {
+  gsap.fromTo(slide, {opacity:0, y:60, scale:0.98}, {opacity:1, y:0, scale:1, duration:0.7, ease:'power3.out'});
+}
+function animateOut(slide, dir) {
+  gsap.to(slide, {opacity:0, y:dir>0? -60 : 60, scale:0.98, duration:0.5, ease:'power1.in'});
+}
+
+function updateSlide(dir=0) {
+  slides.forEach((s, i) => s.classList.remove('active'));
+  if (dir !== 0) animateOut(slides[idx-dir], dir);
+  slides[idx].classList.add('active');
+  animateIn(slides[idx]);
+  indicator.textContent = (idx+1) + ' / ' + slides.length;
+  prevBtn.disabled = idx === 0;
+  nextBtn.disabled = idx === slides.length-1;
+}
+
+prevBtn.onclick = () => { if(idx>0){let dir=-1;idx--;updateSlide(dir);}};
+nextBtn.onclick = () => { if(idx<slides.length-1){let dir=1;idx++;updateSlide(dir);}};
+// 初始动画
+updateSlide();
+</script>
+</body>
+</html>
