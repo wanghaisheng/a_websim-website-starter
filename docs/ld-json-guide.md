@@ -63,10 +63,10 @@ WebSim Starter 支持并建议优先覆盖以下结构化数据类型，具体�
 
 ## 3. 模板管理与个性化
 
-- 所有 ld+json 模板存放于 `d:\Download\audio-visual\heytcm\a_websim-website-starter\scripts\ld-examples\` 及其子目录。
+- 所有 ld+json 模板存放于 `d:\Download\audio-visual\heytcm\a_websim-website-starter\scripts\ldjson\` 及其子目录。
 - 支持两种模板组织方式：
-  1. **默认类型模板**：如 `ld-examples/app/default/app.json`、`website.json` 等，适用于大多数页面。
-  2. **页面级个性化模板**：如 `ld-examples/app/home/website.json`、`ld-examples/app/about/organization.json`，每个页面一个文件夹，内含该页面所有需注入的结构化数据文件。
+  1. **默认类型模板**：如 `ldjson/app/default/app.json`、`website.json` 等，适用于大多数页面。
+  2. **页面级个性化模板**：如 `ldjson/app/home/website.json`、`ldjson/app/about/organization.json`，每个页面一个文件夹，内含该页面所有需注入的结构化数据文件。
 - 模板采用 `{{变量名}}` 占位，自动从 config 或页面内容提取。
 
 ---
@@ -102,7 +102,7 @@ WebSim Starter 支持并建议优先覆盖以下结构化数据类型，具体�
 
 ### 4.3 页面级个性化注入
 
-- 若 `ld-examples/<apptype>/<页面名>/` 目录存在，则优先加载该页面下所有 json 文件，全部注入。
+- 若 `ldjson/<apptype>/<页面名>/` 目录存在，则优先加载该页面下所有 json 文件，全部注入。
 - 若无页面级目录，则按默认类型模板和自动判定规则注入。
 
 ### 4.4 内容感知补充注入
@@ -129,7 +129,7 @@ WebSim Starter 支持并建议优先覆盖以下结构化数据类型，具体�
 ## 6. 配置与扩展
 
 - `config.json` 可指定默认注入的 apptype（如 `"apptype": "game"`）。
-- 新增类型只需在 `ld-examples` 目录下添加模板，并在注入规则中配置即可。
+- 新增类型只需在 `ldjson` 目录下添加模板，并在注入规则中配置即可。
 - 支持自定义模板变量，自动从 config 或页面内容提取。
 - 支持为每个页面单独准备结构化数据，实现页面级 SEO 优化。
 
@@ -137,7 +137,7 @@ WebSim Starter 支持并建议优先覆盖以下结构化数据类型，具体�
 
 ## 7. 示例模板
 
-见 `scripts/ld-examples/` 目录下各类 JSON 文件，如：
+见 `scripts/ldjson/` 目录下各类 JSON 文件，如：
 
 - `app/default/app.json`
 - `app/home/website.json`

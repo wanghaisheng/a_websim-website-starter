@@ -1,0 +1,12 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "关于我们",
+  "author": {
+    "@type": "Organization",
+    "name": "WebSim Starter Inc."
+  },
+  "datePublished": "2023-11-01",
+  "image": "https://websimstarter.borninsea.com/assets/app-logo.png",
+  "articleBody": "WebSim Starter App 是一个面向商业和教育的强大仿真平台，帮助用户创建、运行和分享交互式仿真。"
+}
