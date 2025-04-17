@@ -2,6 +2,7 @@
   "baseUrl": "https://websimstarter.borninsea.com",
   "defaultLang": "en",
   "email":"support@websimstarter.borninsea.com",
+  "apptype":"game",
   "robots": {
     "allowedBots": [
       "Googlebot",
