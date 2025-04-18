@@ -6,9 +6,10 @@ const configPath = path.resolve(__dirname, 'config.json');
 let config;
 try {
     const configData = fs.readFileSync(configPath, 'utf-8');
+    console.log('[ldjson] 读取config.json成功:', configPath);
     config = JSON.parse(configData);
 } catch (error) {
-    console.error('Error reading or parsing config.json:', error.message);
+    console.error('[ldjson] 读取或解析config.json出错:', error.message);
     process.exit(1);
 }
 
@@ -36,9 +37,13 @@ function listHtmlFiles(dir) {
 const allHtmlFiles = locales.flatMap(locale => {
     const localeDir = path.join(baseDir, locale);
     if (!fs.existsSync(localeDir)) return [];
-    return listHtmlFiles(localeDir).map(file => ({
+    const files = listHtmlFiles(localeDir).map(file => ({
         path: path.join(locale, path.relative(localeDir, file)).replace(/\\+/g, '/')
     }));
+    if (files.length > 0) {
+        console.log(`[ldjson] 发现${locale ? locale : '默认'}目录下HTML文件数:`, files.length);
+    }
+    return files;
 });
 
 // --- LD+JSON GENERATORS ---
@@ -128,16 +133,22 @@ const templatesDir = path.join(__dirname, 'ldjson');
 
 function loadTemplate(templateName) {
     const templatePath = path.join(templatesDir, `${templateName}.json`);
-    if (!fs.existsSync(templatePath)) return null;
+    if (!fs.existsSync(templatePath)) {
+        console.warn(`[ldjson] 模板不存在: ${templatePath}`);
+        return null;
+    }
+    console.log(`[ldjson] 加载模板: ${templatePath}`);
     return fs.readFileSync(templatePath, 'utf-8');
 }
 
 function renderTemplate(templateStr, data) {
     // Simple {{key}} replacement, supports nested keys like a.b.c
-    return templateStr.replace(/{{\s*([\w.]+)\s*}}/g, (_, key) => {
+    const rendered = templateStr.replace(/{{\s*([\w.]+)\s*}}/g, (_, key) => {
         const value = key.split('.').reduce((o, k) => (o ? o[k] : ''), data);
         return value !== undefined ? value : '';
     });
+    console.log('[ldjson] 渲染模板完成');
+    return rendered;
 }
 
 // --- INJECTION LOGIC ---
@@ -184,6 +195,9 @@ function extractFAQFromHtml(html) {
             answer: match[2].replace(/<[^>]+>/g, '').trim()
         });
     }
+    if (faqs.length > 0) {
+        console.log(`[ldjson] 提取FAQ数量: ${faqs.length}`);
+    }
     return faqs;
 }
 
@@ -196,6 +210,7 @@ function extractArticleDataFromHtml(html) {
     const image = (html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) || [])[1] || '';
     // For body, just grab the main content div as a fallback
     const body = (html.match(/<div[^>]+class=["'][^"']*article-body[^"']*["'][^>]*>([\s\s]*?)<\/div>/i) || [])[1] || '';
+    console.log('[ldjson] 提取文章数据:', { headline, author, datePublished, dateModified, image });
     return { headline, author, datePublished, dateModified, image, body };
 }
 
@@ -251,133 +266,51 @@ function getTemplatesForCategory(category) {
 
 function injectLdJsonIfNeeded(html, config, pageTitle, absPath) {
     const inserts = [];
-    const apptype = config.apptype || 'app';
 
-    // 解析相对路径，提取语言和页面名
+    // 解析语言和页面名
     const relPath = path.relative(baseDir, absPath).replace(/\\/g, '/');
-    // 例如 relPath: 'en/about.html' 或 'about.html'
     const parts = relPath.split('/');
-    let lang = '';
+    let lang = config.defaultLang || 'en';
     let pageName = '';
     if (parts.length === 2 && locales.includes(parts[0])) {
         lang = parts[0];
         pageName = path.basename(parts[1], '.html').toLowerCase();
     } else {
-        // 根目录下的html，使用config.defaultLang
-        lang = config.defaultLang || 'en';
         pageName = path.basename(parts[parts.length - 1], '.html').toLowerCase();
     }
 
-    // 优先查找 ldjson/app/about/en/，再 about/，最后 default/
-    const customPageFolderLang = lang ? path.join(templatesDir, apptype, pageName, lang) : '';
-    const customPageFolder = path.join(templatesDir, apptype, pageName);
-    const defaultFolder = path.join(templatesDir, apptype, 'default');
+    // 多语言目录优先查找
+    const ldjsonDirLang = path.join(__dirname, 'ldjson', lang, pageName);
+    const ldjsonDirDefault = path.join(__dirname, 'ldjson', pageName);
 
-    let injected = false;
-
-    // 1. about/en 这种多语言页面级模板优先
-    if (customPageFolderLang && fs.existsSync(customPageFolderLang) && fs.statSync(customPageFolderLang).isDirectory()) {
-        const files = fs.readdirSync(customPageFolderLang).filter(f => f.endsWith('.json'));
-        for (const file of files) {
-            const tpl = fs.readFileSync(path.join(customPageFolderLang, file), 'utf-8');
-            let typeName = '';
-            try {
-                const json = JSON.parse(tpl.replace(/{{.*?}}/g, ''));
-                typeName = json['@type'];
-            } catch {}
-            if (!typeName || !hasLdJson(html, typeName)) {
-                inserts.push('<script type="application/ld+json">\n' + renderTemplate(tpl, { ...config, pageTitle, lang }) + '\n</script>');
-            }
-        }
-        injected = inserts.length > 0;
+    let ldjsonDir = '';
+    if (fs.existsSync(ldjsonDirLang) && fs.statSync(ldjsonDirLang).isDirectory()) {
+        ldjsonDir = ldjsonDirLang;
+    } else if (fs.existsSync(ldjsonDirDefault) && fs.statSync(ldjsonDirDefault).isDirectory()) {
+        ldjsonDir = ldjsonDirDefault;
     }
 
-    // 2. about 页面级模板
-    if (!injected && fs.existsSync(customPageFolder) && fs.statSync(customPageFolder).isDirectory()) {
-        const files = fs.readdirSync(customPageFolder).filter(f => f.endsWith('.json'));
-        for (const file of files) {
-            const tpl = fs.readFileSync(path.join(customPageFolder, file), 'utf-8');
-            let typeName = '';
+    if (ldjsonDir) {
+        const jsonFiles = fs.readdirSync(ldjsonDir).filter(f => f.endsWith('.json'));
+        for (const jsonFile of jsonFiles) {
+            const jsonPath = path.join(ldjsonDir, jsonFile);
             try {
-                const json = JSON.parse(tpl.replace(/{{.*?}}/g, ''));
-                typeName = json['@type'];
-            } catch {}
-            if (!typeName || !hasLdJson(html, typeName)) {
-                inserts.push('<script type="application/ld+json">\n' + renderTemplate(tpl, { ...config, pageTitle, lang }) + '\n</script>');
-            }
-        }
-        injected = inserts.length > 0;
-    }
-
-    // 3. default 文件夹
-    if (!injected && fs.existsSync(defaultFolder) && fs.statSync(defaultFolder).isDirectory()) {
-        const files = fs.readdirSync(defaultFolder).filter(f => f.endsWith('.json'));
-        for (const file of files) {
-            const tpl = fs.readFileSync(path.join(defaultFolder, file), 'utf-8');
-            let typeName = '';
-            try {
-                const json = JSON.parse(tpl.replace(/{{.*?}}/g, ''));
-                typeName = json['@type'];
-            } catch {}
-            if (!typeName || !hasLdJson(html, typeName)) {
-                inserts.push('<script type="application/ld+json">\n' + renderTemplate(tpl, { ...config, pageTitle, lang }) + '\n</script>');
-            }
-        }
-    }
-
-    // 3. 内容感知补充注入（如FAQ、Article等）
-    const category = getPageCategory(absPath, html);
-    const templates = getTemplatesForCategory(category);
-
-    // Inject all relevant templates for the detected category
-    for (const tplName of templates) {
-        // Capitalize first letter for @type check
-        const typeName = tplName.charAt(0).toUpperCase() + tplName.slice(1).replace('page', 'Page').replace('list', 'List');
-        if (!hasLdJson(html, typeName)) {
-            const tpl = loadTemplate(tplName);
-            if (tpl) {
-                // For FAQPage and Article, pass extracted data
-                if (tplName === 'faqpage') {
-                    const faqs = extractFAQFromHtml(html);
-                    if (faqs.length > 0) {
-                        inserts.push('<script type="application/ld+json">\n' + renderTemplate(tpl, { ...config, faqs }) + '\n</script>');
-                    }
-                } else if (tplName === 'article') {
-                    const articleData = extractArticleDataFromHtml(html);
-                    inserts.push('<script type="application/ld+json">\n' + renderTemplate(tpl, { ...config, ...articleData }) + '\n</script>');
-                } else {
-                    inserts.push('<script type="application/ld+json">\n' + renderTemplate(tpl, { ...config, pageTitle }) + '\n</script>');
+                const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
+                let typeName = '';
+                try {
+                    const jsonObj = JSON.parse(jsonContent);
+                    typeName = jsonObj['@type'];
+                } catch {}
+                if (!typeName || !hasLdJson(html, typeName)) {
+                    inserts.push('<script type="application/ld+json">\n' + jsonContent + '\n</script>');
                 }
+            } catch (e) {
+                console.warn(`[ldjson] 读取json文件失败: ${jsonPath}`, e.message);
             }
-        }
-    }
-
-    // Fallback: If FAQPage is detected by content but not by path, still inject
-    if (category !== 'faq') {
-        const faqs = extractFAQFromHtml(html);
-        if (faqs.length > 0 && !hasLdJson(html, "FAQPage")) {
-            const tpl = loadTemplate('faqpage');
-            if (tpl) {
-                inserts.push('<script type="application/ld+json">\n' + renderTemplate(tpl, { ...config, faqs }) + '\n</script>');
-            } else {
-                inserts.push('<script type="application/ld+json">\n' + JSON.stringify(genFAQPage(faqs), null, 2) + '\n</script>');
-            }
-        }
-    }
-
-    // Fallback: If Article is detected by content but not by path, still inject
-    if (category !== 'blog' && /<article/i.test(html) && !hasLdJson(html, "Article")) {
-        const articleData = extractArticleDataFromHtml(html);
-        const tpl = loadTemplate('article');
-        if (tpl) {
-            inserts.push('<script type="application/ld+json">\n' + renderTemplate(tpl, { ...config, ...articleData }) + '\n</script>');
-        } else {
-            inserts.push('<script type="application/ld+json">\n' + JSON.stringify(genArticle(config, articleData), null, 2) + '\n</script>');
         }
     }
 
     if (inserts.length === 0) return html;
-    // Insert before </head>
     return html.replace(/<\/head>/i, inserts.join('\n') + '\n</head>');
 }
 

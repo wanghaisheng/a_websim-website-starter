@@ -1,14 +1,1 @@
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "WebSim Starter Inc.",
-  "url": "https://websimstarter.borninsea.com",
-  "logo": "https://websimstarter.borninsea.com/assets/app-logo.png",
-  "contactPoint": [
-    {
-      "@type": "ContactPoint",
-      "email": "support@websimstarter.borninsea.com",
-      "contactType": "customer support"
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"Organization","name":"Mood Island Team","url":"https://example.com/about","description":"A small, dedicated team passionate about creating innovative web solutions.","logo":"https://example.com/favicon.ico","sameAs":[],"foundingDate":"2023","founders":[{"@type":"Person","name":""}],"address":"","contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"","telephone":""}],"language":"en"}
