@@ -346,6 +346,24 @@ function injectLdJsonIfNeeded(html, config, pageTitle, absPath) {
 
 // --- MAIN PROCESS ---
 
+// 预生成全站通用的 website 和 organization ld+json，只生成一次
+const globalLdJsonTypes = ['website', 'organization'];
+const globalLdJsonCache = {};
+globalLdJsonTypes.forEach(type => {
+    const dir = path.join(__dirname, 'ldjson', type);
+    if (fs.existsSync(dir) && fs.statSync(dir).isDirectory()) {
+        const jsonFiles = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+        globalLdJsonCache[type] = jsonFiles.map(jsonFile => {
+            const jsonPath = path.join(dir, jsonFile);
+            try {
+                return fs.readFileSync(jsonPath, 'utf-8');
+            } catch {
+                return null;
+            }
+        }).filter(Boolean);
+    }
+});
+
 allHtmlFiles.forEach(fileObj => {
     const absPath = path.join(baseDir, fileObj.path);
     if (!fs.existsSync(absPath)) return;
@@ -353,7 +371,28 @@ allHtmlFiles.forEach(fileObj => {
     let pageTitle = '';
     const titleMatch = html.match(/<title>(.*?)<\/title>/i);
     if (titleMatch) pageTitle = titleMatch[1];
-    const newHtml = injectLdJsonIfNeeded(html, config, pageTitle, absPath);
+    let newHtml = html;
+    // 先注入全站通用的 website 和 organization ld+json
+    let globalInserts = [];
+    for (const type of globalLdJsonTypes) {
+        if (globalLdJsonCache[type]) {
+            globalLdJsonCache[type].forEach(jsonContent => {
+                let typeName = '';
+                try {
+                    const jsonObj = JSON.parse(jsonContent);
+                    typeName = jsonObj['@type'];
+                } catch {}
+                if (!typeName || !hasLdJson(newHtml, typeName)) {
+                    globalInserts.push('<script type="application/ld+json">\n' + jsonContent + '\n</script>');
+                }
+            });
+        }
+    }
+    if (globalInserts.length > 0) {
+        newHtml = newHtml.replace(/<\/head>/i, globalInserts.join('\n') + '\n</head>');
+    }
+    // 再注入页面专属的 ld+json
+    newHtml = injectLdJsonIfNeeded(newHtml, config, pageTitle, absPath);
     if (newHtml !== html) {
         fs.writeFileSync(absPath, newHtml, 'utf-8');
         console.log(`Injected missing ld+json into ${absPath}`);

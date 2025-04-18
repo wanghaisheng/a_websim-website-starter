@@ -19,6 +19,10 @@
 8. 生成的 json 文件内容需自动填充页面实际数据（如标题、作者、图片、描述、评分等），如无法提取则留空或用默认值。
 9. 生成的 json 文件可直接供 scripts/ldjson.js 脚本加载 html 页面使用。
 
+补充说明：
+- 每个 HTML 页面必须包含 WebSite 和 Organization 两种结构化数据，这两类数据全站内容一致，仅需生成一次，统一存放于 scripts/ldjson/website.json 和 scripts/ldjson/organization.json，并在所有页面结构化数据注入流程中自动加载，无需为每个页面重复生成。
+- 其他如 Article、Product、FAQPage 等 schema 仍按页面内容智能生成，按页面和语言分目录存放。
+
 目标：
 实现智能、结构化地为每个页面直接生成最优 ld+json 的 json 文件，便于后续 SEO 和富媒体展示。
 
