@@ -278,38 +278,68 @@ function injectLdJsonIfNeeded(html, config, pageTitle, absPath) {
     } else {
         pageName = path.basename(parts[parts.length - 1], '.html').toLowerCase();
     }
-
-    // 多语言目录优先查找
-    const ldjsonDirLang = path.join(__dirname, 'ldjson', lang, pageName);
-    const ldjsonDirDefault = path.join(__dirname, 'ldjson', pageName);
-
-    let ldjsonDir = '';
-    if (fs.existsSync(ldjsonDirLang) && fs.statSync(ldjsonDirLang).isDirectory()) {
-        ldjsonDir = ldjsonDirLang;
-    } else if (fs.existsSync(ldjsonDirDefault) && fs.statSync(ldjsonDirDefault).isDirectory()) {
-        ldjsonDir = ldjsonDirDefault;
-    }
-
-    if (ldjsonDir) {
-        const jsonFiles = fs.readdirSync(ldjsonDir).filter(f => f.endsWith('.json'));
-        for (const jsonFile of jsonFiles) {
-            const jsonPath = path.join(ldjsonDir, jsonFile);
-            try {
-                const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
-                let typeName = '';
+    // 修复首页 index.html 匹配目录
+    if (pageName === 'index') {
+        // 优先多语言目录
+        const ldjsonDirLang = path.join(__dirname, 'ldjson', lang, 'index');
+        const ldjsonDirDefault = path.join(__dirname, 'ldjson', 'index');
+        let ldjsonDir = '';
+        if (fs.existsSync(ldjsonDirLang) && fs.statSync(ldjsonDirLang).isDirectory()) {
+            ldjsonDir = ldjsonDirLang;
+        } else if (fs.existsSync(ldjsonDirDefault) && fs.statSync(ldjsonDirDefault).isDirectory()) {
+            ldjsonDir = ldjsonDirDefault;
+        }
+        if (ldjsonDir) {
+            const jsonFiles = fs.readdirSync(ldjsonDir).filter(f => f.endsWith('.json'));
+            for (const jsonFile of jsonFiles) {
+                const jsonPath = path.join(ldjsonDir, jsonFile);
                 try {
-                    const jsonObj = JSON.parse(jsonContent);
-                    typeName = jsonObj['@type'];
-                } catch {}
-                if (!typeName || !hasLdJson(html, typeName)) {
-                    inserts.push('<script type="application/ld+json">\n' + jsonContent + '\n</script>');
+                    const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
+                    let typeName = '';
+                    try {
+                        const jsonObj = JSON.parse(jsonContent);
+                        typeName = jsonObj['@type'];
+                    } catch {}
+                    // 检查页面中是否已存在同类型@type的ld+json脚本，若已存在则跳过
+                    if (!typeName || !hasLdJson(html, typeName)) {
+                        inserts.push('<script type="application/ld+json">\n' + jsonContent + '\n</script>');
+                    }
+                } catch (e) {
+                    console.warn(`[ldjson] 读取json文件失败: ${jsonPath}`, e.message);
                 }
-            } catch (e) {
-                console.warn(`[ldjson] 读取json文件失败: ${jsonPath}`, e.message);
+            }
+        }
+    } else {
+        // 多语言目录优先查找
+        const ldjsonDirLang = path.join(__dirname, 'ldjson', lang, pageName);
+        const ldjsonDirDefault = path.join(__dirname, 'ldjson', pageName);
+        let ldjsonDir = '';
+        if (fs.existsSync(ldjsonDirLang) && fs.statSync(ldjsonDirLang).isDirectory()) {
+            ldjsonDir = ldjsonDirLang;
+        } else if (fs.existsSync(ldjsonDirDefault) && fs.statSync(ldjsonDirDefault).isDirectory()) {
+            ldjsonDir = ldjsonDirDefault;
+        }
+        if (ldjsonDir) {
+            const jsonFiles = fs.readdirSync(ldjsonDir).filter(f => f.endsWith('.json'));
+            for (const jsonFile of jsonFiles) {
+                const jsonPath = path.join(ldjsonDir, jsonFile);
+                try {
+                    const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
+                    let typeName = '';
+                    try {
+                        const jsonObj = JSON.parse(jsonContent);
+                        typeName = jsonObj['@type'];
+                    } catch {}
+                    // 检查页面中是否已存在同类型@type的ld+json脚本，若已存在则跳过
+                    if (!typeName || !hasLdJson(html, typeName)) {
+                        inserts.push('<script type="application/ld+json">\n' + jsonContent + '\n</script>');
+                    }
+                } catch (e) {
+                    console.warn(`[ldjson] 读取json文件失败: ${jsonPath}`, e.message);
+                }
             }
         }
     }
-
     if (inserts.length === 0) return html;
     return html.replace(/<\/head>/i, inserts.join('\n') + '\n</head>');
 }
