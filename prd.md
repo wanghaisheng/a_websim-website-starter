@@ -47,6 +47,11 @@
 - 支持自定义主题与 UI 组件市场。
 - 智能内容更新与 A/B 测试。
 
+## 9. AI Scraper 友好特性
+- 内置支持主流 AI 爬虫（如 GPTBot、anthropic-ai、Amazonbot、Bytespider 等）友好的 robots.txt 自动生成，自动区分普通搜索引擎与 AI Scraper。
+- 支持自动生成 llms.txt/llms-full.txt，向 AI 爬虫清晰传递网站结构、内容分类、页面说明及最新动态，提升 AI 搜索与索引的友好度与曝光。
+- robots.txt、llms.txt 规则可自动根据 config 和 ai-robots.txt 列表扩展维护，适配未来更多 AI 相关标准。
+
 ---
 
 > 本 PRD.md 可作为自动化站点生成与团队协作的蓝本，适用于 WebSim Vibe Coding Starter 及其衍生项目。

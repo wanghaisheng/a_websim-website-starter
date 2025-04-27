@@ -15,7 +15,7 @@
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://websimstarter.borninsea.com/"},{"@type":"ListItem","position":2,"name":"首页","item":"https://websimstarter.borninsea.com/"}],"language":"en"}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Mood Island Team","url":"https://example.com/about","description":"A small, dedicated team passionate about creating innovative web solutions.","logo":"https://example.com/favicon.ico","sameAs":[],"foundingDate":"2023","founders":[{"@type":"Person","name":""}],"address":"","contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"","telephone":""}],"language":"en"}
+{"@context":"https://schema.org","@type":"Organization","name":"Mood Island Team","url":"https://example.com/about","description":"A small, dedicated team passionate about creating innovative web solutions.","logo":"https://example.com/favicon.ico","sameAs":["https://github.com/wanghaisheng/a_websim-website-starter"],"foundingDate":"2023","founders":[{"@type":"Person","name":""}],"address":"","contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"contact@websimstarter.borninsea.com","telephone":""}],"audience":{"@type":"Audience","audienceType":"创业者, 产品经理, 编程小白"},"language":"zh"}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Mood Island Team","url":"https://example.com/about","description":"A small, dedicated team passionate about creating innovative web solutions.","inLanguage":"en","publisher":{"@type":"Organization","name":"Mood Island Team"}}
@@ -48,9 +48,12 @@
       <div class="lang-switcher" id="lang-switcher"></div>
     </nav>
     <div class="hero-content">
-      <h1 data-i18n="hero_title">Build the Future of Coding. Instantly.</h1>
-      <p data-i18n="hero_subtitle">AI-powered, SEO-first, multi-language SaaS starter. Experience the boldest, most creative web playground.</p>
-      <a href="#playground" class="cta" data-i18n="cta_try">Try Playground</a>
+      <h1 data-i18n="hero_title">零代码，5分钟上线你的创业网站</h1>
+      <div class="summary">
+        <p>WebSim Vibe Coding Starter 专为创业者、产品经理和编程经验有限的创新者打造。无需代码基础，5分钟内即可验证你的商业想法，快速上线专业网站。内置 SaaS 工具、游戏类 App 落地页与原型设计提示词模板、SEO 优化 prompt 及常用自动化脚本，助你高效实现从创意到落地。</p>
+      </div>
+      <p data-i18n="hero_subtitle">AI驱动，SEO极致优化，多语言支持，助力创新高效落地。</p>
+      <a href="#playground" class="cta" data-i18n="cta_try">立即免费试用 | 零代码上线你的创意</a>
     </div>
     <div class="hero-bg-anim" id="hero-bg-anim"></div>
   </header>
@@ -59,14 +62,19 @@
     <section id="features" class="features-section">
       <h2 data-i18n="features_title">Features</h2>
       <ul class="features-list">
-        <li data-i18n="feature_rapid">⚡ Rapid static site setup & deployment</li>
-        <li data-i18n="feature_multilang">🌍 Multi-language support & auto-generated sitemaps</li>
-        <li data-i18n="feature_seo">🔍 Automated SEO: IndexNow, Bing, Google, metadata, validation</li>
-        <li data-i18n="feature_ai">🤖 AI-powered blog & image generation</li>
-        <li data-i18n="feature_pwa">📱 PWA & mobile-first, blazing fast</li>
-        <li data-i18n="feature_research">🔑 Keyword research, analytics, clarity</li>
-        <li data-i18n="feature_user">👤 Real user management (Cloudflare Workers)</li>
-        <li data-i18n="feature_deploy">🚀 One-click static deployment</li>
+        <li>🪄 无需编程，自动生成全站</li>
+        <li>🚀 5分钟快速验证产品概念</li>
+        <li>💡 创业者/产品经理友好</li>
+        <li>📝 SaaS/游戏App落地页与原型设计 Prompt 模板</li>
+        <li>🔍 SEO 优化专用 Prompt 模板</li>
+        <li>⚙️ 常用自动化脚本（生成、部署、SEO 提交）</li>
+        <li>🌍 Multi-language support & auto-generated sitemaps</li>
+        <li>🔍 Automated SEO: IndexNow, Bing, Google, metadata, validation</li>
+        <li>🤖 AI-powered blog & image generation</li>
+        <li>📱 PWA & mobile-first, blazing fast</li>
+        <li>🔑 Keyword research, analytics, clarity</li>
+        <li>👤 Real user management (Cloudflare Workers)</li>
+        <li>🤖 AI Scraper friendly robots.txt & llms.txt auto-generation</li>
       </ul>
     </section>
 
@@ -228,23 +236,24 @@
   <footer>
     <div class="footer-content">
       <div class="footer-logo">
-        <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="WebSim Logo">
-          <circle cx="20" cy="20" r="20" fill="url(#paint0_radial_footer)"/>
-          <defs>
-            <radialGradient id="paint0_radial_footer" cx="0.5" cy="0.5" r="0.5" fx="0.2" fy="0.2">
-              <stop offset="0%" stop-color="#6f00ff"/>
-              <stop offset="100%" stop-color="#00eaff"/>
-            </radialGradient>
-          </defs>
-        </svg>
-        <span class="brand" data-i18n="brand">WebSim Vibe Coding Starter</span>
+        <span>WebSim Vibe Coding Starter</span>
       </div>
       <div class="footer-links">
-        <a href="about.html" data-i18n="footer_about">About</a>
-        <a href="career.html" data-i18n="footer_career">Career</a>
-        <a href="#features" data-i18n="footer_features">Features</a>
+        <a href="about.html">关于我们</a> |
+        <a href="privacy.html">隐私政策</a> |
+        <a href="terms.html">服务条款</a>
       </div>
-      <div class="footer-lang-switcher" id="footer-lang-switcher"></div>
+      <div class="footer-github">
+        <a href="https://github.com/wanghaisheng/a_websim-website-starter" target="_blank" rel="noopener noreferrer">
+          <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" width="20" style="vertical-align:middle;"> 本项目已开源于 GitHub
+        </a>
+      </div>
+      <div class="footer-contact">
+        联系方式：<a href="mailto:contact@websimstarter.borninsea.com">contact@websimstarter.borninsea.com</a>
+      </div>
+      <div class="footer-trust">
+        <span>数据安全与隐私保护承诺 · 支持 HTTPS 加密 · 社区共建</span>
+      </div>
     </div>
     <div class="footer-meta">
       <span>&copy; 2025 WebSim. <span data-i18n="footer_rights">All rights reserved.</span></span>
