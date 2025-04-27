@@ -13,6 +13,18 @@ User-agent: Yisouspider
 User-agent: Sogouspider
 Disallow: /
 
+
+User-Agent: GPTBot
+Allow: /llms.txt
+Disallow: /
+
+
+User-Agent: anthropic-ai
+Allow: /llms.txt
+Disallow: /
+
+
+
 User-agent: *
 Allow: /en/getting-started
 Allow: /en/using-tiktok

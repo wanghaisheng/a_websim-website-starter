@@ -141,6 +141,31 @@ if (config.robots?.blockedBots) {
     robotsContent.push('Disallow: /\n');
 }
 
+// --- AI Scraper bots special handling ---
+const aiRobotsPath = path.join(__dirname, 'ai-robots.txt');
+let aiBots = [];
+if (fs.existsSync(aiRobotsPath)) {
+    const aiLines = fs.readFileSync(aiRobotsPath, 'utf-8').split(/\r?\n/);
+    aiBots = aiLines
+        .map(line => line.trim())
+        .filter(line => line.toLowerCase().startsWith('user-agent:'))
+        .map(line => line.split(':')[1].trim())
+        .filter(Boolean);
+}
+// 获取 config 里已允许的 bot（忽略大小写）
+const allowedBotsSet = new Set(
+    (config.robots?.allowedBots || []).map(bot => bot.toLowerCase())
+);
+if (aiBots.length > 0) {
+    aiBots.forEach(bot => {
+        if (allowedBotsSet.has(bot.toLowerCase())) return; // 如果已允许则跳过
+        robotsContent.push(`User-agent: ${bot}`);
+        robotsContent.push('Allow: /llms.txt');
+        robotsContent.push('Disallow: /\n');
+    });
+}
+// --- End AI Scraper bots special handling ---
+
 // Add general rules
 robotsContent.push('User-agent: *');
 if (config.robots?.allowedPaths) {
