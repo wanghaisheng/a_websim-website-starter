@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "个人中心",
+  "description": "管理您的愿望板、成就、订阅和个人信息。",
+  "inLanguage": "zh-CN",
+  "url": "https://visionboard.heymanifestation.com/profile"
+}

@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Vision Board Community Launch: Start Your Co-Creation Journey",
+  "description": "The Vision Board Community is now live! Users can share vision boards, discuss manifestation, and get inspiration and support.",
+  "author": {
+    "@type": "Organization",
+    "name": "HeyManifestation"
+  },
+  "datePublished": "2025-04-27",
+  "inLanguage": "en",
+  "mainEntityOfPage": "https://visionboard.heymanifestation.com/community"
+}

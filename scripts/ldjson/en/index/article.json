@@ -1,0 +1,11 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Vision Board Introduction",
+  "author": {
+    "@type": "Person",
+    "name": "HeyManifestation Team"
+  },
+  "datePublished": "2024-01-01",
+  "mainEntityOfPage": "https://visionboard.heymanifestation.com/index.html"
+}

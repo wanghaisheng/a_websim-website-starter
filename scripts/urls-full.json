@@ -1,0 +1,34 @@
+{
+  "defaultLang": "en",
+  "langs": [
+    "",
+    "en",
+    "zh"
+  ],
+  "urls": [
+    "https://visionboard.heymanifestation.com/app/community",
+    "https://visionboard.heymanifestation.com/app/create",
+    "https://visionboard.heymanifestation.com/app/home",
+    "https://visionboard.heymanifestation.com/app/inspiration",
+    "https://visionboard.heymanifestation.com/app/profile",
+    "https://visionboard.heymanifestation.com/app/progress",
+    "https://visionboard.heymanifestation.com/intro-en",
+    "https://visionboard.heymanifestation.com/intro-zh",
+    "https://visionboard.heymanifestation.com/privacy",
+    "https://visionboard.heymanifestation.com/terms",
+    "https://visionboard.heymanifestation.com/zh/app/community",
+    "https://visionboard.heymanifestation.com/zh/app/create",
+    "https://visionboard.heymanifestation.com/zh/app/home",
+    "https://visionboard.heymanifestation.com/zh/app/inspiration",
+    "https://visionboard.heymanifestation.com/zh/app/profile",
+    "https://visionboard.heymanifestation.com/zh/app/progress",
+    "https://visionboard.heymanifestation.com/zh/intro-en",
+    "https://visionboard.heymanifestation.com/zh/intro-zh",
+    "https://visionboard.heymanifestation.com/zh/privacy",
+    "https://visionboard.heymanifestation.com/zh/terms",
+    "https://visionboard.heymanifestation.com/",
+    "https://visionboard.heymanifestation.com/zh",
+    "https://visionboard.heymanifestation.com/index.html",
+    "https://visionboard.heymanifestation.com/zh/index.html"
+  ]
+}

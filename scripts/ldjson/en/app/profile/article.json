@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Profile Page",
+  "author": {"@type": "Organization", "name": "HeyManifestation"},
+  "datePublished": "2024-01-01",
+  "mainEntityOfPage": "https://visionboard.heymanifestation.com/app/profile.html"
+}

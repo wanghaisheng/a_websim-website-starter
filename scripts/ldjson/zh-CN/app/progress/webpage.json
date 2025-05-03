@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "进度统计",
+  "description": "查看愿望板实现进度、每日练习和成长曲线。",
+  "inLanguage": "zh-CN",
+  "url": "https://visionboard.heymanifestation.com/progress"
+}

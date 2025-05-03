@@ -1,0 +1,31 @@
+{
+  "defaultLang": "en",
+  "langs": [
+    "en",
+    "zh"
+  ],
+  "urls": [
+    "/app/community",
+    "/app/create",
+    "/app/home",
+    "/app/inspiration",
+    "/app/profile",
+    "/app/progress",
+    "/intro-en",
+    "/intro-zh",
+    "/privacy",
+    "/terms",
+    "/zh/app/community",
+    "/zh/app/create",
+    "/zh/app/home",
+    "/zh/app/inspiration",
+    "/zh/app/profile",
+    "/zh/app/progress",
+    "/zh/intro-en",
+    "/zh/intro-zh",
+    "/zh/privacy",
+    "/zh/terms",
+    "/",
+    "/zh"
+  ]
+}

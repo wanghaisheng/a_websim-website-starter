@@ -1,0 +1,19 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Vision Board",
+  "operatingSystem": "iOS, Android, Web",
+  "applicationCategory": "ProductivityApplication",
+  "description": "Vision Board是一款集显化、愿望管理、多媒体体验于一体的现代化愿望板应用，助力用户实现个人目标。",
+  "inLanguage": "zh-CN",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "CNY"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "1200"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "reviewBody": "Vision Board让我的目标管理变得更科学、更有趣！",
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "小明"
+  }
+}

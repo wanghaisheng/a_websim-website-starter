@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Vision Board 社区上线，开启共创之旅",
+  "description": "Vision Board社区正式上线，用户可在此分享愿望板、交流显化经验、获取灵感与支持。",
+  "author": {
+    "@type": "Organization",
+    "name": "HeyManifestation"
+  },
+  "datePublished": "2025-04-27",
+  "inLanguage": "zh-CN",
+  "mainEntityOfPage": "https://visionboard.heymanifestation.com/community"
+}

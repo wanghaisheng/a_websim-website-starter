@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "如何追踪我的进度？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "进入进度页面即可查看和更新进度。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Vision Board",
+  "operatingSystem": "iOS, Android, Web",
+  "applicationCategory": "ProductivityApplication",
+  "description": "Vision Board is a modern manifestation app that integrates vision board management, multimedia experience, and scientific manifestation methods to help users achieve personal goals.",
+  "inLanguage": "en",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "1200"
+  }
+}

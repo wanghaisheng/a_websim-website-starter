@@ -1,0 +1,22 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Vision Board free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Basic features are free forever, premium features can be unlocked by subscription."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to add multimedia content?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Supports one-click import of images, music, and voice content."
+      }
+    }
+  ]
+}

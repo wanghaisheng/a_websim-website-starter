@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "创建页面",
+  "author": {"@type": "Organization", "name": "HeyManifestation"},
+  "datePublished": "2024-01-01",
+  "mainEntityOfPage": "https://visionboard.heymanifestation.com/zh/app/create.html"
+}

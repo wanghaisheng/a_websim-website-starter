@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "如何修改个人资料？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "进入个人资料页面并点击编辑按钮。"
+      }
+    }
+  ]
+}

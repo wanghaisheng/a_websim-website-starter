@@ -1,0 +1,11 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "愿望板介绍",
+  "author": {
+    "@type": "Person",
+    "name": "HeyManifestation 团队"
+  },
+  "datePublished": "2024-01-01",
+  "mainEntityOfPage": "https://visionboard.heymanifestation.com/zh/index.html"
+}

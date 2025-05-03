@@ -1,0 +1,22 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Vision Board 可以免费使用吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "基础功能永久免费，高级功能可订阅解锁。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何添加多媒体内容？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "支持图片、音乐、语音等多种内容一键导入。"
+      }
+    }
+  ]
+}

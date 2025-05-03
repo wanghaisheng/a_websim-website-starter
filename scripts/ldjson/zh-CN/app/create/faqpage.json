@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "如何创建新的愿望板？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "进入创建页面并按照指引操作。"
+      }
+    }
+  ]
+}

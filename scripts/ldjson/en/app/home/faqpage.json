@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a Vision Board?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A Vision Board is a tool to help you visualize and achieve your goals."
+      }
+    }
+  ]
+}

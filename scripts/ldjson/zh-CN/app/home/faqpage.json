@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "什么是愿望板？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "愿望板是一种帮助你可视化并实现目标的工具。"
+      }
+    }
+  ]
+}

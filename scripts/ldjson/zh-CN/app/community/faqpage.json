@@ -1,0 +1,22 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "如何在社区发布愿望板？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "点击右上角“分享”按钮，选择愿望板并添加描述即可发布。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何获得更多社区互动？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "积极评论他人作品、参与主题活动可提升互动和曝光。"
+      }
+    }
+  ]
+}
