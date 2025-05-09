@@ -1,7 +1,7 @@
 {
-  "baseUrl": "https://visionboard.heymanifestation.com",
+  "baseUrl": "https://moodwheel.heytcm.com",
   "defaultLang": "en",
-  "email":"support@heymanifestation.com",
+  "email":"support@heytcm.com",
   "apptype":"app",
   "localepath":"locale",
   "robots": {
@@ -22,11 +22,7 @@
     ],
     "allowedPaths": [
       "/",
-      "/en",
-      "/zh",
-      "/fr",
-      "/es",
-      "/de"
+      "/zh"
     ],
     "blockedPaths": [
       "/js",

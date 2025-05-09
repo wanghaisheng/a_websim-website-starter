@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/bootstrap-scripts.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodWheel - Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            background-color: #f5f7fa;
+            color: #2d3748;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .status-bar .time {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .status-bar .icons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .app-header {
+            padding: 20px 16px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .app-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #6cd4a8; /* calm color for analysis */
+        }
+        
+        .filter-button {
+            background-color: white;
+            border: 1px solid #e4e8f0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-button span {
+            margin-right: 5px;
+        }
+        
+        .analysis-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .analysis-tabs {
+            display: flex;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .analysis-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #718096;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+        }
+        
+        .analysis-tab.active {
+            color: #6cd4a8;
+            border-bottom-color: #6cd4a8;
+        }
+        
+        .chart-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .mood-trends-chart {
+            height: 200px;
+            background: linear-gradient(to right, rgba(108, 212, 168, 0.1), rgba(94, 145, 255, 0.1), rgba(255, 92, 92, 0.1));
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C50,120 100,60 150,80 C200,100 250,30 300,60" fill="none" stroke="%236cd4a8" stroke-width="3"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .chart-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .chart-label {
+            font-size: 12px;
+            color: #718096;
+        }
+        
+        .calendar-chart {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            margin-bottom: 5px;
+        }
+        
+        .calendar-weekday {
+            text-align: center;
+            font-size: 12px;
+            color: #718096;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1/1;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #4a5568;
+            position: relative;
+        }
+        
+        .calendar-day.empty {
+            background-color: #f5f7fa;
+        }
+        
+        .calendar-day.happy {
+            background-color: rgba(255, 219, 77, 0.3);
+        }
+        
+        .calendar-day.sad {
+            background-color: rgba(94, 145, 255, 0.3);
+        }
+        
+        .calendar-day.angry {
+            background-color: rgba(255, 92, 92, 0.3);
+        }
+        
+        .calendar-day.calm {
+            background-color: rgba(108, 212, 168, 0.3);
+        }
+        
+        .calendar-day::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 2px;
+            background-color: #2d3748;
+        }
+        
+        .insights-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .insight-item {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .insight-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .insight-item::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .insight-item p {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
+        .export-button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background-color: #6cd4a8;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .export-button span {
+            margin-right: 8px;
+        }
+        
+        .export-button:hover {
+            background-color: #50b890;
+        }
+        
+        .tab-bar {
+            height: 80px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e4e8f0;
+        }
+        
+        .tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #a0aec0;
+        }
+        
+        .tab.active {
+            color: #5e72e4;
+        }
+        
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div class="time">9:41 AM</div>
+        <div class="icons">
+            <div class="icon">📶</div>
+            <div class="icon">🔋</div>
+        </div>
+    </div>
+    
+    <div class="app-header">
+        <h1>情绪分析</h1>
+        <button class="filter-button">
+            <span>🔍</span> 筛选
+        </button>
+    </div>
+    
+    <div class="analysis-container">
+        <div class="analysis-tabs">
+            <div class="analysis-tab active">日历</div>
+            <div class="analysis-tab">趋势</div>
+            <div class="analysis-tab">洞察</div>
+        </div>
+        
+        <div class="chart-container">
+            <h3 class="chart-title">8月情绪日历</h3>
+            <div class="calendar-header">
+                <div class="calendar-weekday">一</div>
+                <div class="calendar-weekday">二</div>
+                <div class="calendar-weekday">三</div>
+                <div class="calendar-weekday">四</div>
+                <div class="calendar-weekday">五</div>
+                <div class="calendar-weekday">六</div>
+                <div class="calendar-weekday">日</div>
+            </div>
+            <div class="calendar-chart">
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day happy">1</div>
+                <div class="calendar-day sad">2</div>
+                <div class="calendar-day happy">3</div>
+                <div class="calendar-day happy">4</div>
+                <div class="calendar-day calm">5</div>
+                <div class="calendar-day sad">6</div>
+                <div class="calendar-day sad">7</div>
+                <div class="calendar-day angry">8</div>
+                <div class="calendar-day angry">9</div>
+                <div class="calendar-day calm">10</div>
+                <div class="calendar-day calm">11</div>
+                <div class="calendar-day happy">12</div>
+                <div class="calendar-day happy">13</div>
+                <div class="calendar-day happy">14</div>
+                <div class="calendar-day sad">15</div>
+                <div class="calendar-day sad">16</div>
+                <div class="calendar-day sad">17</div>
+                <div class="calendar-day happy">18</div>
+                <div class="calendar-day calm">19</div>
+                <div class="calendar-day calm">20</div>
+                <div class="calendar-day happy">21</div>
+                <div class="calendar-day happy">22</div>
+                <div class="calendar-day happy">23</div>
+                <div class="calendar-day sad">24</div>
+                <div class="calendar-day sad">25</div>
+                <div class="calendar-day angry">26</div>
+                <div class="calendar-day angry">27</div>
+                <div class="calendar-day calm">28</div>
+                <div class="calendar-day calm">29</div>
+                <div class="calendar-day happy">30</div>
+                <div class="calendar-day happy">31</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h3 class="chart-title">情绪趋势（过去30天）</h3>
+            <div class="mood-trends-chart">
+                <div class="chart-line"></div>
+            </div>
+            <div class="chart-labels">
+                <div class="chart-label">8月1日</div>
+                <div class="chart-label">8月15日</div>
+                <div class="chart-label">8月31日</div>
+            </div>
+        </div>
+        
+        <div class="insights-container">
+            <h3 class="chart-title">情绪洞察</h3>
+            <div class="insight-item">
+                <p>你的工作相关事件往往会触发「焦虑」情绪，尝试在工作日结束后进行5分钟的冥想练习。</p>
+            </div>
+            <div class="insight-item">
+                <p>当你和家人在一起时，「平静」和「快乐」情绪出现频率更高。考虑增加家庭活动时间。</p>
+            </div>
+            <div class="insight-item">
+                <p>每周二似乎是你情绪低落的规律，可能与工作压力积累有关，建议在周二午休时进行短暂放松。</p>
+            </div>
+        </div>
+        
+        <button class="export-button">
+            <span>📊</span> 导出分析报告
+        </button>
+    </div>
+    
+    <div class="tab-bar">
+        <div class="tab">
+            <div class="tab-icon">🎡</div>
+            <div>轮盘</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">📔</div>
+            <div>日记</div>
+        </div>
+        <div class="tab active">
+            <div class="tab-icon">📊</div>
+            <div>分析</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">🧰</div>
+            <div>工具箱</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">🗺️</div>
+            <div>地图</div>
+        </div>
+    </div>
+</body>
+</html>
+

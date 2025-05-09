@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/bootstrap-scripts.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodWheel - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            background-color: #f5f7fa;
+            color: #2d3748;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .status-bar .time {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .status-bar .icons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .app-header {
+            padding: 20px 16px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .app-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, #5e72e4, #ffdb4d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-image: url('../../img/avatar1.png');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .wheel-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .mood-wheel {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background-image: url('../../img/hero-wheel.png');
+            background-size: cover;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transition: transform 0.5s ease;
+        }
+        
+        .mood-wheel:hover {
+            transform: scale(1.05);
+        }
+        
+        .center-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            text-align: center;
+            color: #5e72e4;
+        }
+        
+        .mood-path {
+            margin-top: 30px;
+            background-color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            font-size: 16px;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mood-path span {
+            margin: 0 5px;
+            color: #5e72e4;
+            font-weight: 600;
+        }
+        
+        .tab-bar {
+            height: 80px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e4e8f0;
+        }
+        
+        .tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #a0aec0;
+        }
+        
+        .tab.active {
+            color: #5e72e4;
+        }
+        
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .instruction {
+            text-align: center;
+            margin-top: 20px;
+            color: #718096;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div class="time">9:41 AM</div>
+        <div class="icons">
+            <div class="icon">📶</div>
+            <div class="icon">🔋</div>
+        </div>
+    </div>
+    
+    <div class="app-header">
+        <h1>MoodWheel</h1>
+        <div class="user-avatar"></div>
+    </div>
+    
+    <div class="wheel-container">
+        <div class="mood-wheel">
+            <div class="center-indicator">点击选择情绪</div>
+        </div>
+        
+        <p class="instruction">点击轮盘上的情绪开始导航</p>
+        
+        <div class="mood-path">
+            当前路径: <span>待选择...</span>
+        </div>
+    </div>
+    
+    <div class="tab-bar">
+        <div class="tab active">
+            <div class="tab-icon">🎡</div>
+            <div>轮盘</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">📔</div>
+            <div>日记</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">📊</div>
+            <div>分析</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">🧰</div>
+            <div>工具箱</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">🗺️</div>
+            <div>地图</div>
+        </div>
+    </div>
+</body>
+</html>
+

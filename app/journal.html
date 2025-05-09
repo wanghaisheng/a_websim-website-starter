@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/bootstrap-scripts.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodWheel - Journal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            background-color: #f5f7fa;
+            color: #2d3748;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .status-bar .time {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .status-bar .icons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .app-header {
+            padding: 20px 16px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .app-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #5e91ff; /* sad color for journal */
+        }
+        
+        .back-button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #5e72e4;
+            cursor: pointer;
+        }
+        
+        .journal-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .emotion-header {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .emotion-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background-color: #5e91ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .emotion-info {
+            flex: 1;
+        }
+        
+        .emotion-path {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 5px;
+        }
+        
+        .emotion-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .journal-form {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        .intensity-slider {
+            width: 100%;
+            height: 20px;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #ccd4e0, #5e91ff);
+            border-radius: 10px;
+            outline: none;
+        }
+        
+        .intensity-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        
+        .intensity-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #718096;
+        }
+        
+        .journal-textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid #e4e8f0;
+            border-radius: 8px;
+            resize: none;
+            font-size: 16px;
+            color: #4a5568;
+        }
+        
+        .media-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .media-button {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #e4e8f0;
+            border-radius: 8px;
+            background-color: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #4a5568;
+            cursor: pointer;
+        }
+        
+        .media-button span {
+            margin-right: 5px;
+            font-size: 18px;
+        }
+        
+        .save-button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background-color: #5e91ff;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .save-button:hover {
+            background-color: #4070e0;
+        }
+        
+        .tab-bar {
+            height: 80px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e4e8f0;
+        }
+        
+        .tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #a0aec0;
+        }
+        
+        .tab.active {
+            color: #5e72e4;
+        }
+        
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div class="time">9:41 AM</div>
+        <div class="icons">
+            <div class="icon">📶</div>
+            <div class="icon">🔋</div>
+        </div>
+    </div>
+    
+    <div class="app-header">
+        <button class="back-button">←</button>
+        <h1>情绪日记</h1>
+        <div style="width: 20px;"></div> <!-- Placeholder for balance -->
+    </div>
+    
+    <div class="journal-container">
+        <div class="emotion-header">
+            <div class="emotion-icon">😢</div>
+            <div class="emotion-info">
+                <div class="emotion-path">Sad → Lonely → Abandoned</div>
+                <div class="emotion-title">被遗弃感</div>
+            </div>
+        </div>
+        
+        <div class="journal-form">
+            <div class="form-group">
+                <label class="form-label">情绪强度 (0-10)</label>
+                <input type="range" min="0" max="10" value="7" class="intensity-slider">
+                <div class="intensity-labels">
+                    <span>轻微</span>
+                    <span>中等</span>
+                    <span>强烈</span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">发生了什么？</label>
+                <textarea class="journal-textarea" placeholder="在这里描述你的感受..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">添加媒体（可选）</label>
+                <div class="media-buttons">
+                    <div class="media-button">
+                        <span>📷</span> 照片
+                    </div>
+                    <div class="media-button">
+                        <span>🎤</span> 语音
+                    </div>
+                </div>
+            </div>
+            
+            <button class="save-button">保存情绪记录</button>
+        </div>
+    </div>
+    
+    <div class="tab-bar">
+        <div class="tab">
+            <div class="tab-icon">🎡</div>
+            <div>轮盘</div>
+        </div>
+        <div class="tab active">
+            <div class="tab-icon">📔</div>
+            <div>日记</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">📊</div>
+            <div>分析</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">🧰</div>
+            <div>工具箱</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">🗺️</div>
+            <div>地图</div>
+        </div>
+    </div>
+</body>
+</html>
+

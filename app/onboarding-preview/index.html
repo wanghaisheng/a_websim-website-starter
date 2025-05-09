@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/bootstrap-scripts.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodWheel - Onboarding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            background-color: #f5f7fa;
+            color: #2d3748;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .status-bar .time {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .status-bar .icons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .onboarding-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        
+        .slide-image {
+            width: 70%;
+            max-width: 300px;
+            margin-bottom: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .slide-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(to right, #5e72e4, #ffdb4d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .slide-description {
+            font-size: 16px;
+            text-align: center;
+            color: #718096;
+            margin-bottom: 40px;
+            max-width: 300px;
+            line-height: 1.6;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 20px 30px;
+        }
+        
+        .nav-btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-skip {
+            background-color: transparent;
+            color: #718096;
+            border: none;
+        }
+        
+        .btn-next {
+            background-color: #5e72e4;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 14px rgba(94, 114, 228, 0.3);
+        }
+        
+        .btn-get-started {
+            background-color: #5e72e4;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(94, 114, 228, 0.3);
+        }
+        
+        .indicator-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e4e8f0;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            width: 20px;
+            background-color: #5e72e4;
+        }
+        
+        /* Paywall Screen */
+        .paywall-container {
+            display: none;
+            flex-direction: column;
+            padding: 30px;
+            height: 100%;
+        }
+        
+        .paywall-header {
+            margin-bottom: 30px;
+        }
+        
+        .paywall-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+            background: linear-gradient(to right, #5e72e4, #ffdb4d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .paywall-subtitle {
+            font-size: 16px;
+            text-align: center;
+            color: #718096;
+            line-height: 1.6;
+        }
+        
+        .features-list {
+            margin-bottom: 30px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: rgba(94, 114, 228, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .feature-text {
+            font-size: 16px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+        
+        .subscription-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .subscription-option {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #e4e8f0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .subscription-option.selected {
+            border-color: #5e72e4;
+            background-color: rgba(94, 114, 228, 0.05);
+        }
+        
+        .option-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2d3748;
+        }
+        
+        .option-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #5e72e4;
+            margin-bottom: 5px;
+        }
+        
+        .option-period {
+            font-size: 12px;
+            color: #718096;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffdb4d;
+            color: #2d3748;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .subscribe-button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background-color: #5e72e4;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 14px rgba(94, 114, 228, 0.3);
+        }
+        
+        .free-trial-text {
+            text-align: center;
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 15px;
+        }
+        
+        .terms-text {
+            text-align: center;
+            font-size: 12px;
+            color: #a0aec0;
+        }
+        
+        .terms-text a {
+            color: #5e72e4;
+            text-decoration: none;
+        }
+        
+        .trial-days {
+            font-weight: 600;
+            color: #5e72e4;
+        }
+        
+        .skip-paywall {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .skip-paywall button {
+            background: none;
+            border: none;
+            color: #718096;
+            font-size: 14px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div class="time">9:41 AM</div>
+        <div class="icons">
+            <div class="icon">📶</div>
+            <div class="icon">🔋</div>
+        </div>
+    </div>
+    
+    <div class="onboarding-container">
+        <div class="slide slide1 active">
+            <img src="slide1.png" alt="Emotion Wheel" class="slide-image">
+            <h1 class="slide-title">认识你的情绪</h1>
+            <p class="slide-description">通过MoodWheel的情绪轮盘，探索和识别你内心细微的情感变化</p>
+        </div>
+        
+        <div class="slide slide2">
+            <img src="slide2.png" alt="Journal" class="slide-image">
+            <h1 class="slide-title">记录每一刻感受</h1>
+            <p class="slide-description">为情绪添加文字、图片和语音，创建丰富的情感日记</p>
+        </div>
+        
+        <div class="slide slide3">
+            <img src="slide3.png" alt="Analysis" class="slide-image">
+            <h1 class="slide-title">洞察情绪模式</h1>
+            <p class="slide-description">通过直观的图表和分析，了解你的情绪趋势和触发因素</p>
+        </div>
+        
+        <div class="slide slide4">
+            <img src="slide4.png" alt="Toolkit" class="slide-image">
+            <h1 class="slide-title">情绪调节工具箱</h1>
+            <p class="slide-description">基于你的情绪状态，获取个性化的调节方法和活动建议</p>
+        </div>
+        
+        <div class="slide slide5">
+            <img src="slide5.png" alt="Journey Map" class="slide-image">
+            <h1 class="slide-title">开启情绪探索之旅</h1>
+            <p class="slide-description">将情绪管理变成一场冒险，解锁全部情绪，完成内心地图</p>
+            <button class="btn-get-started" onclick="showPaywall()">开始体验</button>
+        </div>
+        
+        <div class="indicator-container">
+            <div class="indicator indicator1 active"></div>
+            <div class="indicator indicator2"></div>
+            <div class="indicator indicator3"></div>
+            <div class="indicator indicator4"></div>
+            <div class="indicator indicator5"></div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn btn-skip" onclick="skipToLast()">跳过</button>
+            <button class="nav-btn btn-next" onclick="nextSlide()">下一步</button>
+        </div>
+    </div>
+    
+    <div class="paywall-container">
+        <div class="paywall-header">
+            <h1 class="paywall-title">升级到高级版</h1>
+            <p class="paywall-subtitle">解锁全部功能，开启完整的情绪探索之旅</p>
+        </div>
+        
+        <div class="features-list">
+            <div class="feature-item">
+                <div class="feature-icon">∞</div>
+                <div class="feature-text">无限情绪记录</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <div class="feature-text">高级情绪分析图表</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🧰</div>
+                <div class="feature-text">完整情绪调节工具箱</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🗺️</div>
+                <div class="feature-text">情绪探索地图完整体验</div>
+            </div>
+        </div>
+        
+        <div class="subscription-options">
+            <div class="subscription-option">
+                <div class="option-title">月度订阅</div>
+                <div class="option-price">¥12</div>
+                <div class="option-period">每月</div>
+            </div>
+            <div class="subscription-option selected" style="position: relative;">
+                <div class="popular-badge">最受欢迎</div>
+                <div class="option-title">年度订阅</div>
+                <div class="option-price">¥98</div>
+                <div class="option-period">每年 (省30%)</div>
+            </div>
+        </div>
+        
+        <button class="subscribe-button">开始7天免费试用</button>
+        
+        <p class="free-trial-text">
+            试用结束后自动续费，随时可取消
+        </p>
+        
+        <p class="terms-text">
+            订阅即表示您同意我们的<a href="#">服务条款</a>和<a href="#">隐私政策</a>
+        </p>
+        
+        <div class="skip-paywall">
+            <button onclick="skipPaywall()">继续使用免费版</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 5;
+        
+        function updateSlides() {
+            for (let i = 1; i <= totalSlides; i++) {
+                const slide = document.querySelector(`.slide${i}`);
+                const indicator = document.querySelector(`.indicator${i}`);
+                
+                if (i === currentSlide) {
+                    slide.classList.add('active');
+                    indicator.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                    indicator.classList.remove('active');
+                }
+            }
+            
+            // Hide/show navigation buttons
+            if (currentSlide === totalSlides) {
+                document.querySelector('.navigation').style.display = 'none';
+            } else {
+                document.querySelector('.navigation').style.display = 'flex';
+            }
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+        
+        function skipToLast() {
+            currentSlide = totalSlides;
+            updateSlides();
+        }
+        
+        function showPaywall() {
+            document.querySelector('.onboarding-container').style.display = 'none';
+            document.querySelector('.paywall-container').style.display = 'flex';
+        }
+        
+        function skipPaywall() {
+            window.location.href = '../home.html';
+        }
+        
+        // Add click handlers for subscription options
+        const subscriptionOptions = document.querySelectorAll('.subscription-option');
+        subscriptionOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                subscriptionOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>
+

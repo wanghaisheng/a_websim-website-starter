@@ -1,279 +1,365 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="WebSim Vibe Coding Starter: Build a modern, SEO-optimized website in 5 minutes. AI赋能、极致自动化、响应式、SEO最佳实践、极具创意与未来感的SaaS工具。">
-  <meta name="keywords" content="WebSim, SaaS, Coding Starter, SEO, AI, Playground, 多语言, 创意, 极致体验">
-  <meta name="robots" content="index, follow">
-  <title data-i18n="title">WebSim Vibe Coding Starter</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="js/lang.js" defer></script>
-  <script src="js/playground.js" defer></script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://websimstarter.borninsea.com/"},{"@type":"ListItem","position":2,"name":"首页","item":"https://websimstarter.borninsea.com/"}],"language":"en"}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Mood Island Team","url":"https://example.com/about","description":"A small, dedicated team passionate about creating innovative web solutions.","logo":"https://example.com/favicon.ico","sameAs":["https://github.com/wanghaisheng/a_websim-website-starter"],"foundingDate":"2023","founders":[{"@type":"Person","name":""}],"address":"","contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"contact@websimstarter.borninsea.com","telephone":""}],"audience":{"@type":"Audience","audienceType":"创业者, 产品经理, 编程小白"},"language":"zh"}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Mood Island Team","url":"https://example.com/about","description":"A small, dedicated team passionate about creating innovative web solutions.","inLanguage":"en","publisher":{"@type":"Organization","name":"Mood Island Team"}}
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodWheel - 转动你的感受，发现内心的彩虹</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="/js/bootstrap-scripts.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="hero">
-    <nav class="navbar">
-      <div class="logo">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="WebSim Logo">
-          <circle cx="20" cy="20" r="20" fill="url(#paint0_radial)"/>
-          <text x="50%" y="55%" text-anchor="middle" fill="#fff" font-size="18" font-family="monospace" dy=".3em">WS</text>
-          <defs>
-            <radialGradient id="paint0_radial" cx="0.5" cy="0.5" r="0.5" fx="0.2" fy="0.2">
-              <stop offset="0%" stop-color="#6f00ff"/>
-              <stop offset="100%" stop-color="#00eaff"/>
-            </radialGradient>
-          </defs>
-        </svg>
-        <span class="brand" data-i18n="brand">WebSim Vibe Coding Starter</span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="#features" data-i18n="nav_features">Features</a></li>
-        <li><a href="#playground" data-i18n="nav_playground">Playground</a></li>
-        <li><a href="#showcase" data-i18n="nav_showcase">Showcase</a></li>
-        <li><a href="#future" data-i18n="nav_future">Vision</a></li>
-        <li><a href="about.html" data-i18n="nav_about">About</a></li>
-        <li><a href="career.html" data-i18n="nav_career">Career</a></li>
-      </ul>
-      <div class="lang-switcher" id="lang-switcher"></div>
-    </nav>
-    <div class="hero-content">
-      <h1 data-i18n="hero_title">零代码，5分钟上线你的创业网站</h1>
-      <div class="summary">
-        <p>WebSim Vibe Coding Starter 专为创业者、产品经理和编程经验有限的创新者打造。无需代码基础，5分钟内即可验证你的商业想法，快速上线专业网站。内置 SaaS 工具、游戏类 App 落地页与原型设计提示词模板、SEO 优化 prompt 及常用自动化脚本，助你高效实现从创意到落地。</p>
-      </div>
-      <p data-i18n="hero_subtitle">AI驱动，SEO极致优化，多语言支持，助力创新高效落地。</p>
-      <a href="#playground" class="cta" data-i18n="cta_try">立即免费试用 | 零代码上线你的创意</a>
-    </div>
-    <div class="hero-bg-anim" id="hero-bg-anim"></div>
-  </header>
-
-  <main>
-    <section id="features" class="features-section">
-      <h2 data-i18n="features_title">Features</h2>
-      <ul class="features-list">
-        <li>🪄 无需编程，自动生成全站</li>
-        <li>🚀 5分钟快速验证产品概念</li>
-        <li>💡 创业者/产品经理友好</li>
-        <li>📝 SaaS/游戏App落地页与原型设计 Prompt 模板</li>
-        <li>🔍 SEO 优化专用 Prompt 模板</li>
-        <li>⚙️ 常用自动化脚本（生成、部署、SEO 提交）</li>
-        <li>🌍 Multi-language support & auto-generated sitemaps</li>
-        <li>🔍 Automated SEO: IndexNow, Bing, Google, metadata, validation</li>
-        <li>🤖 AI-powered blog & image generation</li>
-        <li>📱 PWA & mobile-first, blazing fast</li>
-        <li>🔑 Keyword research, analytics, clarity</li>
-        <li>👤 Real user management (Cloudflare Workers)</li>
-        <li>🤖 AI Scraper friendly robots.txt & llms.txt auto-generation</li>
-      </ul>
-    </section>
-
-    <section id="playground" class="playground-section">
-      <h2 data-i18n="playground_title">Try the Interactive Playground</h2>
-      <div class="playground-tabs">
-        <ul class="tab-list">
-          <li class="tab active" data-tab="step1" data-i18n="tab_grok" tabindex="0">1. Research on Grok</li>
-          <li class="tab" data-tab="step2" data-i18n="tab_google" tabindex="0">2. Generate PRD.md</li>
-          <li class="tab" data-tab="step3" data-i18n="tab_websim" tabindex="0">3. Generate Site with WebSim</li>
-          <li class="tab" data-tab="step4" data-i18n="tab_deploy" tabindex="0">4. Deploy & Go Live</li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="step1">
-            <div class="tab-desc">
-              <div class="desc-main">
-                <h3 data-i18n="grok_title">Research User Complaints on Grok</h3>
-                <ul class="desc-features">
-                  <li data-i18n="grok_feat1">AI-powered search for user pain points</li>
-                  <li data-i18n="grok_feat2">Real-time trending topics</li>
-                  <li data-i18n="grok_feat3">Export insights for product ideation</li>
-                </ul>
-                <div class="desc-resources">
-                  <a href="https://grok.x.com/" target="_blank" class="desc-cta" data-i18n="grok_cta">Go to Grok.com &rarr;</a>
-                </div>
-              </div>
-              <div class="desc-media">
-                <img src="https://assets.codeium.com/websim/grok-sample.png" alt="Grok.com Screenshot" loading="lazy" style="max-width:260px;border-radius:12px;box-shadow:0 2px 12px #00eaff44;">
-              </div>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logo.png" alt="MoodWheel Logo">
+                <h1>MoodWheel</h1>
             </div>
-            <iframe src="https://grok.x.com/" title="Grok.com Research" style="width:100%;height:400px;border-radius:16px;border:none;box-shadow:0 2px 12px #00eaff44;"></iframe>
-            <p data-i18n="grok_hint">Use Grok to research user pain points and complaints for your SaaS idea. Copy the insights for the next step.</p>
-          </div>
-          <div class="tab-pane" id="step2">
-            <div class="tab-desc">
-              <div class="desc-main">
-                <h3 data-i18n="google_title">Generate PRD.md with Google AI Studio</h3>
-                <ul class="desc-features">
-                  <li data-i18n="google_feat1">AI generates detailed PRD.md from research</li>
-                  <li data-i18n="google_feat2">Starter templates for SaaS, tools, apps</li>
-                  <li data-i18n="google_feat3">Easy editing and export</li>
+            <nav>
+                <ul>
+                    <li><a href="#features">功能</a></li>
+                    <li><a href="#how-it-works">如何使用</a></li>
+                    <li><a href="#testimonials">用户评价</a></li>
+                    <li><a href="#download">下载</a></li>
+                    <li class="language-selector">
+                        <select id="language-select">
+                            <option value="zh">中文</option>
+                            <option value="en">English</option>
+                        </select>
+                    </li>
                 </ul>
-                <div class="desc-resources">
-                  <a href="https://aistudio.google.com/starter-apps" target="_blank" class="desc-cta" data-i18n="google_cta">Go to Google AI Studio &rarr;</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-i18n="hero.title">转动你的感受，发现内心的彩虹</h1>
+                <p data-i18n="hero.subtitle">MoodWheel 帮助你理解、表达和管理情绪，让每一种感受都成为自我成长的养分</p>
+                <div class="hero-cta">
+                    <a href="#download" class="btn btn-primary" data-i18n="hero.cta">开始情绪之旅</a>
+                    <a href="#demo" class="btn btn-secondary" data-i18n="hero.demo">查看演示</a>
                 </div>
-              </div>
-              <div class="desc-media">
-                <img src="https://assets.codeium.com/websim/google-ai-studio-sample.png" alt="Google AI Studio Screenshot" loading="lazy" style="max-width:260px;border-radius:12px;box-shadow:0 2px 12px #00eaff44;">
-              </div>
             </div>
-            <iframe src="https://aistudio.google.com/starter-apps" title="Google AI Studio" style="width:100%;height:400px;border-radius:16px;border:none;box-shadow:0 2px 12px #00eaff44;"></iframe>
-            <p data-i18n="google_hint">Paste Grok output here and use Google AI Studio to generate a detailed PRD.md for your project.</p>
-            <textarea id="prd-input" placeholder="Paste Grok output here..." style="width:100%;margin:1em 0 0.5em;height:80px;"></textarea>
-            <button class="playground-btn" id="to-step3" data-i18n="to_websim_btn">Next: Generate Site with WebSim</button>
-          </div>
-          <div class="tab-pane" id="step3">
-            <div class="tab-desc">
-              <div class="desc-main">
-                <h3 data-i18n="websim_title">Generate HTML Site with WebSim</h3>
-                <ul class="desc-features">
-                  <li data-i18n="websim_feat1">AI-powered code & content generation</li>
-                  <li data-i18n="websim_feat2">SEO, multi-language, SaaS best practices</li>
-                  <li data-i18n="websim_feat3">Prompt templates for rapid prototyping</li>
-                </ul>
-                <div class="desc-resources">
-                  <a href="https://websim.com/" target="_blank" class="desc-cta" data-i18n="websim_cta">Go to WebSim.com &rarr;</a>
-                  <a href="docs/prompts" target="_blank" class="desc-cta" data-i18n="websim_prompt">Prompt Templates</a>
+            <div class="hero-image">
+                <img src="img/hero-wheel.png" alt="MoodWheel Emotion Wheel">
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 data-i18n="features.title">探索你的情绪宇宙</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="img/feature-wheel.png" alt="MoodWheel Feature">
+                    </div>
+                    <h3 data-i18n="features.wheel.title">情绪轮盘导航</h3>
+                    <p data-i18n="features.wheel.description">通过互动式轮盘设计，层层深入探索你的情绪，从基础感受到细微情绪，精确定位你的内心状态</p>
                 </div>
-              </div>
-              <div class="desc-media">
-                <img src="https://assets.codeium.com/websim/websim-sample.png" alt="WebSim.com Screenshot" loading="lazy" style="max-width:260px;border-radius:12px;box-shadow:0 2px 12px #6f00ff44;">
-              </div>
-            </div>
-            <iframe src="https://websim.com/" title="WebSim.com" style="width:100%;height:400px;border-radius:16px;border:none;box-shadow:0 2px 12px #6f00ff44;"></iframe>
-            <p data-i18n="websim_hint">Use your PRD.md and a prompt template from <code>docs/prompts</code> as input. WebSim will generate the HTML site files for you.</p>
-            <textarea id="websim-input" placeholder="Paste PRD.md and prompt template here..." style="width:100%;margin:1em 0 0.5em;height:80px;"></textarea>
-            <button class="playground-btn" id="to-step4" data-i18n="to_deploy_btn">Next: Deploy & Go Live</button>
-          </div>
-          <div class="tab-pane" id="step4">
-            <div class="tab-desc">
-              <div class="desc-main">
-                <h3 data-i18n="deploy_title">Deploy & Go Live</h3>
-                <ul class="desc-features">
-                  <li data-i18n="deploy_feat1">One-click deployment to Cloudflare or static host</li>
-                  <li data-i18n="deploy_feat2">SEO, config, and CI/CD best practices</li>
-                  <li data-i18n="deploy_feat3">Git push to go live instantly</li>
-                </ul>
-                <div class="desc-resources">
-                  <a href="https://pages.cloudflare.com/" target="_blank" class="desc-cta" data-i18n="deploy_cta">Go to Cloudflare Pages &rarr;</a>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="img/feature-journal.png" alt="Journal Feature">
+                    </div>
+                    <h3 data-i18n="features.journal.title">情绪日记记录</h3>
+                    <p data-i18n="features.journal.description">为你的情绪配上文字、照片和语音，记录当下的感受，留存珍贵的情绪轨迹</p>
                 </div>
-              </div>
-              <div class="desc-media">
-                <img src="https://assets.codeium.com/websim/cloudflare-sample.png" alt="Cloudflare Pages Screenshot" loading="lazy" style="max-width:260px;border-radius:12px;box-shadow:0 2px 12px #00eaff44;">
-              </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="img/feature-analysis.png" alt="Analysis Feature">
+                    </div>
+                    <h3 data-i18n="features.analysis.title">情绪图谱分析</h3>
+                    <p data-i18n="features.analysis.description">通过时间轴、日历视图查看情绪变化趋势，发现情绪触发因素和规律</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="img/feature-toolkit.png" alt="Toolkit Feature">
+                    </div>
+                    <h3 data-i18n="features.toolkit.title">情绪调节工具箱</h3>
+                    <p data-i18n="features.toolkit.description">基于你的情绪状态，智能推荐冥想、音乐、表达练习等调节方式，帮助你平衡情绪</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="img/feature-map.png" alt="Map Feature">
+                    </div>
+                    <h3 data-i18n="features.map.title">心情探索地图</h3>
+                    <p data-i18n="features.map.description">将情绪探索游戏化，解锁全部情绪，完成一次心灵冒险之旅</p>
+                </div>
             </div>
-            <ol>
-              <li data-i18n="deploy_step1">Place generated HTML files in this root folder.</li>
-              <li data-i18n="deploy_step2">Edit or create your <code>config.json</code>.</li>
-              <li data-i18n="deploy_step3">Connect your repo to Cloudflare Pages or another static host.</li>
-              <li data-i18n="deploy_step4">Git push and watch your SEO-friendly site go live!</li>
-            </ol>
-            <p data-i18n="deploy_success">🎉 Bingo! Your SaaS site is now live and SEO-optimized.</p>
-          </div>
         </div>
-      </div>
     </section>
 
-    <section id="showcase" class="showcase-section">
-      <h2 data-i18n="showcase_title">Featured Results Showcase</h2>
-      <div class="showcase-list">
-        <div class="showcase-item">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User project screenshot" loading="lazy">
-          <div class="showcase-desc">
-            <h3 data-i18n="showcase_project1">AI SaaS Landing Page</h3>
-            <p data-i18n="showcase_project1_desc">Generated in seconds with WebSim Vibe. Fully responsive, SEO-optimized, and production-ready.</p>
-          </div>
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 data-i18n="howItWorks.title">如何使用 MoodWheel</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 data-i18n="howItWorks.step1.title">选择情绪</h3>
+                        <p data-i18n="howItWorks.step1.description">在情绪轮盘上点击，逐层探索你当前的情绪状态</p>
+                        <img src="img/step1.png" alt="Step 1: Choose Emotion">
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 data-i18n="howItWorks.step2.title">记录体验</h3>
+                        <p data-i18n="howItWorks.step2.description">评分情绪强度，记录文字描述、照片或语音</p>
+                        <img src="img/step2.png" alt="Step 2: Record Experience">
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 data-i18n="howItWorks.step3.title">获取洞察</h3>
+                        <p data-i18n="howItWorks.step3.description">查看情绪变化趋势，发现情绪触发因素</p>
+                        <img src="img/step3.png" alt="Step 3: Gain Insights">
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 data-i18n="howItWorks.step4.title">平衡情绪</h3>
+                        <p data-i18n="howItWorks.step4.description">使用推荐的情绪调节工具，提升情绪管理能力</p>
+                        <img src="img/step4.png" alt="Step 4: Balance Emotions">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="showcase-item">
-          <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="User project screenshot" loading="lazy">
-          <div class="showcase-desc">
-            <h3 data-i18n="showcase_project2">Multi-language Blog</h3>
-            <p data-i18n="showcase_project2_desc">Supports English, Chinese, and more. SEO best practices built-in.</p>
-          </div>
-        </div>
-        <div class="showcase-item">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="SVG Example">
-            <rect x="5" y="5" width="50" height="50" rx="12" fill="#00eaff"/>
-            <text x="50%" y="55%" text-anchor="middle" fill="#6f00ff" font-size="20" font-family="monospace" dy=".3em">SVG</text>
-          </svg>
-          <div class="showcase-desc">
-            <h3 data-i18n="showcase_project3">SVG UI Kit</h3>
-            <p data-i18n="showcase_project3_desc">All illustrations are SVG for best performance and scalability.</p>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <section id="future" class="future-section">
-      <h2 data-i18n="future_title">Future Advantages & Vision</h2>
-      <ul>
-        <li data-i18n="future_ai">Continuous AI integration: smarter, more creative site generation</li>
-        <li data-i18n="future_seo">SEO automation: always up-to-date with the latest algorithms</li>
-        <li data-i18n="future_ux">Bold, creative UI/UX: GSAP-powered micro-interactions & animations</li>
-        <li data-i18n="future_scale">Scale from MVP to enterprise with one codebase</li>
-      </ul>
+    <section id="demo" class="app-preview">
+        <div class="container">
+            <h2 data-i18n="appPreview.title">应用展示</h2>
+            <p data-i18n="appPreview.description">探索 MoodWheel 的核心功能和界面</p>
+            
+            <div class="preview-tabs">
+                <button class="tab-btn active" data-tab="base">基础风格</button>
+                <button class="tab-btn" data-tab="minimal">简约风格</button>
+                <button class="tab-btn" data-tab="colorful">多彩风格</button>
+            </div>
+            
+            <div class="preview-content">
+                <div class="tab-content active" id="base-content">
+                    <div class="phone-mockups">
+                        <div class="phone-mockup">
+                            <iframe src="apps/base/home.html" frameborder="0"></iframe>
+                            <p>主页情绪轮盘</p>
+                        </div>
+                        <div class="phone-mockup">
+                            <iframe src="apps/base/journal.html" frameborder="0"></iframe>
+                            <p>情绪日记</p>
+                        </div>
+                        <div class="phone-mockup">
+                            <iframe src="apps/base/analysis.html" frameborder="0"></iframe>
+                            <p>情绪分析</p>
+                        </div>
+                        <div class="phone-mockup">
+                            <iframe src="apps/base/toolkit.html" frameborder="0"></iframe>
+                            <p>情绪调节工具箱</p>
+                        </div>
+                        <div class="phone-mockup">
+                            <iframe src="apps/base/journey.html" frameborder="0"></iframe>
+                            <p>情绪探索地图</p>
+                        </div>
+                    </div>
+                    <div class="preview-cta">
+                        <a href="apps/base/onboarding-preview/index.html" class="btn btn-secondary" target="_blank" data-i18n="appPreview.onboarding">体验完整导览流程</a>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="minimal-content">
+                    <div class="phone-mockups">
+                        <div class="phone-mockup">
+                            <iframe src="apps/minimal/home.html" frameborder="0"></iframe>
+                            <p>主页情绪轮盘</p>
+                        </div>
+                        <div class="phone-mockup">
+                            <iframe src="apps/minimal/journal.html" frameborder="0"></iframe>
+                            <p>情绪日记</p>
+                        </div>
+                        <div class="phone-mockup">
+                            <iframe src="apps/minimal/analysis.html" frameborder="0"></iframe>
+                            <p>情绪分析</p>
+                        </div>
+                    </div>
+                    <div class="preview-cta">
+                        <a href="apps/minimal/onboarding-preview/index.html" class="btn btn-secondary" target="_blank" data-i18n="appPreview.onboarding">体验完整导览流程</a>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="colorful-content">
+                    <div class="phone-mockups">
+                        <div class="phone-mockup">
+                            <iframe src="apps/colorful/home.html" frameborder="0"></iframe>
+                            <p>主页情绪轮盘</p>
+                        </div>
+                        <div class="phone-mockup">
+                            <iframe src="apps/colorful/journal.html" frameborder="0"></iframe>
+                            <p>情绪日记</p>
+                        </div>
+                        <div class="phone-mockup">
+                            <iframe src="apps/colorful/analysis.html" frameborder="0"></iframe>
+                            <p>情绪分析</p>
+                        </div>
+                    </div>
+                    <div class="preview-cta">
+                        <a href="apps/colorful/onboarding-preview/index.html" class="btn btn-secondary" target="_blank" data-i18n="appPreview.onboarding">体验完整导览流程</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="painpoints" class="painpoints-section">
-      <h2 data-i18n="painpoints_title">Deep User Pain Points & Visionary Solutions</h2>
-      <ul>
-        <li data-i18n="painpoint1">No more boring templates: instantly generate unique, high-converting pages</li>
-        <li data-i18n="painpoint2">SEO & multi-language are built-in, not afterthoughts</li>
-        <li data-i18n="painpoint3">No coding? No problem. Playground lets you prototype visually</li>
-        <li data-i18n="painpoint4">Performance, accessibility, and mobile-responsiveness by default</li>
-      </ul>
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 data-i18n="testimonials.title">用户心声</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="img/avatar1.png" alt="User Avatar">
+                    </div>
+                    <div class="testimonial-content">
+                        <p class="testimonial-text" data-i18n="testimonials.user1.quote">"MoodWheel 帮助我识别出以前从未注意的情绪细微差别。现在我能够更好地理解自己的反应，家人也说我的情绪管理能力有了明显提升。"</p>
+                        <p class="testimonial-author" data-i18n="testimonials.user1.name">李明，心理咨询师</p>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="img/avatar2.png" alt="User Avatar">
+                    </div>
+                    <div class="testimonial-content">
+                        <p class="testimonial-text" data-i18n="testimonials.user2.quote">"每天使用情绪轮盘记录感受，成为我自我关怀的重要仪式。特别喜欢情绪探索地图的设计，让整个过程变得有趣而不是负担。"</p>
+                        <p class="testimonial-author" data-i18n="testimonials.user2.name">张婷，大学生</p>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="img/avatar3.png" alt="User Avatar">
+                    </div>
+                    <div class="testimonial-content">
+                        <p class="testimonial-text" data-i18n="testimonials.user3.quote">"作为一名企业高管，我常感到压力巨大却说不出具体感受。MoodWheel 让我能够准确表达内心状态，情绪调节工具箱提供的方法也非常实用。"</p>
+                        <p class="testimonial-author" data-i18n="testimonials.user3.name">王强，公司CEO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <footer>
-    <div class="footer-content">
-      <div class="footer-logo">
-        <span>WebSim Vibe Coding Starter</span>
-      </div>
-      <div class="footer-links">
-        <a href="about.html">关于我们</a> |
-        <a href="privacy.html">隐私政策</a> |
-        <a href="terms.html">服务条款</a>
-      </div>
-      <div class="footer-github">
-        <a href="https://github.com/wanghaisheng/a_websim-website-starter" target="_blank" rel="noopener noreferrer">
-          <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" width="20" style="vertical-align:middle;"> 本项目已开源于 GitHub
-        </a>
-      </div>
-      <div class="footer-contact">
-        联系方式：<a href="mailto:contact@websimstarter.borninsea.com">contact@websimstarter.borninsea.com</a>
-      </div>
-      <div class="footer-trust">
-        <span>数据安全与隐私保护承诺 · 支持 HTTPS 加密 · 社区共建</span>
-      </div>
-    </div>
-    <div class="footer-meta">
-      <span>&copy; 2025 WebSim. <span data-i18n="footer_rights">All rights reserved.</span></span>
-    </div>
-  </footer>
+    <section id="download" class="download">
+        <div class="container">
+            <h2 data-i18n="download.title">开始你的情绪探索之旅</h2>
+            <p data-i18n="download.description">下载 MoodWheel，转动情绪轮盘，发现内心的彩虹</p>
+            <div class="download-options">
+                <a href="#" class="download-btn">
+                    <img src="img/app-store.png" alt="Download on App Store">
+                </a>
+                <a href="#" class="download-btn">
+                    <img src="img/google-play.png" alt="Get it on Google Play">
+                </a>
+            </div>
+            <div class="subscription-info">
+                <div class="subscription-plan popular">
+                    <div class="popular-badge" data-i18n="download.plans.popular">最受欢迎</div>
+                    <h3 data-i18n="download.plans.premium.title">高级版</h3>
+                    <div class="price">
+                        <span class="amount">¥12</span>
+                        <span class="period" data-i18n="download.plans.premium.period">/ 月</span>
+                    </div>
+                    <ul class="features-list">
+                        <li data-i18n="download.plans.premium.feature1">所有基础功能</li>
+                        <li data-i18n="download.plans.premium.feature2">无限情绪记录</li>
+                        <li data-i18n="download.plans.premium.feature3">高级情绪分析图表</li>
+                        <li data-i18n="download.plans.premium.feature4">完整情绪调节工具箱</li>
+                        <li data-i18n="download.plans.premium.feature5">情绪探索地图完整体验</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" data-i18n="download.plans.premium.cta">立即升级</a>
+                </div>
+                <div class="subscription-plan">
+                    <h3 data-i18n="download.plans.free.title">免费版</h3>
+                    <div class="price">
+                        <span class="amount">¥0</span>
+                    </div>
+                    <ul class="features-list">
+                        <li data-i18n="download.plans.free.feature1">基础情绪轮盘</li>
+                        <li data-i18n="download.plans.free.feature2">每月30条情绪记录</li>
+                        <li data-i18n="download.plans.free.feature3">基础情绪趋势图</li>
+                        <li data-i18n="download.plans.free.feature4">5种情绪调节工具</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" data-i18n="download.plans.free.cta">免费下载</a>
+                </div>
+                <div class="subscription-plan">
+                    <h3 data-i18n="download.plans.family.title">家庭版</h3>
+                    <div class="price">
+                        <span class="amount">¥28</span>
+                        <span class="period" data-i18n="download.plans.family.period">/ 月</span>
+                    </div>
+                    <ul class="features-list">
+                        <li data-i18n="download.plans.family.feature1">最多5个家庭成员</li>
+                        <li data-i18n="download.plans.family.feature2">所有高级版功能</li>
+                        <li data-i18n="download.plans.family.feature3">家庭情绪连接功能</li>
+                        <li data-i18n="download.plans.family.feature4">家庭共享活动推荐</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" data-i18n="download.plans.family.cta">家庭共享</a>
+                </div>
+            </div>
+            <div class="download-guarantee">
+                <img src="img/guarantee.png" alt="Satisfaction Guarantee">
+                <p data-i18n="download.guarantee">14天无条件退款保证，没有隐藏费用</p>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    // GSAP Hero background animation
-    document.addEventListener('DOMContentLoaded', function() {
-      gsap.to('#hero-bg-anim', {
-        background: 'radial-gradient(circle at 60% 40%, #00eaff 0%, #6f00ff 100%)',
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut',
-        onUpdate: function() {
-          // Custom creative micro-interaction
-        }
-      });
-    });
-  </script>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="img/logo.png" alt="MoodWheel Logo">
+                <h3>MoodWheel</h3>
+            </div>
+            <div class="footer-nav">
+                <div class="footer-nav-column">
+                    <h4 data-i18n="footer.product">产品</h4>
+                    <ul>
+                        <li><a href="#features" data-i18n="footer.features">功能</a></li>
+                        <li><a href="#demo" data-i18n="footer.demo">演示</a></li>
+                        <li><a href="#download" data-i18n="footer.pricing">价格</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h4 data-i18n="footer.company">公司</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer.about">关于我们</a></li>
+                        <li><a href="#" data-i18n="footer.blog">博客</a></li>
+                        <li><a href="#" data-i18n="footer.careers">招聘</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h4 data-i18n="footer.support">支持</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer.help">帮助中心</a></li>
+                        <li><a href="#" data-i18n="footer.contact">联系我们</a></li>
+                        <li><a href="#" data-i18n="footer.privacy">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h4 data-i18n="footer.connect">关注我们</h4>
+                    <div class="social-links">
+                        <a href="#"><img src="img/icon-twitter.png" alt="Twitter"></a>
+                        <a href="#"><img src="img/icon-instagram.png" alt="Instagram"></a>
+                        <a href="#"><img src="img/icon-facebook.png" alt="Facebook"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">© 2023 MoodWheel. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

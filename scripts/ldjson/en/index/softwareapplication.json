@@ -1,19 +1,29 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Vision Board",
+  "name": "MoodWheel",
   "operatingSystem": "iOS, Android, Web",
-  "applicationCategory": "ProductivityApplication",
-  "description": "Vision Board is a modern manifestation app that integrates vision board management, multimedia experience, and scientific manifestation methods to help users achieve personal goals.",
+  "applicationCategory": "LifestyleApplication",
+  "description": "MoodWheel is an emotion exploration and recording app that helps users understand, express, and manage their emotions. It uses an interactive emotion wheel and provides tools for journaling, pattern analysis, and emotional regulation, turning every feeling into a resource for personal growth.",
   "inLanguage": "en",
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "1200"
-  }
+  "url": "https://moodwheel.heytcm.com/index.html",
+  "downloadUrl": "https://moodwheel.heytcm.com/index.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "MoodWheel Team",
+    "url": "https://moodwheel.heytcm.com"
+  },
+  "featureList": [
+    "Emotional Wheel Navigation",
+    "Emotion Journal Recording",
+    "Emotion Pattern Analysis",
+    "Emotion Regulation Toolkit",
+    "Mood Exploration Map"
+  ],
+  "keywords": "emotion, mood, journal, tracker, mental health, self-care, emotion wheel"
 }

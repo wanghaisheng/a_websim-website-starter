@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/bootstrap-scripts.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodWheel - Journey Map</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            background-color: #f5f7fa;
+            color: #2d3748;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .status-bar .time {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .status-bar .icons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .app-header {
+            padding: 20px 16px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .app-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ff9966; /* adventure color for journey */
+        }
+        
+        .share-button {
+            background-color: white;
+            border: 1px solid #e4e8f0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+        }
+        
+        .share-button span {
+            margin-right: 5px;
+        }
+        
+        .journey-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .journey-stats {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f5f7fa;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff9966;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #718096;
+        }
+        
+        .journey-map {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .map-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .map-zoom {
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 300px;
+            background-color: #e8f4f8;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-region {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .region-happy {
+            width: 80px;
+            height: 80px;
+            top: 50px;
+            left: 40px;
+            background-color: rgba(255, 219, 77, 0.7);
+        }
+        
+        .region-sad {
+            width: 70px;
+            height: 70px;
+            top: 180px;
+            left: 120px;
+            background-color: rgba(94, 145, 255, 0.7);
+        }
+        
+        .region-angry {
+            width: 60px;
+            height: 60px;
+            top: 100px;
+            right: 50px;
+            background-color: rgba(255, 92, 92, 0.7);
+        }
+        
+        .region-calm {
+            width: 75px;
+            height: 75px;
+            bottom: 40px;
+            right: 80px;
+            background-color: rgba(108, 212, 168, 0.7);
+        }
+        
+        .region-locked {
+            width: 55px;
+            height: 55px;
+            top: 220px;
+            right: 180px;
+            background-color: rgba(169, 169, 169, 0.5);
+            filter: grayscale(1);
+        }
+        
+        .map-path {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg width="350" height="300" xmlns="http://www.w3.org/2000/svg"><path d="M80,90 C120,140 180,120 250,130 C300,140 260,200 220,200 C180,200 120,180 120,220" fill="none" stroke="%23ff9966" stroke-width="3" stroke-dasharray="5,5"/></svg>');
+            background-size: cover;
+        }
+        
+        .map-character {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #ff9966;
+            border-radius: 50%;
+            border: 3px solid white;
+            top: 220px;
+            left: 120px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .recent-emotions {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .emotions-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .emotions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .emotion-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f5f7fa;
+        }
+        
+        .emotion-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .badge-sad {
+            background-color: rgba(94, 145, 255, 0.3);
+        }
+        
+        .badge-happy {
+            background-color: rgba(255, 219, 77, 0.3);
+        }
+        
+        .badge-angry {
+            background-color: rgba(255, 92, 92, 0.3);
+        }
+        
+        .emotion-details {
+            flex: 1;
+        }
+        
+        .emotion-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 2px;
+        }
+        
+        .emotion-date {
+            font-size: 12px;
+            color: #718096;
+        }
+        
+        .emotion-xp {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ff9966;
+        }
+        
+        .tab-bar {
+            height: 80px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e4e8f0;
+        }
+        
+        .tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #a0aec0;
+        }
+        
+        .tab.active {
+            color: #5e72e4;
+        }
+        
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div class="time">9:41 AM</div>
+        <div class="icons">
+            <div class="icon">📶</div>
+            <div class="icon">🔋</div>
+        </div>
+    </div>
+    
+    <div class="app-header">
+        <h1>情绪探索</h1>
+        <button class="share-button">
+            <span>🔗</span> 分享
+        </button>
+    </div>
+    
+    <div class="journey-container">
+        <div class="journey-stats">
+            <h3 class="stats-title">探索统计</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">36%</div>
+                    <div class="stat-label">情绪岛屿探索进度</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">28</div>
+                    <div class="stat-label">已解锁情绪</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">14</div>
+                    <div class="stat-label">连续记录天数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">680</div>
+                    <div class="stat-label">情绪探索点数</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="journey-map">
+            <div class="map-title">
+                <span>情绪世界地图</span>
+                <span class="map-zoom">🔍 缩放</span>
+            </div>
+            <div class="map-container">
+                <div class="map-path"></div>
+                <div class="map-region region-happy">😊</div>
+                <div class="map-region region-sad">😢</div>
+                <div class="map-region region-angry">😠</div>
+                <div class="map-region region-calm">😌</div>
+                <div class="map-region region-locked">🔒</div>
+                <div class="map-character"></div>
+            </div>
+        </div>
+        
+        <div class="recent-emotions">
+            <h3 class="emotions-title">最近解锁的情绪</h3>
+            <div class="emotions-list">
+                <div class="emotion-item">
+                    <div class="emotion-badge badge-sad">😢</div>
+                    <div class="emotion-details">
+                        <div class="emotion-name">被遗弃感</div>
+                        <div class="emotion-date">今天 9:23</div>
+                    </div>
+                    <div class="emotion-xp">+25 XP</div>
+                </div>
+                <div class="emotion-item">
+                    <div class="emotion-badge badge-happy">😊</div>
+                    <div class="emotion-details">
+                        <div class="emotion-name">成就感</div>
+                        <div class="emotion-date">昨天 15:46</div>
+                    </div>
+                    <div class="emotion-xp">+25 XP</div>
+                </div>
+                <div class="emotion-item">
+                    <div class="emotion-badge badge-angry">😠</div>
+                    <div class="emotion-details">
+                        <div class="emotion-name">受挫感</div>
+                        <div class="emotion-date">2天前 20:12</div>
+                    </div>
+                    <div class="emotion-xp">+25 XP</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tab-bar">
+        <div class="tab">
+            <div class="tab-icon">🎡</div>
+            <div>轮盘</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">📔</div>
+            <div>日记</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">📊</div>
+            <div>分析</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">🧰</div>
+            <div>工具箱</div>
+        </div>
+        <div class="tab active">
+            <div class="tab-icon">🗺️</div>
+            <div>地图</div>
+        </div>
+    </div>
+</body>
+</html>
+

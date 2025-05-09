@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/bootstrap-scripts.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodWheel - Toolkit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            background-color: #f5f7fa;
+            color: #2d3748;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .status-bar .time {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .status-bar .icons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .app-header {
+            padding: 20px 16px;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .app-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #c792ea; /* relaxation color for toolkit */
+        }
+        
+        .favorites-button {
+            background-color: white;
+            border: 1px solid #e4e8f0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+        }
+        
+        .favorites-button span {
+            margin-right: 5px;
+        }
+        
+        .toolkit-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .emotion-header {
+            background-color: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .emotion-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background-color: #5e91ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .emotion-info {
+            flex: 1;
+        }
+        
+        .emotion-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .emotion-description {
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        .toolkit-categories {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+        }
+        
+        .toolkit-category {
+            padding: 10px 16px;
+            background-color: white;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 14px;
+            color: #718096;
+            white-space: nowrap;
+            border: 1px solid #e4e8f0;
+        }
+        
+        .toolkit-category.active {
+            background-color: #c792ea;
+            color: white;
+            border-color: #c792ea;
+        }
+        
+        .toolkit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .toolkit-item {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .toolkit-img {
+            width: 100%;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .toolkit-content {
+            padding: 12px;
+        }
+        
+        .toolkit-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .toolkit-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #718096;
+        }
+        
+        .toolkit-time span {
+            margin-right: 3px;
+        }
+        
+        .toolkit-favorite {
+            color: #c792ea;
+        }
+        
+        .tab-bar {
+            height: 80px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e4e8f0;
+        }
+        
+        .tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #a0aec0;
+        }
+        
+        .tab.active {
+            color: #5e72e4;
+        }
+        
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div class="time">9:41 AM</div>
+        <div class="icons">
+            <div class="icon">📶</div>
+            <div class="icon">🔋</div>
+        </div>
+    </div>
+    
+    <div class="app-header">
+        <h1>情绪调节</h1>
+        <button class="favorites-button">
+            <span>⭐</span> 收藏
+        </button>
+    </div>
+    
+    <div class="toolkit-container">
+        <div class="emotion-header">
+            <div class="emotion-icon">😢</div>
+            <div class="emotion-info">
+                <div class="emotion-title">针对「悲伤」的推荐</div>
+                <div class="emotion-description">以下活动可以帮助你处理和平衡悲伤情绪</div>
+            </div>
+        </div>
+        
+        <div class="toolkit-categories">
+            <div class="toolkit-category active">全部</div>
+            <div class="toolkit-category">冥想</div>
+            <div class="toolkit-category">音乐</div>
+            <div class="toolkit-category">写作</div>
+            <div class="toolkit-category">运动</div>
+            <div class="toolkit-category">艺术</div>
+        </div>
+        
+        <div class="toolkit-grid">
+            <div class="toolkit-item">
+                <div class="toolkit-img" style="background-image: url('https://images.unsplash.com/photo-1470116892389-0de5d9770b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');"></div>
+                <div class="toolkit-content">
+                    <div class="toolkit-title">舒缓冥想</div>
+                    <div class="toolkit-meta">
+                        <div class="toolkit-time"><span>⏱️</span>10分钟</div>
+                        <div class="toolkit-favorite">♥</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="toolkit-item">
+                <div class="toolkit-img" style="background-image: url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');"></div>
+                <div class="toolkit-content">
+                    <div class="toolkit-title">感恩日记</div>
+                    <div class="toolkit-meta">
+                        <div class="toolkit-time"><span>📝</span>5分钟</div>
+                        <div class="toolkit-favorite">♡</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="toolkit-item">
+                <div class="toolkit-img" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');"></div>
+                <div class="toolkit-content">
+                    <div class="toolkit-title">放松音乐集</div>
+                    <div class="toolkit-meta">
+                        <div class="toolkit-time"><span>🎵</span>30分钟</div>
+                        <div class="toolkit-favorite">♡</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="toolkit-item">
+                <div class="toolkit-img" style="background-image: url('https://images.unsplash.com/photo-1502230831726-fe5549140034?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');"></div>
+                <div class="toolkit-content">
+                    <div class="toolkit-title">舒展运动</div>
+                    <div class="toolkit-meta">
+                        <div class="toolkit-time"><span>💪</span>15分钟</div>
+                        <div class="toolkit-favorite">♡</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="toolkit-item">
+                <div class="toolkit-img" style="background-image: url('https://images.unsplash.com/photo-1535673774336-ef95d2851cf3?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');"></div>
+                <div class="toolkit-content">
+                    <div class="toolkit-title">情绪释放绘画</div>
+                    <div class="toolkit-meta">
+                        <div class="toolkit-time"><span>🎨</span>20分钟</div>
+                        <div class="toolkit-favorite">♡</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="toolkit-item">
+                <div class="toolkit-img" style="background-image: url('https://images.unsplash.com/photo-1530021232320-687d8e3dba54?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');"></div>
+                <div class="toolkit-content">
+                    <div class="toolkit-title">给未来的信</div>
+                    <div class="toolkit-meta">
+                        <div class="toolkit-time"><span>✉️</span>10分钟</div>
+                        <div class="toolkit-favorite">♡</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tab-bar">
+        <div class="tab">
+            <div class="tab-icon">🎡</div>
+            <div>轮盘</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">📔</div>
+            <div>日记</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">📊</div>
+            <div>分析</div>
+        </div>
+        <div class="tab active">
+            <div class="tab-icon">🧰</div>
+            <div>工具箱</div>
+        </div>
+        <div class="tab">
+            <div class="tab-icon">🗺️</div>
+            <div>地图</div>
+        </div>
+    </div>
+</body>
+</html>
+

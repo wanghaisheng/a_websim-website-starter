@@ -19,7 +19,51 @@
 
   function getLdjsonTypes() {
     // 可根据实际需求调整要加载的类型
-    return ['webpage', 'article', 'faqpage', 'breadcrumblist'];
+    // 根据 config.json 的 apptype 和页面类型，动态返回需要加载的 ld+json 类型
+    // 基础类型，通常所有页面都需要
+    let types = ['WebSite', 'Organization', 'BreadcrumbList'];
+
+    // 从全局配置或页面元数据中获取 apptype
+    // 此处为示例，实际项目中需要更完善的 apptype 获取机制
+    const appConfig = window.ldJsonConfig || {};
+    const apptype = appConfig.apptype || 'app'; // 默认为 'app'
+    const pageType = appConfig.pageType || ''; // 页面类型，例如 'blog', 'product', 'faq'
+
+    switch (apptype) {
+        case 'app':
+            types.push('SoftwareApplication', 'Review');
+            break;
+        case 'game':
+            types.push('GameApplication', 'Review');
+            break;
+        case 'product':
+            types.push('Product', 'Review');
+            break;
+        case 'blog':
+            types.push('Article', 'Review');
+            if (pageType === 'faq') { // 博文内嵌FAQ
+                types.push('FAQPage');
+            }
+            break;
+        case 'faq':
+            types.push('FAQPage');
+            break;
+        default:
+            // 默认情况下，可以只加载基础类型
+            break;
+    }
+
+    // 如果页面本身就是特定类型，也加入
+    if (pageType && !types.includes(pageType.charAt(0).toUpperCase() + pageType.slice(1) + 'Page') && pageType !== 'blog') {
+        if (pageType === 'article' || pageType === 'product' || pageType === 'faq') {
+             types.push(pageType.charAt(0).toUpperCase() + pageType.slice(1));
+        } else if (pageType === 'faqpage') {
+            types.push('FAQPage');
+        }
+    }
+
+    // 去重
+    return [...new Set(types)];
   }
 
   async function loadAndInjectLdjson() {

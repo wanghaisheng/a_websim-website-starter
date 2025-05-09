@@ -1,8 +1,15 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Home",
-  "description": "Vision Board home page. Discover the latest features, trending vision boards, and manifestation tips.",
+  "name": "MoodWheel Home",
+  "url": "https://moodwheel.heytcm.com/app/home",
+  "description": "探索 MoodWheel 应用的核心功能，开始您的情绪管理之旅。",
+  "isPartOf": {
+    "@id": "https://moodwheel.heytcm.com/#website"
+  },
   "inLanguage": "en",
-  "url": "https://visionboard.heymanifestation.com/home"
+  "mainEntity": {
+    "@type": "SoftwareApplication",
+    "@id": "https://moodwheel.heytcm.com/#softwareapplication"
+  }
 }
