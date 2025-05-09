@@ -3,8 +3,8 @@
   "@type": "Review",
   "itemReviewed": {
     "@type": "SoftwareApplication",
-    "name": "WebSim Vibe Coding Starter",
-    "url": "https://websimstarter.borninsea.com/"
+    "name": "WebSim Vibe 编程启动器",
+    "url": "https://websimstarter.borninsea.com/zh/"
   },
   "reviewRating": {
     "@type": "Rating",
@@ -14,12 +14,12 @@
   },
   "author": {
     "@type": "Person",
-    "name": "A. Developer"
+    "name": "开发者李明"
   },
   "datePublished": "2024-07-16",
-  "reviewBody": "The WebSim Vibe Coding Starter is an amazing toolkit! It helped me launch a prototype for my SaaS idea in minutes, not days. The AI-powered features and SEO automation are top-notch.",
+  "reviewBody": "WebSim Vibe 编程启动器太棒了！它帮助我在几分钟内就为我的SaaS想法推出了一个原型，而不是几天。AI驱动的功能和SEO自动化都是顶级的。",
   "publisher": {
     "@type": "Organization",
-    "name": "WebSim Team"
+    "name": "WebSim 团队"
   }
-}
+} 

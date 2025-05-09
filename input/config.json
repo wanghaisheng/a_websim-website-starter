@@ -1,8 +1,9 @@
 {
-  "baseUrl": "https://visionboard.heymanifestation.com",
+  "baseUrl": "https://websimstarter.borninsea.com",
   "defaultLang": "en",
-  "email":"support@heymanifestation.com",
+  "email":"support@borninsea.com",
   "apptype":"app",
+  "localepath":"locale",
   "robots": {
     "allowedBots": [
       "Googlebot",
@@ -21,11 +22,7 @@
     ],
     "allowedPaths": [
       "/",
-      "/en",
-      "/zh",
-      "/fr",
-      "/es",
-      "/de"
+      "/zh"
     ],
     "blockedPaths": [
       "/js",

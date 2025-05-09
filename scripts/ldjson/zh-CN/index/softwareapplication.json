@@ -11,12 +11,12 @@
     "price": "0",
     "priceCurrency": "CNY"
   },
-  "url": "https://moodwheel.heytcm.com/zh/index.html",
-  "downloadUrl": "https://moodwheel.heytcm.com/zh/index.html",
+  "url": "https://websimstarter.borninsea.com/zh/index.html",
+  "downloadUrl": "https://websimstarter.borninsea.com/zh/index.html",
   "publisher": {
     "@type": "Organization",
     "name": "MoodWheel 团队",
-    "url": "https://moodwheel.heytcm.com"
+    "url": "https://websimstarter.borninsea.com"
   },
   "featureList": [
     "情绪轮盘导航",

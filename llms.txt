@@ -1,47 +1,72 @@
-# MoodWheel - Full Website Introduction
-> MoodWheel is an emotion exploration and recording app based on the imagery of an emotion wheel, designed to help users better understand, express, and manage their emotions. It empowers users to turn every feeling into a resource for personal growth.
+# WebSim Vibe Coding Starter - Full Website Introduction
+> WebSim Vibe Coding Starter: Build a modern, SEO-optimized website in 5 minutes. AI-powered, highly automated, responsive, SEO best practices, creative and futuristic SaaS tool.
 
 ## Website Background
-MoodWheel was created to provide a dedicated tool for emotional exploration and well-being. It leverages the intuitive concept of an emotion wheel to help users navigate and articulate their feelings, fostering self-awareness and emotional intelligence. The vision is to make emotional understanding accessible and insightful.
+WebSim Vibe Coding Starter is designed for entrepreneurs, product managers, and innovators with limited coding experience. It allows users to validate business ideas and launch professional websites within 5 minutes without needing a coding background. It includes built-in SaaS tools, landing page and prototype design prompt templates for gaming apps, SEO optimization prompts, and common automation scripts to efficiently transform ideas into reality.
 
 ## Main URLs (from sitemap.xml)
-- https://moodwheel.heytcm.com/app/home
-  - The main page featuring the interactive MoodWheel for emotion exploration.
-- https://moodwheel.heytcm.com/app/journal
-  - For recording emotional experiences, including intensity, descriptions, and multimedia.
-- https://moodwheel.heytcm.com/app/analysis
-  - Provides analysis of emotion patterns and history through various visualizations.
-- https://moodwheel.heytcm.com/app/journey
-  - A gamified Mood Exploration Map to discover and understand a wide range of emotions.
-- https://moodwheel.heytcm.com/app/toolkit
-  - Offers a toolkit with resources like meditation and exercises for emotion regulation.
-- https://moodwheel.heytcm.com/privacy
+- https://websimstarter.borninsea.com/
+  - The main landing page for WebSim Vibe Coding Starter.
+- https://websimstarter.borninsea.com/#features
+  - Section detailing the features of the starter kit.
+- https://websimstarter.borninsea.com/#playground
+  - Interactive playground to experience the workflow.
+- https://websimstarter.borninsea.com/#showcase
+  - Showcase of projects built with WebSim Vibe.
+- https://websimstarter.borninsea.com/#future
+  - Vision for future development and advantages.
+- https://websimstarter.borninsea.com/about.html
+  - Information about the team and project.
+- https://websimstarter.borninsea.com/career.html
+  - Career opportunities.
+- https://websimstarter.borninsea.com/privacy.html
   - Details the application's privacy policy.
-- https://moodwheel.heytcm.com/terms
-  - Outlines the terms of service for using MoodWheel.
+- https://websimstarter.borninsea.com/terms.html
+  - Outlines the terms of service.
 
 ## Content Categories
-### [MoodWheel Emotion Exploration](https://moodwheel.heytcm.com/app/home)
-Interactive wheel navigation to explore emotions layer by layer, from basic feelings to nuanced states.
+### [Homepage](https://websimstarter.borninsea.com/)
+Introduces WebSim Vibe Coding Starter, its purpose, and core value proposition. Highlights key benefits like no-code development and rapid deployment.
 
-### [Emotion Journaling & Recording](https://moodwheel.heytcm.com/app/journal)
-Log emotions with details like intensity scores, textual descriptions, and optional photo/voice attachments.
+### [Features](https://websimstarter.borninsea.com/#features)
+Lists key features including:
+- No-code full site generation
+- 5-minute product concept validation
+- Entrepreneur/Product Manager friendly
+- SaaS/Game App landing page & prototype design prompt templates
+- SEO optimization dedicated prompt templates
+- Common automation scripts (generation, deployment, SEO submission)
+- Multi-language support & auto-generated sitemaps
+- Automated SEO: IndexNow, Bing, Google, metadata, validation
+- AI-powered blog & image generation
+- PWA & mobile-first, blazing fast
+- Keyword research, analytics, clarity
+- Real user management (Cloudflare Workers)
+- AI Scraper friendly robots.txt & llms.txt auto-generation
 
-### [Emotion Pattern Analysis](https://moodwheel.heytcm.com/app/analysis)
-Visualize emotional history and trends using timelines, calendars, or heatmaps to identify patterns and triggers.
+### [Interactive Playground](https://websimstarter.borninsea.com/#playground)
+A four-step guided experience:
+1.  **Research on Grok:** Research user complaints and pain points.
+2.  **Generate PRD.md with Google AI Studio:** Create a Product Requirements Document.
+3.  **Generate Site with WebSim:** Use PRD and prompts to generate the website.
+4.  **Deploy & Go Live:** Deploy the site to Cloudflare or a static host.
 
-### [Mood Exploration Map](https://moodwheel.heytcm.com/app/journey)
-Engage in a gamified experience to explore and unlock a comprehensive map of emotions.
+### [Showcase](https://websimstarter.borninsea.com/#showcase)
+Displays examples of websites and applications built using WebSim Vibe Coding Starter, such as AI SaaS landing pages and multi-language blogs.
 
-### [Emotion Regulation Toolkit](https://moodwheel.heytcm.com/app/toolkit)
-Access a curated set of tools and exercises, such as guided meditations or music, tailored to help manage and balance emotions.
+### [Future Vision](https://websimstarter.borninsea.com/#future)
+Outlines future advantages and the project's vision, including:
+- Continuous AI integration for smarter site generation.
+- Always up-to-date SEO automation.
+- Bold, creative UI/UX with GSAP-powered micro-interactions.
+- Scalability from MVP to enterprise.
 
 ## User Value
-- Enhances self-awareness by helping users identify and articulate their emotions accurately.
-- Facilitates emotional understanding and management through structured exploration and recording.
-- Provides insights into personal emotional patterns and triggers for proactive well-being.
-- Offers practical tools and resources for effective emotion regulation.
-- Supports a journey of personal growth by turning emotional experiences into learning opportunities.
+- Enables rapid validation of business ideas without coding.
+- Provides a comprehensive toolkit for building and launching professional websites quickly.
+- Automates SEO, multi-language support, and other complex tasks.
+- Offers templates and AI-powered tools to streamline development.
+- Focuses on performance, accessibility, and mobile-responsiveness by default.
 
 ## Technical SEO Enhancements
 - Dynamic injection of SEO meta tags, alternate language links, and LD+JSON structured data for optimal search engine visibility and multilingual support.

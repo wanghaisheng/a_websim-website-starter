@@ -1,16 +1,16 @@
 {
   "seo": {
-    "description": "AI驱动的愿景管理与自我成长平台，支持多语言、社区互动与数据隐私保障。",
-    "keywords": "愿景板, 显化, 目标管理, 自我成长, AI, 多语言, 社区, 数据隐私",
-    "og:title": "Vision Board - AI愿景板与显化工具",
-    "og:description": "用AI愿景板实现目标，提升自我成长，加入活跃社区，体验多语言和数据隐私保障。",
-    "og:image": "https://visionboard.heymanifestation.com/og-image.png",
-    "og:image:alt": "Vision Board App Banner",
+    "description": "WebSim Vibe 编程启动器隐私政策。了解当您使用我们的AI驱动网站构建器启动项目时，我们如何处理您的数据。",
+    "keywords": "WebSim, 隐私政策, 数据保护, SaaS, 编程启动器, AI, 网站构建器",
+    "og:title": "隐私政策 - WebSim Vibe 编程启动器",
+    "og:description": "了解我们对您在使用 WebSim Vibe 编程启动器时的隐私承诺。",
+    "og:image": "https://websimstarter.borninsea.com/og-image-privacy.png",
+    "og:image:alt": "WebSim Vibe 隐私政策横幅",
     "og:image:width": "1200",
     "og:image:height": "630",
-    "og:site_name": "HeyManifestation Vision Board",
+    "og:site_name": "WebSim Vibe 编程启动器",
     "google": "notranslate",
-    "author": "HeyManifestation Team",
-    "robots": "index, follow"
+    "author": "WebSim 团队",
+    "robots": "index, follow, noarchive"
   }
 }

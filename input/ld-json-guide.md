@@ -63,7 +63,7 @@ WebSim Starter 支持并建议优先覆盖以下结构化数据类型，具体�
 
 ## 3. 模板管理与个性化
 
-- 所有 ld+json 模板存放于 `d:\Download\audio-visual\heytcm\a_websim-website-starter\scripts\ldjson\` 及其子目录。
+- 所有 ld+json 模板存放于 `d:\Download\audio-visual\borninsea\a_websim-website-starter\scripts\ldjson\` 及其子目录。
 - 支持两种模板组织方式：
   1. **默认类型模板**：如 `ldjson/app/default/app.json`、`website.json` 等，适用于大多数页面。
   2. **页面级个性化模板**：如 `ldjson/app/home/website.json`、`ldjson/app/about/organization.json`，每个页面一个文件夹，内含该页面所有需注入的结构化数据文件。

@@ -18,14 +18,13 @@ try {
 // 3. 首页只保留 / 和 /zh（等多语言前缀），不输出 /index.html
 // 4. 其它静态页面（如 privacy, terms, intro-en 等）自动收录多语言版本
 
-const localeDir = path.resolve(__dirname, '../locale');
+const localeDir = path.resolve(__dirname, `../${config.localepath || 'locale'}`);
 let locales = ['']; // 默认无 locale
 try {
     if (fs.existsSync(localeDir)) {
-        const localeFiles = fs.readdirSync(localeDir)
-            .filter(f => f.endsWith('.json') && fs.statSync(path.join(localeDir, f)).isFile())
-            .map(f => path.basename(f, '.json'));
-        locales = [''].concat(localeFiles);
+        const detectedLocaleDirs = fs.readdirSync(localeDir)
+            .filter(f => fs.statSync(path.join(localeDir, f)).isDirectory());
+        locales = [''].concat(detectedLocaleDirs); // Correctly gets ['','en','zh'] etc.
     }
 } catch (e) {
     console.warn('Warning: Unable to read locale directory for i18n detection:', e.message);

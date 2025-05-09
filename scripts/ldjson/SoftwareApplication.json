@@ -7,11 +7,11 @@
   "description": "一个基于情绪轮盘意象的情绪探索与记录应用，帮助用户更好地理解、表达和管理情绪。",
   "author": {
     "@type": "Organization",
-    "name": "HeyTCM"
+    "name": "borninsea"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "HeyTCM",
+    "name": "borninsea",
     "url": "{{website.url}}"
   },
   "offers": {

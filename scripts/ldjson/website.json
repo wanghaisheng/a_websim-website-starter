@@ -2,18 +2,18 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "MoodWheel",
-  "url": "https://moodwheel.heytcm.com",
+  "url": "https://websimstarter.borninsea.com",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://moodwheel.heytcm.com/search?q={search_term_string}",
+    "target": "https://websimstarter.borninsea.com/search?q={search_term_string}",
     "query-input": "required name=search_term_string"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "HeyTCM",
+    "name": "borninsea",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://moodwheel.heytcm.com/img/logo.svg",
+      "url": "https://websimstarter.borninsea.com/img/logo.svg",
       "width": 600,
       "height": 60
     }

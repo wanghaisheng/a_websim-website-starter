@@ -4,7 +4,7 @@ const path = require('path');
 async function main() {
     const configPath = path.resolve(__dirname, 'config.json');
     const config = require(configPath);
-    const baseUrl = config.baseUrl || 'https://mood-island.heytcm.com';
+    const baseUrl = config.baseUrl || 'https://mood-island.borninsea.com';
     
     const validator = new URLValidator(baseUrl);
     const results = await validator.validateDirectory(path.resolve(__dirname, '..'));
