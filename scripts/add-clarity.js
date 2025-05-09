@@ -28,8 +28,8 @@ const clarityScript = `
   </script>`;
 
 const locales = ['', 'fr', 'zh', 'es', 'de'];
-const baseDir = path.join(__dirname, '/');
-const ignoreFolders = ['node_modules', 'template', 'assets', 'temp'];
+const baseDir = path.join(__dirname, '../');
+const ignoreFolders = ['node_modules', 'template', 'assets', 'temp', '.git', 'scripts'];
 
 function listHtmlFiles(dir) {
     return fs.readdirSync(dir).reduce((files, file) => {
@@ -62,6 +62,7 @@ function processHtmlFiles() {
 
         htmlFiles.forEach(filePath => {
             try {
+                console.log(`Processing for Clarity: ${filePath}`);
                 let content = fs.readFileSync(filePath, 'utf8');
                 
                 // Check if Microsoft Clarity is already present
