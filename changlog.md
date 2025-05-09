@@ -42,3 +42,7 @@
 
 8. **AI 友好的 llms.txt 多语言支持**
    - 支持自动为每种站点语言生成对应的 llms-<lang>.txt 文件（如 llms-zh.txt、llms-fr.txt），robots.txt 针对 AI Scraper bot 自动开放所有语言版本，提升 AI 语料抓取与国际化能力。
+
+
+8. 使用germini一键更新内容
+
