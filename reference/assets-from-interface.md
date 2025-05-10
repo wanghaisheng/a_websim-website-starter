@@ -1,4 +1,4 @@
-0. how to  get prd from raw idea /1 sentence
+# 工作流0. how to  get prd from raw idea /1 sentence
 ```
 通用提示词：从一句话需求挖掘并生成视觉界面描述PRD初稿
 You are an expert Game Designer and Product Analyst, skilled at transforming nascent ideas into structured product descriptions. Your task is to take a **brief, single-sentence user requirement** for a game interface and expand it into a preliminary **Visual Interface Description section for a Product Requirements Document (PRD)**.
@@ -65,7 +65,7 @@ The goal is to generate a description that, while based on minimal input, is ric
 Please generate the preliminary Visual Interface Description PRD section based on the user's requirement provided above. Focus on elaborating the visual structure and components, and ensure all text/data areas are described as visual placeholders.
 ```
   
-2. how to describe interface
+# 工作流1. how to describe interface
 
 ```
 好的，我们来将这个“从PRD生成UI元素CSV的界面描述”的提示词进行泛化，移除特定游戏名称《救救熊猫》和固定的“水墨画风”，使其更具通用性，可以适应不同游戏项目和美术风格。
@@ -113,7 +113,7 @@ For a given UI screen/interface described in the PRD, generate a textual descrip
 Please generate the detailed visual interface description based on the PRD excerpt(s) provided above, adhering to all the specified guidelines, particularly the focus on visual placeholders for text/data areas, and ensuring consistency with the defined [GAME GENRE] and [OVERALL ART STYLE].
 ```
 
-**如何使用这个泛化后的提示词：**
+ ##1.1 **如何使用这个泛化后的提示词：**
 
 1.  **填写占位符：**
     *   `[SPECIFY GAME GENRE, e.g., "mobile puzzle game," "desktop RPG," "casual simulation game"]`: 替换为你当前项目的游戏类型。
@@ -144,7 +144,7 @@ Please generate the detailed visual interface description based on the PRD excer
 ```
 
 
-2. how to get assets prompt from interface description
+# 工作流2. how to get assets prompt from interface description
 ```
 好的，我们来泛化之前那个“从界面图片（或其文字描述）生成UI元素CSV的提示词”，使其不再写死游戏名称和风格，并且能更好地接收上一阶段（从PRD生成的）“视觉界面描述”作为输入。
 
@@ -203,7 +203,7 @@ Your goal is to deconstruct this description into its constituent visual element
 Please generate the CSV output for the visual interface description provided above. Ensure all AI image prompts within the CSV strictly adhere to the "no text" rule and accurately reflect the described visual placeholders and the overall [SPECIFY OVERALL ART STYLE].
 ```
 
-**如何使用这个泛化后的提示词：**
+##2.1**如何使用这个泛化后的提示词：**
 
 1.  **填写占位符:**
     *   `[SPECIFY OVERALL ART STYLE, e.g., "pixel art," "cartoonish," "photorealistic," "flat design," "sci-fi minimalist"]`: 替换为你当前项目的统一美术风格。这个风格将指导所有生成的AI图像素材。
@@ -242,7 +242,7 @@ Please generate the CSV output for the visual interface description provided abo
 ```
 
 
-3 how  to get assets from screenshot
+# 工作流3 how  to get assets from screenshot
 ```
 好的，我们来泛化之前那个“从界面图片生成UI元素CSV的提示词”，使其不再绑定具体游戏名称和风格，而是可以根据用户指定的风格来分析任意界面图片，并生成相应的、包含“无文字AI素材提示词”的CSV。
 
