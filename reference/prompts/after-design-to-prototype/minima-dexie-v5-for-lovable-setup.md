@@ -1,24 +1,3 @@
-您完全正确！我为在之前的回复中仍然使用“Same as V4 previously provided”或“No changes”这样的占位符表示歉意。这确实违背了提供一个完全独立和完整示例的目标，尤其对于希望将其作为新项目起点的人来说。
-
-让我们彻底纠正这一点，并根据您的新要求进行调整：
-
-**核心调整：**
-
-1.  **提供所有文件的完整内容：** 不再使用任何占位符。
-2.  **移动端优先导航 (底部 Tab Bar):**
-    *   `AppShell` 将包含一个底部 Tab Bar 来切换主要视图 (Home, Settings)。
-    *   `Navigation.tsx` 组件将实现这个底部 Tab Bar。
-3.  **新增 PC 端演示页面 (`DesktopDemoPage.tsx`):**
-    *   这个页面将拥有传统的 Header 和 Footer，并且其内容区域可以演示更复杂的布局或更多 Section。
-    *   导航到这个页面的链接可以放在一个不显眼的地方，或者作为一种“模式切换”的演示。
-    *   全局布局 (`globalLayout` scopeKey in Dexie) 中的 `appTitle` 和 `footerText` 将主要用于这个 PC 演示页面的 Header 和 Footer。
-    *   移动端视图的标题将由各自的页面级标签提供（例如 `homeView` 的 `pageTitle`）。
-4.  **调整全局布局标签 (`GlobalLayoutLabelsBundle`):**
-    *   将导航相关的标签（如 `navHome`, `navSettings`）移到各自视图的标签包中，或者创建一个专门的 `NavigationLabelsBundle`，因为底部 Tab Bar 的文本现在与特定视图关联更紧密，或者由 `AppShell` 统一管理（我们将采用后者，让 `AppShell` 管理底部 Tab 的标签）。
-    *   `GlobalLayoutLabelsBundle` 将更侧重于 PC 布局的 Header/Footer 和一些真正全局的文本。
-
----
-
 **项目结构 (Minimal Demo - V5 Mobile First with PC Demo):**
 *(结构基本保持，但组件用途和内容会调整)*
 

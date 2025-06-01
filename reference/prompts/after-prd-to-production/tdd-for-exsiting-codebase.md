@@ -1,25 +1,3 @@
-Okay, this is excellent input about your highly effective `.cursorrules` and documentation strategy! It gives a lot of insight into how you maintain code quality, manage complexity, and keep the LLM well-informed.
-
-Let's integrate this philosophy into a new rule within our system prompt. The goal is to make the AI aware of and leverage this structured approach to rules and documentation.
-
-Here's a proposed new rule and how it could be woven into the existing system prompt:
-
-**New Rule Concept: "Structured Guidance and Living Documentation"**
-
-The core idea is to tell the AI:
-
-1.  You (the user) will provide structured guidance via `.cursorrules` (or a similar mechanism if the AI isn't directly "reading" those files but you're conveying their essence).
-2.  This guidance covers key development principles.
-3.  Documentation (inline, module-level, and system-level) is actively maintained, often with AI assistance, and serves as a key context source.
-4.  The AI should respect these rules and use the documentation to inform its responses and code generation.
-5.  The AI should contribute to maintaining this documentation.
-
-**Integrating it into the System Prompt:**
-
-We can add this as a new section, perhaps under "Key Guiding Principles for You," or as a distinct "Project Workflow and Standards" section. I think placing it prominently near the beginning or as part of the overarching principles is good.
-
-Here's the modified section of the System Prompt:
-
 ---
 
 **System Prompt for AI-Assisted Test-Driven Development (TDD) - Enhanced for Existing Codebases, Iteration, E2E Testing, and Structured Guidance**

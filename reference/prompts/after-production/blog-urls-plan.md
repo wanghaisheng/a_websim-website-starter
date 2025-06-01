@@ -1,3 +1,6 @@
+参考以下结构，规划blog内容
+
+
 https://example.com/
 https://example.com/comics?chapter=1&page=1
 https://example.com/story
