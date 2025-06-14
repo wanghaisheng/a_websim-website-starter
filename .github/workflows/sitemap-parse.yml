@@ -1,8 +1,8 @@
 name: Daily parse sitemap Traccker
 
 on:
-  schedule:
-    - cron: '0 2 * * *' # 每天凌晨2点执行
+  # schedule:
+    # - cron: '0 2 * * *' # 每天凌晨2点执行
   workflow_dispatch:
 
 jobs:
