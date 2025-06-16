@@ -99,7 +99,7 @@ def aggregate_all_domains(domain_file):
 
     # --- 写入今日新增 newurl_YYYY-MM-DD.csv ---
     newurl_path = os.path.join(results_folder, f'newurl_{today}.csv')
-    if firstime==False and all_new_url_details:
+    if  all_new_url_details:
         with open(newurl_path, 'w', encoding='utf-8', newline='') as nf:
             writer = csv.DictWriter(nf, fieldnames=['loc', 'lastmodified', 'added_date'])
             writer.writeheader()
