@@ -1,0 +1,119 @@
+name: Daily App Opportunity Hunter
+
+on:
+  # 每天UTC时间早上8点自动运行一次 (你可以根据需要修改时间)
+  schedule:
+    - cron: '0 8 * * *'
+  # 允许你从GitHub的Actions标签页手动触发此工作流
+  workflow_dispatch:
+
+jobs:
+  hunt-for-apps:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
+
+      - name: Run Google Search Scraper
+        id: scraper
+        run: |
+          # 将Python脚本直接嵌入到工作流中，使其自包含
+          cat << 'EOF' > scraper.py
+          import requests
+          from bs4 import BeautifulSoup
+          import sys
+          from datetime import datetime
+          import urllib.parse
+          import time
+
+          # 定义我们的三个探测器
+          DETECTORS = {
+              "angry_user_detector": 'site:reddit.com {category} intitle:("app" OR "apps") intext:("paywall" OR "scam" OR "subscription trap" OR "forced to pay")',
+              "direct_hit_detector": '(site:play.google.com OR site:apps.apple.com) {category} intext:("paywall" OR "useless without paying" OR "must subscribe")',
+              "value_proposition_detector": 'site:reddit.com {category} intitle:("worth it" OR "review" OR "vs") intext:("paid" OR "pro" OR "subscription")'
+          }
+
+          # 定义我们要扫描的应用品类
+          CATEGORIES = ["photo editor", "scanner", "budgeting", "note taking", "habit tracker", "vpn"]
+
+          # 设置HTTP请求头，模拟浏览器
+          HEADERS = {
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
+          }
+
+          def search(query):
+              # 增加tbs=qdr:d参数，限定为过去一天
+              params = {
+                  "q": query,
+                  "tbs": "qdr:d",
+                  "hl": "en" # 使用英文界面以获得更一致的HTML结构
+              }
+              url = f"https://www.google.com/search?{urllib.parse.urlencode(params)}"
+              print(f"Searching for: {query}")
+              
+              try:
+                  response = requests.get(url, headers=HEADERS)
+                  response.raise_for_status()
+                  
+                  soup = BeautifulSoup(response.text, "html.parser")
+                  
+                  links = []
+                  # Google搜索结果的HTML结构经常变化，这个选择器可能需要调整
+                  # 我们寻找包含主链接的div，然后提取其中的a标签
+                  for result_div in soup.select("div.g"):
+                      link_tag = result_div.find("a")
+                      if link_tag and link_tag.get("href"):
+                          href = link_tag.get("href")
+                          # 过滤掉非搜索结果的链接
+                          if href.startswith("http"):
+                              links.append(href)
+                  
+                  return links
+              except requests.RequestException as e:
+                  print(f"Error during request: {e}", file=sys.stderr)
+                  return []
+
+          if __name__ == "__main__":
+              today = datetime.now().strftime("%Y-%m-%d")
+              
+              for detector_name, query_template in DETECTORS.items():
+                  all_results = set()
+                  for category in CATEGORIES:
+                      # 每次搜索之间增加延迟，降低被屏蔽的风险
+                      time.sleep(5) 
+                      query = query_template.format(category=category)
+                      results = search(query)
+                      for result in results:
+                          all_results.add(result)
+                  
+                  if all_results:
+                      filename = f"{detector_name}_{today}.txt"
+                      with open(filename, "w", encoding="utf-8") as f:
+                          for link in sorted(list(all_results)):
+                              f.write(link + "\n")
+                      print(f"Saved {len(all_results)} results to {filename}")
+
+          EOF
+
+          # 执行脚本
+          python scraper.py
+      
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "CI: Daily app opportunity hunter results"
+          file_pattern: "*.txt"
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "actions@github.com"
+          commit_author: "GitHub Actions Bot <actions@github.com>"
