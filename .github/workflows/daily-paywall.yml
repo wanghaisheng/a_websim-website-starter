@@ -59,7 +59,7 @@ jobs:
                   "tbs": "qdr:d",
                   "hl": "en" # 使用英文界面以获得更一致的HTML结构
               }
-              url = f"https://www.google.com/search?{urllib.parse.urlencode(params)}"
+              url = f"https://www.google.com.hk/search?{urllib.parse.urlencode(params)}"
               print(f"Searching for: {query}")
               
               try:
