@@ -1,0 +1,130 @@
+name: Daily depedent game  Hunter (Flexible V3)
+
+on:
+  schedule:
+    - cron: '0 8 * * *' # Daily at 8:00 AM UTC
+  workflow_dispatch:
+
+jobs:
+  hunt-for-apps:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Advanced Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install "curl_cffi>=0.6.0" beautifulsoup4
+
+      - name: Run Flexible Google Search Scraper
+        id: scraper
+        run: |
+          # The flexible and robust Python script is embedded here
+          cat << 'EOF' > flexible_scraper.py
+          import time
+          import json
+          import sys
+          import urllib.parse
+          from datetime import datetime
+          from curl_cffi import requests
+          from bs4 import BeautifulSoup
+
+          # --- Configuration ---
+          # Define our three探测器
+          DETECTORS = {
+              # "angry_user_detector": 'site:reddit.com {category} intitle:("app" OR "apps") intext:("paywall" OR "scam" OR "subscription trap")',
+              "direct_hit_detector": '(intext:("independent game" OR " is an independent website and is not affiliated with any organizations")',
+              # "value_proposition_detector": 'site:reddit.com {category} intitle:("worth it" OR "review") intext:("paid" OR "subscription")'
+          }
+          
+          # --- KEY CHANGE: CATEGORIES is empty by default ---
+          # To run category-specific searches, populate this list.
+          # e.g., CATEGORIES = ["photo editor", "scanner", "budgeting"]
+          CATEGORIES = []
+
+          MAX_RETRIES = 3
+          RETRY_DELAY = 10 # seconds
+          BROWSER_IMPERSONATE = "chrome110"
+
+          def search(query):
+              params = {"q": query.strip(), "tbs": "qdr:d", "hl": "en"}
+              url = f"https://www.google.com/search?{urllib.parse.urlencode(params)}"
+              print(f"Searching for: {query.strip()}")
+
+              for attempt in range(MAX_RETRIES):
+                  try:
+                      response = requests.get(url, impersonate=BROWSER_IMPERSONATE, timeout=20)
+                      if response.status_code == 429:
+                          print(f"WARN: Received 429. Waiting {RETRY_DELAY}s for attempt {attempt + 2}...")
+                          time.sleep(RETRY_DELAY)
+                          continue
+                      response.raise_for_status()
+                      soup = BeautifulSoup(response.text, "html.parser")
+                      links = []
+                      for result_div in soup.select("div.g"):
+                          link_tag = result_div.find("a")
+                          if link_tag and link_tag.get("href"):
+                              href = link_tag.get("href")
+                              if href.startswith("http"):
+                                  links.append(href)
+                      return links
+                  except Exception as e:
+                      print(f"ERROR: Attempt {attempt + 1} failed for query '{query}'. Error: {e}", file=sys.stderr)
+                      if attempt < MAX_RETRIES - 1:
+                          print(f"Waiting {RETRY_DELAY}s before retrying...")
+                          time.sleep(RETRY_DELAY)
+              print(f"FATAL: All {MAX_RETRIES} attempts failed for query '{query}'.", file=sys.stderr)
+              return []
+
+          if __name__ == "__main__":
+              today = datetime.now().strftime("%Y-%m-%d")
+              
+              # --- KEY CHANGE: Logic to handle empty CATEGORIES list ---
+              if not CATEGORIES:
+                  # If CATEGORIES is empty, perform a single, broad search per detector
+                  search_list = [""]
+                  print("INFO: No categories defined. Performing a broad search.")
+              else:
+                  # If CATEGORIES is populated, use the defined list
+                  search_list = CATEGORIES
+                  print(f"INFO: Searching for specified categories: {', '.join(search_list)}")
+
+              for detector_name, query_template in DETECTORS.items():
+                  all_results = set()
+                  for category in search_list:
+                      time.sleep(7)
+                      # The .strip() handles potential extra spaces when category is empty
+                      query = query_template.format(category=category).strip()
+                      results = search(query)
+                      for result in results:
+                          all_results.add(result)
+                  
+                  if all_results:
+                      # Add 'broad' prefix to filename if no categories were specified
+                      prefix = "broad" if not CATEGORIES else "categorized"
+                      filename = f"{prefix}_{detector_name}_{today}.txt"
+                      with open(filename, "w", encoding="utf-8") as f:
+                          for link in sorted(list(all_results)):
+                              f.write(link + "\n")
+                      print(f"SUCCESS: Saved {len(all_results)} results to {filename}")
+
+          EOF
+
+          # Execute the flexible scraper script
+          python flexible_scraper.py
+      
+      - name: Commit and push results
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "CI: Daily app opportunity hunter results (flexible v3)"
+          file_pattern: "*.txt"
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "actions@github.com"
+          commit_author: "GitHub Actions Bot <actions@github.com>"
