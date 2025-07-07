@@ -1,0 +1,135 @@
+name: Robust Google Search for TikTok Links (Rate Limited)
+
+on:
+  workflow_dispatch:
+    inputs:
+      category_keyword:
+        description: 'Category keyword for the search (e.g., "VPN", "skincare")'
+        required: false
+        default: ''
+      hours_to_search:
+        description: 'Number of past hours to search (rate limited to ~200 results/hour)'
+        required: true
+        default: '1'
+        type: number
+
+jobs:
+  google_search:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Or your preferred Node.js version
+
+      - name: Install dependencies
+        run: npm install axios cheerio moment  # Install axios, cheerio, and moment
+
+      - name: Run Google Search Script
+        env:
+          CATEGORY_KEYWORD: ${{ github.event.inputs.category_keyword }}
+          HOURS_TO_SEARCH: ${{ github.event.inputs.hours_to_search }}
+        run: |
+          # Create a Node.js script to perform the Google search and rudimentary parsing
+          NODE_SCRIPT=$(cat <<EOF
+          const axios = require('axios');
+          const cheerio = require('cheerio');
+          const moment = require('moment');
+
+          async function performGoogleSearch(categoryKeyword, hoursToSearch) {
+            const platformString = 'tiktok.com';
+            const tiktokSearchTerms = [
+              "link in bio",
+              "link please",
+              "where to buy",
+              "where can I find",
+              "product link",
+              "shopping link",
+              "where did you get this",
+              "what is it called",
+              "drop the link",
+              "link?",
+              "shop link",
+              "pls link",
+              "can i get the link",
+              "what's the link",
+              "link to buy",
+              "source?",
+              "where can i find it?",
+              "where can i get it?",
+              "product recs?",
+              "product recommendations?",
+              "what brand is it?",
+              "what brand?",
+              "where's it from?",
+              "link in comments"
+            ];
+
+            const baseSearchQuery = `site:${platformString} "${categoryKeyword}" intext:(${tiktokSearchTerms.map(term => `"${term}"`).join(" OR ")})`;
+            const allSearchResults = [];
+
+            for (let i = 0; i < hoursToSearch; i++) {
+              const endTime = moment().subtract(i, 'hours');
+              const startTime = moment().subtract(i + 1, 'hours');
+
+              const timeRange = `after:${startTime.format('YYYY-MM-DD')} before:${endTime.format('YYYY-MM-DD')}`;
+              const timeLimitedSearchQuery = baseSearchQuery + ` ${timeRange}`;
+
+              const googleSearchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(timeLimitedSearchQuery);
+
+              try {
+                const response = await axios.get(googleSearchUrl);
+                console.log(\`Hour \${i + 1}: Google Search URL: \${googleSearchUrl}\`);
+                console.log(\`Hour \${i + 1}: Status Code: \${response.status}\`);
+
+                if (response.status === 200) {
+                  const $ = cheerio.load(response.data);
+                  const resultElements = $('.tF2Cxc');
+
+                  resultElements.each((index, element) => {
+                    const title = $(element).find('h3').text();
+                    const link = $(element).find('a').attr('href');
+
+                     if (link && (link.includes(platformString))) {
+                        allSearchResults.push({title, link, timeRange});
+                        console.log(\`Hour \${i + 1}, Result \${index + 1}: Title: \${title}, Link: \${link}, Time: \${timeRange}\`);
+                     }
+                  });
+                } else {
+                  console.error(\`Hour \${i + 1}: Google Search returned non-200 status code: \${response.status}\`);
+                }
+              } catch (error) {
+                console.error(\`Hour \${i + 1}: Error performing Google search: \${error.message}\`);
+                if (error.response) {
+                  console.error(\`Hour \${i + 1}: Error Status Code: \${error.response.status}\`);
+                }
+              }
+
+              // Add a small delay to be nice to Google (essential for rate limiting)
+              await new Promise(resolve => setTimeout(resolve, 2000)); // Delay for 2 seconds
+            }
+
+            if (allSearchResults.length === 0) {
+              console.log('No relevant search results found within the specified time range.');
+            } else {
+              console.log(\`Total relevant search results found: \${allSearchResults.length}\`);
+            }
+          }
+
+          const categoryKeyword = process.env.CATEGORY_KEYWORD || ''; // Default to empty string
+          const hoursToSearch = parseInt(process.env.HOURS_TO_SEARCH || '1', 10);
+
+          performGoogleSearch(categoryKeyword, hoursToSearch);
+          EOF
+          )
+
+          # Execute the Node.js script
+          echo "$NODE_SCRIPT" > google_search.js
+          node google_search.js
+
+      - name: Output Search Results
+        run: echo "Check the logs above for the Google Search Results (limited to ~200 results per hour searched)."
