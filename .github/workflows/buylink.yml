@@ -35,7 +35,9 @@ jobs:
           HOURS_TO_SEARCH: ${{ github.event.inputs.hours_to_search }}
         run: |
           # Create a Node.js script to perform the Google search and rudimentary parsing
-          NODE_SCRIPT=$(cat <<EOF
+
+          # Define the Node.js script using printf to avoid shell interpretation issues
+          printf "%s" > google_search.js <<EOF
           const axios = require('axios');
           const cheerio = require('cheerio');
           const moment = require('moment');
@@ -69,15 +71,16 @@ jobs:
               "link in comments"
             ];
 
-            const baseSearchQuery = `site:${platformString} "${categoryKeyword}" intext:(${tiktokSearchTerms.map(term => `"${term}"`).join(" OR ")})`;
+            const baseSearchQuery = \`site:\${platformString} "\${categoryKeyword}" intext:(\${tiktokSearchTerms.map(term => \`"\${term}"\`).join(" OR ")})\`;
+
             const allSearchResults = [];
 
             for (let i = 0; i < hoursToSearch; i++) {
               const endTime = moment().subtract(i, 'hours');
               const startTime = moment().subtract(i + 1, 'hours');
 
-              const timeRange = `after:${startTime.format('YYYY-MM-DD')} before:${endTime.format('YYYY-MM-DD')}`;
-              const timeLimitedSearchQuery = baseSearchQuery + ` ${timeRange}`;
+              const timeRange = \`after:\${startTime.format('YYYY-MM-DD')} before:\${endTime.format('YYYY-MM-DD')}\`;
+              const timeLimitedSearchQuery = baseSearchQuery + \` \${timeRange}\`;
 
               const googleSearchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(timeLimitedSearchQuery);
 
@@ -94,10 +97,10 @@ jobs:
                     const title = $(element).find('h3').text();
                     const link = $(element).find('a').attr('href');
 
-                     if (link && (link.includes(platformString))) {
-                        allSearchResults.push({title, link, timeRange});
-                        console.log(\`Hour \${i + 1}, Result \${index + 1}: Title: \${title}, Link: \${link}, Time: \${timeRange}\`);
-                     }
+                    if (link && (link.includes(platformString))) {
+                      allSearchResults.push({title, link, timeRange});
+                      console.log(\`Hour \${i + 1}, Result \${index + 1}: Title: \${title}, Link: \${link}, Time: \${timeRange}\`);
+                    }
                   });
                 } else {
                   console.error(\`Hour \${i + 1}: Google Search returned non-200 status code: \${response.status}\`);
@@ -125,10 +128,8 @@ jobs:
 
           performGoogleSearch(categoryKeyword, hoursToSearch);
           EOF
-          )
 
           # Execute the Node.js script
-          echo "$NODE_SCRIPT" > google_search.js
           node google_search.js
 
       - name: Output Search Results
