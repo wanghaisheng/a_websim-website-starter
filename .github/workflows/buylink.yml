@@ -35,9 +35,8 @@ jobs:
           HOURS_TO_SEARCH: ${{ github.event.inputs.hours_to_search }}
         run: |
           # Create a Node.js script to perform the Google search and rudimentary parsing
-
-          # Define the Node.js script using printf to avoid shell interpretation issues
-          printf "%s" > google_search.js <<EOF
+          # Use a quoted heredoc to prevent shell interpretation
+          cat > google_search.js <<'EOF'
           const axios = require('axios');
           const cheerio = require('cheerio');
           const moment = require('moment');
@@ -71,7 +70,7 @@ jobs:
               "link in comments"
             ];
 
-            const baseSearchQuery = \`site:\${platformString} "\${categoryKeyword}" intext:(\${tiktokSearchTerms.map(term => \`"\${term}"\`).join(" OR ")})\`;
+            const baseSearchQuery = `site:${platformString} "\${categoryKeyword}" intext:(\${tiktokSearchTerms.map(term => \`"\${term}"\`).join(" OR ")})`;
 
             const allSearchResults = [];
 
