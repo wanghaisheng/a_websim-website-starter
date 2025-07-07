@@ -29,14 +29,13 @@ jobs:
       - name: Install dependencies
         run: npm install axios cheerio moment  # Install axios, cheerio, and moment
 
-      - name: Run Google Search Script
+      - name: Prepare and Run Google Search Script
         env:
           CATEGORY_KEYWORD: ${{ github.event.inputs.category_keyword }}
           HOURS_TO_SEARCH: ${{ github.event.inputs.hours_to_search }}
         run: |
-          # Create a Node.js script to perform the Google search and rudimentary parsing
-          # Use a quoted heredoc to prevent shell interpretation
-          cat > google_search.js <<'EOF'
+          # Define the Node.js script with correct syntax (no template literals here)
+          NODE_SCRIPT=$(cat <<EOF
           const axios = require('axios');
           const cheerio = require('cheerio');
           const moment = require('moment');
@@ -70,7 +69,7 @@ jobs:
               "link in comments"
             ];
 
-            const baseSearchQuery = `site:${platformString} "\${categoryKeyword}" intext:(\${tiktokSearchTerms.map(term => \`"\${term}"\`).join(" OR ")})`;
+            const baseSearchQuery = "site:" + platformString + ' "' + categoryKeyword + '" intext:(' + tiktokSearchTerms.map(function(term) { return '"' + term + '"'; }).join(" OR ") + ')';
 
             const allSearchResults = [];
 
@@ -78,36 +77,36 @@ jobs:
               const endTime = moment().subtract(i, 'hours');
               const startTime = moment().subtract(i + 1, 'hours');
 
-              const timeRange = \`after:\${startTime.format('YYYY-MM-DD')} before:\${endTime.format('YYYY-MM-DD')}\`;
-              const timeLimitedSearchQuery = baseSearchQuery + \` \${timeRange}\`;
+              const timeRange = "after:" + startTime.format('YYYY-MM-DD') + " before:" + endTime.format('YYYY-MM-DD');
+              const timeLimitedSearchQuery = baseSearchQuery + ' ' + timeRange;
 
               const googleSearchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(timeLimitedSearchQuery);
 
               try {
                 const response = await axios.get(googleSearchUrl);
-                console.log(\`Hour \${i + 1}: Google Search URL: \${googleSearchUrl}\`);
-                console.log(\`Hour \${i + 1}: Status Code: \${response.status}\`);
+                console.log("Hour " + (i + 1) + ": Google Search URL: " + googleSearchUrl);
+                console.log("Hour " + (i + 1) + ": Status Code: " + response.status);
 
                 if (response.status === 200) {
                   const $ = cheerio.load(response.data);
                   const resultElements = $('.tF2Cxc');
 
-                  resultElements.each((index, element) => {
-                    const title = $(element).find('h3').text();
-                    const link = $(element).find('a').attr('href');
+                  resultElements.each(function(index, element) {
+                    const title = $(this).find('h3').text();
+                    const link = $(this).find('a').attr('href');
 
                     if (link && (link.includes(platformString))) {
-                      allSearchResults.push({title, link, timeRange});
-                      console.log(\`Hour \${i + 1}, Result \${index + 1}: Title: \${title}, Link: \${link}, Time: \${timeRange}\`);
+                      allSearchResults.push({title: title, link: link, timeRange: timeRange});
+                      console.log("Hour " + (i + 1) + ", Result " + (index + 1) + ": Title: " + title + ", Link: " + link + ", Time: " + timeRange);
                     }
                   });
                 } else {
-                  console.error(\`Hour \${i + 1}: Google Search returned non-200 status code: \${response.status}\`);
+                  console.error("Hour " + (i + 1) + ": Google Search returned non-200 status code: " + response.status);
                 }
               } catch (error) {
-                console.error(\`Hour \${i + 1}: Error performing Google search: \${error.message}\`);
+                console.error("Hour " + (i + 1) + ": Error performing Google search: " + error.message);
                 if (error.response) {
-                  console.error(\`Hour \${i + 1}: Error Status Code: \${error.response.status}\`);
+                  console.error("Hour " + (i + 1) + ": Error Status Code: " + error.response.status);
                 }
               }
 
@@ -118,7 +117,7 @@ jobs:
             if (allSearchResults.length === 0) {
               console.log('No relevant search results found within the specified time range.');
             } else {
-              console.log(\`Total relevant search results found: \${allSearchResults.length}\`);
+              console.log("Total relevant search results found: " + allSearchResults.length);
             }
           }
 
@@ -126,9 +125,12 @@ jobs:
           const hoursToSearch = parseInt(process.env.HOURS_TO_SEARCH || '1', 10);
 
           performGoogleSearch(categoryKeyword, hoursToSearch);
-          EOF
+          EOF)
 
-          # Execute the Node.js script
+          # Create the google_search.js file
+          echo "$NODE_SCRIPT" > google_search.js
+
+          # Run the Node.js script using the specified Node.js version
           node google_search.js
 
       - name: Output Search Results
