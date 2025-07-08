@@ -1,0 +1,85 @@
+name: Google Search-1h and Commit Results
+
+on:
+  workflow_dispatch:
+    inputs:
+      search_query:
+        description: 'Enter Google Search Query'
+        required: true
+        default: 'GitHub Actions tutorial'
+
+jobs:
+  search_and_commit:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up Python environment
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google pandas requests
+
+      # Run the Python script with the input query
+      - name: Run Google Search script
+        run: |
+          python google_search_qdr.py "${{ github.event.inputs.search_query }}"
+
+      # Commit and push the result CSV file to the repository
+      - name: Commit CSV file with search results
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add -A
+          git commit -m "Add search results for query: ${{ github.event.inputs.search_query }}"
+          git pushname: Google Search-1h and Commit Results
+
+on:
+  workflow_dispatch:
+    inputs:
+      search_query:
+        description: 'Enter Google Search Query'
+        required: true
+        default: 'GitHub Actions tutorial'
+
+jobs:
+  search_and_commit:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up Python environment
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google pandas requests
+
+      # Run the Python script with the input query
+      - name: Run Google Search script
+        run: |
+          python scripts/google_search_qdr.py "${{ github.event.inputs.search_query }}"
+
+      # Commit and push the result CSV file to the repository
+      - name: Commit CSV file with search results
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add -A
+          git commit -m "Add search results for query: ${{ github.event.inputs.search_query }}"
+          git push
