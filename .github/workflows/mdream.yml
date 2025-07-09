@@ -1,0 +1,55 @@
+# Name of the GitHub Action workflow
+name: Crawl Nuxt Docs and Update Repo
+
+# Controls when the action will run.
+# This workflow uses `workflow_dispatch` which allows you to run it manually.
+on:
+  workflow_dispatch:
+  # You can also run it on a schedule (e.g., once a week) by uncommenting the following lines:
+  # schedule:
+  #   - cron: '0 2 * * 1' # Runs at 2 AM UTC every Monday
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  crawl-and-commit:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Grant GITHUB_TOKEN the permissions to write contents to the repo
+    permissions:
+      contents: write
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # 1. Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Sets up a Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use a recent LTS version of Node.js
+
+      # 3. Run the web crawler to fetch the content
+      - name: Run Web Crawler
+        run: npx @mdream/crawl -o output "https://developer.apple.com/design/human-interface-guidelines/**"
+        # This will create an 'output' directory with the scraped .md files
+
+      # 4. Commit the new/updated files back to the repository
+      # This step uses a popular action to automatically handle staging, committing, and pushing.
+      - name: Commit and Push Files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # Required: The commit message for the update
+          commit_message: "docs: Update content from Nuxt docs crawl"
+
+          # Optional: The branch to push to. Defaults to the current branch.
+          # branch: main
+
+          # Optional: The directory to search for files to commit.
+          # The crawler saves files to the 'output' directory by default.
+          file_pattern: "output/**/*.md"
+
+          # Optional: A custom commit author and email
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
