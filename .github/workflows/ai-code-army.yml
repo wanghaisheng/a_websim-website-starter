@@ -1,4 +1,4 @@
-name: Code Assistant
+name: multirole  Code Assistant act as team in product lifetime development
 
 on:
   issue_comment:
@@ -11,12 +11,103 @@ on:
     types: [submitted]
 
 jobs:
-  claude:
+  product-owner:
+      if: |
+        (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@plan')) ||
+        (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@plan')) ||
+        (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@plan')) ||
+        (github.event_name == 'issues' && (contains(github.event.issue.body, '@plan') || contains(github.event.issue.title, '@plan')))
+      runs-on: ubuntu-latest
+      permissions:
+        contents: read
+        pull-requests: write
+        issues: write
+        id-token: write
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 1
+  
+        - name: Set up Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: '3.11'
+  
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install requests
+  
+        - name: Get comment or issue body
+          id: get_input
+          run: |
+            if [ "${{ github.event_name }}" == "issue_comment" ]; then
+              echo "input_text=$(echo '${{ github.event.comment.body }}' | sed 's/@deepseek//g' | tr -d '\n')" >> $GITHUB_OUTPUT
+              echo "issue_number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
+              echo "comment_id=${{ github.event.comment.id }}" >> $GITHUB_OUTPUT
+              echo "is_pr=${{ github.event.issue.pull_request != null }}" >> $GITHUB_OUTPUT
+            elif [ "${{ github.event_name }}" == "pull_request_review_comment" ]; then
+              echo "input_text=$(echo '${{ github.event.comment.body }}' | sed 's/@deepseek//g' | tr -d '\n')" >> $GITHUB_OUTPUT
+              echo "issue_number=${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+              echo "comment_id=${{ github.event.comment.id }}" >> $GITHUB_OUTPUT
+              echo "is_pr=true" >> $GITHUB_OUTPUT
+            elif [ "${{ github.event_name }}" == "pull_request_review" ]; then
+              echo "input_text=$(echo '${{ github.event.review.body }}' | sed 's/@deepseek//g' | tr -d '\n')" >> $GITHUB_OUTPUT
+              echo "issue_number=${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+              echo "comment_id=" >> $GITHUB_OUTPUT
+              echo "is_pr=true" >> $GITHUB_OUTPUT
+            elif [ "${{ github.event_name }}" == "issues" ]; then
+              echo "input_text=$(echo '${{ github.event.issue.title }} ${{ github.event.issue.body }}' | sed 's/@deepseek//g' | tr -d '\n')" >> $GITHUB_OUTPUT
+              echo "issue_number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
+              echo "comment_id=" >> $GITHUB_OUTPUT
+              echo "is_pr=${{ github.event.issue.pull_request != null }}" >> $GITHUB_OUTPUT
+            fi
+  
+        - name: Call DeepSeek API
+          id: deepseek
+          env:
+            DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          run: |
+            response=$(curl -s -X POST https://api.deepseek.com/chat/completions \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $DEEPSEEK_API_KEY" \
+              -d '{
+                "model": "deepseek-r1",
+                "messages": [
+                  {"role": "system", "content": "You are a helpful AI assistant specializing in code and technical queries. Provide concise, accurate, and well-formatted responses in English."},
+                  {"role": "user", "content": "${{ steps.get_input.outputs.input_text }}"}
+                ],
+                "temperature": 0.6,
+                "max_tokens": 2048,
+                "stream": false
+              }')
+            echo "deepseek_response=$(echo "$response" | jq -r '.choices[0].message.content' | tr -d '\n')" >> $GITHUB_OUTPUT
+            echo "Response from DeepSeek: $response"
+  
+        - name: Post DeepSeek response as comment
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            issue_number=${{ steps.get_input.outputs.issue_number }}
+            is_pr=${{ steps.get_input.outputs.is_pr }}
+            comment_body=$(echo "${{ steps.deepseek.outputs.deepseek_response }}" | jq -s -R .)
+            if [ "$is_pr" == "true" ]; then
+              endpoint="repos/${{ github.repository }}/issues/${issue_number}/comments"
+            else
+              endpoint="repos/${{ github.repository }}/issues/${issue_number}/comments"
+            fi
+            curl -s -X POST \
+              -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/$endpoint \
+              -d "{\"body\": $comment_body}"
+  frontend-engineer-kimi:
     if: |
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
-      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@uiux')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@uiux')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@uiux')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@uiux')))
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -54,9 +145,53 @@ jobs:
         env:
           ANTHROPIC_BASE_URL: http://localhost:3456
         with:
+          anthropic_api_key: "${{ secrets.ANTHROPIC_API_KEY }}"              
+  engineer-claude:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Prepare Environment for Claude
+        run: |
+          curl -fsSL https://bun.sh/install | bash
+          mkdir -p $HOME/.claude-code-router
+          cat << 'EOF' > $HOME/.claude-code-router/config.json
+          {
+            "log": true,
+            "ANTHROPIC_API_KEY": "${{ secrets.kimi_API_KEY }}",
+            "ANTHROPIC_BASE_URL": "https://api.moonshot.cn/anthropic/",
+            "OPENAI_MODEL": "kimi-k2-0711-preview"
+          }
+          EOF
+        shell: bash
+
+      - name: Start Claude Code Router
+        run: |
+          nohup ~/.bun/bin/bunx @musistudio/claude-code-router@1.0.8 start &
+        shell: bash
+
+      - name: Run Claude Code
+        id: claude
+        uses: anthropics/claude-code-action@beta
+        env:
+          ANTHROPIC_BASE_URL: http://localhost:3456
+        with:
           anthropic_api_key: "${{ secrets.ANTHROPIC_API_KEY }}"
 
-  grok:
+  engineer-grok:
     if: |
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@grok')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@grok')) ||
@@ -101,7 +236,7 @@ jobs:
         with:
           xai_api_key: "${{ secrets.XAI_API_KEY }}"
 
-  deepseek:
+  engineer-deepseek:
     if: |
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@deepseek')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@deepseek')) ||
@@ -146,7 +281,7 @@ jobs:
         with:
           deepseek_api_key: "${{ secrets.DEEPSEEK_API_KEY }}"
 
-  gemini:
+  engineer-gemini:
     if: |
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@gemini')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@gemini')) ||
